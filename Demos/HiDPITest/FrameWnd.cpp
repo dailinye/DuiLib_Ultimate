@@ -2,7 +2,7 @@
 #include "duilib.h"
 #include <sstream>
 
-#define WM_USER_SET_DPI WM_USER + 200
+//#define WM_USER_SET_DPI WM_USER + 200
 
 CFrameWnd::CFrameWnd( LPCTSTR pszXMLPath )
 	:  m_strXMLPath(pszXMLPath)

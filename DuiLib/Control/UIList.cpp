@@ -1485,8 +1485,15 @@ namespace DuiLib {
 		if (pList != NULL)
 		{
 			CScrollBarUI* pVScroll = pList->GetVerticalScrollBar();
-			if (pVScroll != NULL)
-				nHeaderWidth -= pVScroll->GetWidth();
+			if (pVScroll != NULL) nHeaderWidth -= pVScroll->GetWidth();
+		}
+		int totalScale = 100;
+		for (int it3 = 0; it3 < m_items.GetSize(); it3++) {
+			CControlUI* pControl = static_cast<CControlUI*>(m_items[it3]);
+			if (!pControl->IsVisible()) {
+				CListHeaderItemUI* pHeaderItem = static_cast<CListHeaderItemUI*>(pControl);
+				totalScale -= pHeaderItem->GetScale();
+			}
 		}
 		for( int it2 = 0; it2 < m_items.GetSize(); it2++ ) {
 			CControlUI* pControl = static_cast<CControlUI*>(m_items[it2]);
@@ -1502,7 +1509,7 @@ namespace DuiLib {
 			if (m_bIsScaleHeader)
 			{
 				CListHeaderItemUI* pHeaderItem = static_cast<CListHeaderItemUI*>(pControl);
-				sz.cx = int(nHeaderWidth * (float)pHeaderItem->GetScale() / 100);
+				sz.cx = int(nHeaderWidth * (float)pHeaderItem->GetScale() / totalScale);
 			}
 			else
 			{
@@ -2153,7 +2160,7 @@ namespace DuiLib {
 		if( m_pOwner == NULL ) return;
 		TListInfoUI* pInfo = m_pOwner->GetListInfo();
 		DWORD iBackColor = 0;
-		if( !pInfo->bAlternateBk || m_iIndex % 2 == 0 ) iBackColor = pInfo->dwBkColor;
+		if( !pInfo->bAlternateBk || m_iIndex % 2 != 0 ) iBackColor = pInfo->dwBkColor;
 		if( (m_uButtonState & UISTATE_HOT) != 0 ) {
 			iBackColor = pInfo->dwHotBkColor;
 		}
@@ -2188,7 +2195,7 @@ namespace DuiLib {
 		}
 
 		if( !m_sBkImage.IsEmpty() ) {
-			if( !pInfo->bAlternateBk || m_iIndex % 2 == 0 ) {
+			if( !pInfo->bAlternateBk || m_iIndex % 2 != 0 ) {
 				if( !DrawImage(hDC, (LPCTSTR)m_sBkImage) ) {}
 			}
 		}
@@ -2893,7 +2900,7 @@ namespace DuiLib {
 		if( m_pOwner == NULL ) return;
 		TListInfoUI* pInfo = m_pOwner->GetListInfo();
 		DWORD iBackColor = 0;
-		if( !pInfo->bAlternateBk || m_iIndex % 2 == 0 ) iBackColor = pInfo->dwBkColor;
+		if( !pInfo->bAlternateBk || m_iIndex % 2 != 0 ) iBackColor = pInfo->dwBkColor;
 
 		if( (m_uButtonState & UISTATE_HOT) != 0 ) {
 			iBackColor = pInfo->dwHotBkColor;
@@ -2927,7 +2934,7 @@ namespace DuiLib {
 			}
 		}
 		if( !m_sBkImage.IsEmpty() ) {
-			if( !pInfo->bAlternateBk || m_iIndex % 2 == 0 ) {
+			if( !pInfo->bAlternateBk || m_iIndex % 2 != 0 ) {
 				if( !DrawImage(hDC, (LPCTSTR)m_sBkImage) ) {}
 			}
 		}
@@ -2993,6 +3000,11 @@ namespace DuiLib {
 			CControlUI *pListItem = static_cast<CControlUI*>(m_items[i]);
 			CControlUI *pHeaderItem = pHeader->GetItemAt(i);
 			if (pHeaderItem == NULL) return;
+			if (!pHeaderItem->IsVisible())
+			{
+				pListItem->SetVisible(false);
+				continue;
+			}
 			RECT rcHeaderItem = pHeaderItem->GetPos();
 			if (pListItem != NULL && !(rcHeaderItem.left ==0 && rcHeaderItem.right ==0) )
 			{
