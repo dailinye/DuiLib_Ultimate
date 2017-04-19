@@ -48,6 +48,8 @@ namespace DuiLib
 		DWORD GetHotBkColor() const;
 		void SetPushedBkColor(DWORD dwColor);
 		DWORD GetPushedBkColor() const;
+		void SetHotBorderColor(DWORD dwColor);
+		DWORD GetHotBorderColor() const;
 		void SetHotTextColor(DWORD dwColor);
 		DWORD GetHotTextColor() const;
 		void SetPushedTextColor(DWORD dwColor);
@@ -61,12 +63,14 @@ namespace DuiLib
 		void PaintBkColor(HDC hDC);
 		void PaintStatusImage(HDC hDC);
 		void PaintForeImage(HDC hDC);
+		void PaintBorder(HDC hDC);
 
 	protected:
 		UINT m_uButtonState;
 
 		DWORD m_dwHotBkColor;
 		DWORD m_dwPushedBkColor;
+		DWORD m_dwHotBorderColor;
 		DWORD m_dwHotTextColor;
 		DWORD m_dwPushedTextColor;
 		DWORD m_dwFocusedTextColor;
