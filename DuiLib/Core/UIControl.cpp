@@ -1300,7 +1300,6 @@ namespace DuiLib {
 			nBorderSize = m_nBorderSize;
 			cxyBorderRound = m_cxyBorderRound;
 			rcBorderSize = m_rcBorderSize;
-
 		}
 		
 		if(m_dwBorderColor != 0 || m_dwFocusBorderColor != 0) {

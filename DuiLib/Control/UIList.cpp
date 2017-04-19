@@ -1487,12 +1487,12 @@ namespace DuiLib {
 			CScrollBarUI* pVScroll = pList->GetVerticalScrollBar();
 			if (pVScroll != NULL) nHeaderWidth -= pVScroll->GetWidth();
 		}
-		int totalScale = 100;
+		int totalScale = 0;
 		for (int it3 = 0; it3 < m_items.GetSize(); it3++) {
 			CControlUI* pControl = static_cast<CControlUI*>(m_items[it3]);
-			if (!pControl->IsVisible()) {
+			if (pControl->IsVisible()) {
 				CListHeaderItemUI* pHeaderItem = static_cast<CListHeaderItemUI*>(pControl);
-				totalScale -= pHeaderItem->GetScale();
+				totalScale += pHeaderItem->GetScale();
 			}
 		}
 		for( int it2 = 0; it2 < m_items.GetSize(); it2++ ) {
@@ -2869,7 +2869,7 @@ namespace DuiLib {
 						CRenderClip::UseOldClipEnd(hDC, childClip);
 					}
 					else {
-						if( !::IntersectRect(&rcTemp, &rc, &pControl->GetPos()) ) continue;
+						if (!::IntersectRect(&rcTemp, &rc, &pControl->GetPos())) continue;
 						pControl->DoPaint(hDC, rcPaint);
 					}
 				}
