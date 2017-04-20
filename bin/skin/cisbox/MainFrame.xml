@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Window size="900,600" sizebox="4,4,4,4" caption="0,0,0,-1" mininfo="900,600" showshadow="true" shadowimage="images\shadow2.png" shadowcorner="30,30,30,30" shadowsize="25">
+	<Include source="common.xml"/>
+	<VerticalLayout bkcolor="#FFFFFFFF">
+		<VerticalLayout>
+			<!-- caption区域 -->
+			<HorizontalLayout height="40" bkcolor="#FF2D90E5">
+			</HorizontalLayout>
+			<HorizontalLayout padding="0,0,0,0">
+				<!-- 左功能区 -->
+				<VerticalLayout width="180" bkcolor="#FFFFFFFF">
+					<Option selected="true"  group="features" height="40" selectedbkcolor="FFD9D9D9" selectedtextcolor="#FF000000" hotbkcolor="#FFE5F3FF" align="left" textpadding="50,0,0,0" font="1" text="My Files" normalimage="file='images\mainframe\ic_nav_myfiles.png' source='0,0,20,20' dest='20,10,40,30'" hotimage="file='images\mainframe\ic_nav_myfiles.png' source='0,0,20,20' dest='20,10,40,30'" pushedimage="file='images\mainframe\ic_nav_myfiles.png' source='0,0,20,20' dest='20,10,40,30'" selectedimage="file='images\mainframe\ic_nav_myfiles.png' source='0,0,20,20' dest='20,10,40,30'"/>
+					<Option selected="false" group="features" height="40" selectedbkcolor="FFD9D9D9" selectedtextcolor="#FF000000" hotbkcolor="#FFE5F3FF" align="left" textpadding="50,0,0,0" font="1" text="Team Space" normalimage="file='images\mainframe\ic_nav_teamspace.png' source='0,0,20,20' dest='20,10,40,30'" hotimage="file='images\mainframe\ic_nav_teamspace.png' source='0,0,20,20' dest='20,10,40,30'" pushedimage="file='images\mainframe\ic_nav_teamspace.png' source='0,0,20,20' dest='20,10,40,30'" selectedimage="file='images\mainframe\ic_nav_teamspace.png' source='0,0,20,20' dest='20,10,40,30'"/>
+					<VerticalLayout height="10" inset="20, 5, 20, 0">
+						<Control height="1" bkcolor="#FFD9D9D9"/>
+					</VerticalLayout>
+					<Option selected="false" group="features" height="40" selectedbkcolor="FFD9D9D9" selectedtextcolor="#FF000000" hotbkcolor="#FFE5F3FF" align="left" textpadding="50,0,0,0" font="1" text="Received Shares" normalimage="file='images\mainframe\ic_nav_sharewithme.png' source='0,0,20,20' dest='20,10,40,30'" hotimage="file='images\mainframe\ic_nav_sharewithme.png' source='0,0,20,20' dest='20,10,40,30'" pushedimage="file='images\mainframe\ic_nav_sharewithme.png' source='0,0,20,20' dest='20,10,40,30'" selectedimage="file='images\mainframe\ic_nav_sharewithme.png' source='0,0,20,20' dest='20,10,40,30'"/>
+					<Option selected="false" group="features" height="40" selectedbkcolor="FFD9D9D9" selectedtextcolor="#FF000000" hotbkcolor="#FFE5F3FF" align="left" textpadding="50,0,0,0" font="1" text="Sent Shares" normalimage="file='images\mainframe\ic_nav_sharebyme.png' source='0,0,20,20' dest='20,10,40,30'" hotimage="file='images\mainframe\ic_nav_sharebyme.png' source='0,0,20,20' dest='20,10,40,30'" pushedimage="file='images\mainframe\ic_nav_sharebyme.png' source='0,0,20,20' dest='20,10,40,30'" selectedimage="file='images\mainframe\ic_nav_sharebyme.png' source='0,0,20,20' dest='20,10,40,30'"/>
+					<Option selected="false" group="features" height="40" selectedbkcolor="FFD9D9D9" selectedtextcolor="#FF000000" hotbkcolor="#FFE5F3FF" align="left" textpadding="50,0,0,0" font="1" text="Transmit" normalimage="file='images\mainframe\ic_nav_transfer.png' source='0,0,20,20' dest='20,10,40,30'" hotimage="file='images\mainframe\ic_nav_transfer.png' source='0,0,20,20' dest='20,10,40,30'" pushedimage="file='images\mainframe\ic_nav_transfer.png' source='0,0,20,20' dest='20,10,40,30'" selectedimage="file='images\mainframe\ic_nav_transfer.png' source='0,0,20,20' dest='20,10,40,30'"/>
+					<VerticalLayout height="10" inset="20, 5, 20, 0">
+						<Control height="1" bkcolor="#FFD9D9D9"/>
+					</VerticalLayout>
+					<Option selected="false" group="features" height="40" selectedbkcolor="FFD9D9D9" selectedtextcolor="#FF000000" hotbkcolor="#FFE5F3FF" align="left" textpadding="50,0,0,0" font="1" text="Backup" normalimage="file='images\mainframe\ic_nav_backup.png' source='0,0,20,20' dest='20,10,40,30'" hotimage="file='images\mainframe\ic_nav_backup.png' source='0,0,20,20' dest='20,10,40,30'" pushedimage="file='images\mainframe\ic_nav_backup.png' source='0,0,20,20' dest='20,10,40,30'" selectedimage="file='images\mainframe\ic_nav_backup.png' source='0,0,20,20' dest='20,10,40,30'"/>
+					<Option selected="false" group="features" height="40" selectedbkcolor="FFD9D9D9" selectedtextcolor="#FF000000" hotbkcolor="#FFE5F3FF" align="left" textpadding="50,0,0,0" font="1" text="Synchronize" normalimage="file='images\mainframe\ic_nav_sync.png' source='0,0,20,20' dest='20,10,40,30'" hotimage="file='images\mainframe\ic_nav_sync.png' source='0,0,20,20' dest='20,10,40,30'" pushedimage="file='images\mainframe\ic_nav_sync.png' source='0,0,20,20' dest='20,10,40,30'" selectedimage="file='images\mainframe\ic_nav_sync.png' source='0,0,20,20' dest='20,10,40,30'"/>
+				</VerticalLayout>
+				<Control width="1" bkcolor="FFD9D9D9"/>
+				<VerticalLayout>
+					<!-- 文件展示区域 -->
+					<VerticalLayout>
+						<!-- 导航栏区域 -->
+						<HorizontalLayout height="30" bkcolor="#FFFFFFFF">
+							<!-- 前进后退 -->
+							<HorizontalLayout padding="10,3,0,0" width="94">
+								<Button bkcolor="#FFFFFFFF" width="24" hotbkcolor="#FFE5F3FF" padding="0,0,0,0" bkimage="res='images\common\navigator\ic_arrow_backward.png' source='0,0,24,24' dest='0,0,24,24'"/>
+								<Button bkcolor="#FFFFFFFF" width="24" hotbkcolor="#FFE5F3FF" padding="10,0,0,0" bkimage="res='images\common\navigator\ic_arrow_forward.png' source='0,0,24,24' dest='0,0,24,24'"/>
+								<Button bkcolor="#FFFFFFFF" width="24" hotbkcolor="#FFE5F3FF" padding="10,0,0,0" bkimage="res='images\common\navigator\ic_arrow_moveup.png' source='0,0,24,24' dest='0,0,24,24'"/>
+							</HorizontalLayout>
+							<!-- 地址栏 -->
+							<HorizontalLayout height="30" padding="0,2,0,0" inset="10,0,30,0" bordercolor="#FFD9D9D9" bordersize="1">
+								<Button autocalcwidth="true" align="left" endellipsis="true" text="work"/>
+								<Label visible="true" autocalcwidth="true" text=">" textcolor="#FF717171" padding="5,0,5,0"/>
+								<Button autocalcwidth="true" align="left" endellipsis="true" text="tools"/>
+								<Label visible="true" autocalcwidth="true" text=">" textcolor="#FF717171" padding="5,0,5,0"/>
+								<Button autocalcwidth="true" align="left" endellipsis="true" text="go"/>
+								<Label visible="true" autocalcwidth="true" text=">" textcolor="#FF717171" padding="5,0,5,0"/>
+								<Button autocalcwidth="true" align="left" endellipsis="true" text="go_1_8"/>
+								<Label visible="true" autocalcwidth="true" text=">" textcolor="#FF717171" padding="5,0,5,0"/>
+								<Button autocalcwidth="true" align="left" endellipsis="true" text="src"/>
+								<Label visible="true" autocalcwidth="true" text=">" textcolor="#FF717171" padding="5,0,5,0"/>
+								<Button autocalcwidth="true" align="left" endellipsis="true" text="archive"/>
+								<Label visible="true" autocalcwidth="true" text=">" textcolor="#FF717171" padding="5,0,5,0"/>
+								<Button autocalcwidth="true" align="left" endellipsis="true" text="tar"/>
+								<Label visible="true" autocalcwidth="true" text=">" textcolor="#FF717171" padding="5,0,5,0"/>
+								<Button autocalcwidth="true" align="left" endellipsis="true" text="testdata"/>
+								<Label visible="true" autocalcwidth="true" text=">" textcolor="#FF717171" padding="5,0,5,0"/>
+								<Button autocalcwidth="true" align="left" endellipsis="true" text="c++"/>
+								<Label visible="true" autocalcwidth="true" text=">" textcolor="#FF717171" padding="5,0,5,0"/>
+								<Button autocalcwidth="true" align="left" endellipsis="true" text="duilib"/>
+								<Label visible="true" autocalcwidth="true" text=">" textcolor="#FF717171" padding="5,0,5,0"/>
+								<Button autocalcwidth="true" align="left" endellipsis="true" text="bin"/>
+								<Label visible="true" autocalcwidth="true" text=">" textcolor="#FF717171" padding="5,0,5,0"/>
+								<Button autocalcwidth="true" align="left" endellipsis="true" text="2017-4-19"/>
+								<Label visible="true" autocalcwidth="true" text=">" textcolor="#FF717171" padding="5,0,5,0"/>
+								<Button autocalcwidth="true" align="left" endellipsis="true" text="csibox"/>
+							</HorizontalLayout>
+							<!-- 刷新搜索 -->
+							<HorizontalLayout height="30" width="204" padding="-1,2,0,0">
+								<Button width="24" bordercolor="#FFD9D9D9" bordersize="1" bkcolor="#FFFFFFFF" hotbkcolor="#FFE5F3FF" bkimage="res='images\common\navigator\ic_arrow_refresh.png' source='0,0,19,23' dest='2,1,21,24'"/>
+								<Edit padding="10,0,10,0" bordercolor="#FFD9D9D9" focusbordercolor="#FF2D90E5" bordersize="1" bkcolor="#FFFFFFFF" tipvalue="search" tipvaluecolor="#FF717171"/>								
+							</HorizontalLayout>
+						</HorizontalLayout>
+						<!-- toolbar区域 -->
+						<HorizontalLayout height="30" padding="0,2,0,0" bkcolor="#FFFFFFFF">
+							<HorizontalLayout childpadding="5">
+								<Button height="26" autocalcwidth="true" textpadding="10,0,10,0" bordersize="1" hotbordercolor="#FF2D90E5" bkcolor="#FF2D90E5" hotbkcolor="#FFFFFFFF" hottextcolor="#FF000000" textcolor="#FFFFFFFF" pushedbkcolor="#FF1474C7" pushedtextcolor="#FFFFFFFF" text="Upload"/>
+								<Button height="26" autocalcwidth="true" textpadding="10,0,10,0" bordersize="1" hotbordercolor="#FF2D90E5" bkcolor="#FF2D90E5" hotbkcolor="#FFFFFFFF" hottextcolor="#FF000000" textcolor="#FFFFFFFF" pushedbkcolor="#FF1474C7" pushedtextcolor="#FFFFFFFF" text="New Folder"/>
+								<Button height="26" autocalcwidth="true" textpadding="10,0,10,0" bordersize="1" hotbordercolor="#FF2D90E5" bkcolor="#FF2D90E5" hotbkcolor="#FFFFFFFF" hottextcolor="#FF000000" textcolor="#FFFFFFFF" pushedbkcolor="#FF1474C7" pushedtextcolor="#FFFFFFFF" text="Share"/>
+								<!-- <Button height="26" autocalcwidth="true" textpadding="10,0,10,0" bordersize="1" hotbordercolor="#FF2D90E5" bkcolor="#FF2D90E5" hotbkcolor="#FFFFFFFF" hottextcolor="#FF000000" textcolor="#FFFFFFFF" pushedbkcolor="#FF1474C7" pushedtextcolor="#FFFFFFFF" text="Share Link"/> -->
+								<!-- <Button height="26" autocalcwidth="true" textpadding="10,0,10,0" bordersize="1" hotbordercolor="#FF2D90E5" bkcolor="#FF2D90E5" hotbkcolor="#FFFFFFFF" hottextcolor="#FF000000" textcolor="#FFFFFFFF" pushedbkcolor="#FF1474C7" pushedtextcolor="#FFFFFFFF" text="Download"/> -->
+								<!-- <Button height="26" autocalcwidth="true" textpadding="10,0,10,0" bordersize="1" hotbordercolor="#FF2D90E5" bkcolor="#FF2D90E5" hotbkcolor="#FFFFFFFF" hottextcolor="#FF000000" textcolor="#FFFFFFFF" pushedbkcolor="#FF1474C7" pushedtextcolor="#FFFFFFFF" text="Transmit to Team Space"/> -->
+								<!-- <Button height="26" autocalcwidth="true" textpadding="10,0,10,0" bordersize="1" hotbordercolor="#FF2D90E5" bkcolor="#FF2D90E5" hotbkcolor="#FFFFFFFF" hottextcolor="#FF000000" textcolor="#FFFFFFFF" pushedbkcolor="#FF1474C7" pushedtextcolor="#FFFFFFFF" text="Copy/Move"/> -->
+								<!-- <Button height="26" autocalcwidth="true" textpadding="10,0,10,0" bordersize="1" hotbordercolor="#FF2D90E5" bkcolor="#FF2D90E5" hotbkcolor="#FFFFFFFF" hottextcolor="#FF000000" textcolor="#FFFFFFFF" pushedbkcolor="#FF1474C7" pushedtextcolor="#FFFFFFFF" text="Delete"/> -->
+								<!-- <Button height="26" autocalcwidth="true" textpadding="10,0,10,0" bordersize="1" hotbordercolor="#FF2D90E5" bkcolor="#FF2D90E5" hotbkcolor="#FFFFFFFF" hottextcolor="#FF000000" textcolor="#FFFFFFFF" pushedbkcolor="#FF1474C7" pushedtextcolor="#FFFFFFFF" text="Rename"/> -->
+								<!-- <Button height="26" autocalcwidth="true" textpadding="10,0,10,0" bordersize="1" hotbordercolor="#FF2D90E5" bkcolor="#FF2D90E5" hotbkcolor="#FFFFFFFF" hottextcolor="#FF000000" textcolor="#FFFFFFFF" pushedbkcolor="#FF1474C7" pushedtextcolor="#FFFFFFFF" text="View Version"/> -->
+								<!-- <Button height="26" autocalcwidth="true" textpadding="10,0,10,0" bordersize="1" hotbordercolor="#FF2D90E5" bkcolor="#FF2D90E5" hotbkcolor="#FFFFFFFF" hottextcolor="#FF000000" textcolor="#FFFFFFFF" pushedbkcolor="#FF1474C7" pushedtextcolor="#FFFFFFFF" text="Add to Favorite"/> -->
+							</HorizontalLayout>
+						</HorizontalLayout>
+						<Control height="1" bkcolor="#FFD9D9D9"/>
+						<!-- 文件列表区域 -->
+						<List itemaltbk="true" vscrollbar="true" itemrselected="true">
+							<ListHeader scaleheader="true">
+								<ListHeaderItem scale="30" visible="true"  sepimage="res='images\common\list_header_sep.png'" sepwidth="1" text="name"/>
+								<ListHeaderItem scale="40" visible="false" sepimage="res='images\common\list_header_sep.png'" sepwidth="1" text="path"/>
+								<ListHeaderItem scale="20" visible="true"  sepimage="res='images\common\list_header_sep.png'" sepwidth="1" text="status"/>
+								<ListHeaderItem scale="20" visible="true"  sepimage="res='images\common\list_header_sep.png'" sepwidth="1" text="size"/>
+								<ListHeaderItem scale="30" visible="true"  sepimage="res='images\common\list_header_sep.png'" sepwidth="1" text="modify time"/>
+							</ListHeader>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+							<ListContainerElement height="40">
+								<HorizontalLayout>
+									<Control width="32" height="32" padding="10,2" bkimage="res='images\common\icons\icon_folder.png'"/>
+									<RenameEdit endellipsis="true" align="left" textpadding="10,0,10,0" text="VersionCompatibility"/>
+								</HorizontalLayout>
+								<Label endellipsis="true" align="center" textpadding="10,0,10,0" text="C:/Program Files (x86)/Microsoft Visual Studio 14.0/SDK/Bootstrapper/Packages/SqlClrTypes_x64/zh-Hant"/>
+								<Label endellipsis="true" align="center" text="shared"/>
+								<Label endellipsis="true" align="center" text="10.1 KB"/>
+								<Label endellipsis="true" align="center" text="2017-04-16 22:19:10"/>
+							</ListContainerElement>
+						</List>
+						<Control height="1" bkcolor="#FFFFFFFF"/>
+					</VerticalLayout>
+					<!-- 状态栏 -->
+					<HorizontalLayout height="30" inset="10,0,10,0" bkcolor="#FF46CF49">
+						<Label text="status OK."/>
+					</HorizontalLayout>
+				</VerticalLayout>
+			</HorizontalLayout>
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

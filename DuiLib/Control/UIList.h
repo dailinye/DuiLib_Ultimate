@@ -79,6 +79,12 @@ namespace DuiLib {
 		virtual int GetNextSelItem(int nItem) const = 0;
 	};
 
+	class IListItemCallbackUI
+	{
+	public:
+		virtual bool Select(CControlUI* pItem, bool bSelect = true) = 0;
+	};
+
 	class IListItemUI
 	{
 	public:
@@ -92,6 +98,8 @@ namespace DuiLib {
 		virtual bool IsExpanded() const = 0;
 		virtual bool Expand(bool bExpand = true) = 0;
 		virtual void DrawItemText(HDC hDC, const RECT& rcItem) = 0;
+		virtual void SetListItemCallback(IListItemCallbackUI* pCallback) {  };
+		virtual IListItemCallbackUI* GetListItemCallback() const { return NULL; };
 	};
 
 
@@ -493,6 +501,9 @@ namespace DuiLib {
 		bool IsExpanded() const;
 		bool Expand(bool bExpand = true);
 
+		void SetListItemCallback(IListItemCallbackUI* pCallback);
+		IListItemCallbackUI* GetListItemCallback() const;
+
 		void Invalidate(); // 直接CControl::Invalidate会导致滚动条刷新，重写减少刷新区域
 		bool Activate();
 
@@ -510,6 +521,7 @@ namespace DuiLib {
 		bool m_bSelected;
 		UINT m_uButtonState;
 		IListOwnerUI* m_pOwner;
+		IListItemCallbackUI* m_pListItemCallback;
 	};
 
 } // namespace DuiLib

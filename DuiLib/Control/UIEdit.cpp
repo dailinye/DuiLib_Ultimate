@@ -158,6 +158,7 @@ namespace DuiLib
 		}
 		else if( uMsg == WM_KEYDOWN && TCHAR(wParam) == VK_RETURN ){
 			m_pOwner->GetManager()->SendNotify(m_pOwner, DUI_MSGTYPE_RETURN);
+			SendMessage(WM_KILLFOCUS);
 		}
 		else if( uMsg == WM_KEYDOWN && TCHAR(wParam) == VK_TAB ){
 			if (m_pOwner->GetManager()->IsLayered()) {
@@ -245,8 +246,8 @@ namespace DuiLib
 		m_bPasswordMode(false), m_cPasswordChar(_T('*')), m_uButtonState(0), 
 		m_dwEditbkColor(0xFFFFFFFF), m_dwEditTextColor(0x00000000), m_iWindowStyls(0),m_dwTipValueColor(0xFFBAC0C5)
 	{
-		SetTextPadding(CDuiRect(4, 3, 4, 3));
-		SetBkColor(0xFFFFFFFF);
+		SetTextPadding(CDuiRect(2, 0, 2, 0));
+		SetBkColor(0x00000000);
 	}
 
 	LPCTSTR CEditUI::GetClass() const
@@ -293,7 +294,7 @@ namespace DuiLib
 			if( m_pWindow ) return;
 			m_pWindow = new CEditWnd();
 			ASSERT(m_pWindow);
-			m_pWindow->Init(this);
+			static_cast<CEditWnd*>(m_pWindow)->Init(this);
 			Invalidate();
 		}
 		if( event.Type == UIEVENT_KILLFOCUS && IsEnabled() ) 
@@ -308,7 +309,7 @@ namespace DuiLib
 				{
 					m_pWindow = new CEditWnd();
 					ASSERT(m_pWindow);
-					m_pWindow->Init(this);
+					static_cast<CEditWnd*>(m_pWindow)->Init(this);
 
 					if( PtInRect(&m_rcItem, event.ptMouse) )
 					{
@@ -570,7 +571,7 @@ namespace DuiLib
 	{
 		CControlUI::SetPos(rc, bNeedInvalidate);
 		if( m_pWindow != NULL ) {
-			RECT rcPos = m_pWindow->CalPos();
+			RECT rcPos = static_cast<CEditWnd*>(m_pWindow)->CalPos();
 			::SetWindowPos(m_pWindow->GetHWND(), NULL, rcPos.left, rcPos.top, rcPos.right - rcPos.left, 
 				rcPos.bottom - rcPos.top, SWP_NOZORDER | SWP_NOACTIVATE);        
 		}
@@ -580,7 +581,7 @@ namespace DuiLib
 	{
 		CControlUI::Move(szOffset, bNeedInvalidate);
 		if( m_pWindow != NULL ) {
-			RECT rcPos = m_pWindow->CalPos();
+			RECT rcPos = static_cast<CEditWnd*>(m_pWindow)->CalPos();
 			::SetWindowPos(m_pWindow->GetHWND(), NULL, rcPos.left, rcPos.top, rcPos.right - rcPos.left, 
 				rcPos.bottom - rcPos.top, SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);        
 		}

@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Includes>
+	<Include source="common_fonts.xml"/>
+	<Include source="common_scrollbar.xml"/>
+</Includes>

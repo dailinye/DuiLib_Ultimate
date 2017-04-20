@@ -66,7 +66,7 @@ namespace DuiLib
 		void PaintText(HDC hDC);
 
 	protected:
-		CEditWnd* m_pWindow;
+		CWindowWnd* m_pWindow;
 
 		UINT m_uMaxChar;
 		bool m_bReadOnly;

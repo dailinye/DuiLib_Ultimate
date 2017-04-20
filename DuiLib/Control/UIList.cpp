@@ -2569,7 +2569,8 @@ namespace DuiLib {
 		m_iIndex(-1),
 		m_pOwner(NULL), 
 		m_bSelected(false),
-		m_uButtonState(0)
+		m_uButtonState(0),
+		m_pListItemCallback(NULL)
 	{
 	}
 
@@ -2695,6 +2696,7 @@ namespace DuiLib {
 		if( bSelect == m_bSelected ) return true;
 		m_bSelected = bSelect;
 		if( bSelect && m_pOwner != NULL ) m_pOwner->SelectItem(m_iIndex);
+		if (m_pListItemCallback) m_pListItemCallback->Select(this, m_bSelected);
 		Invalidate();
 
 		return true;
@@ -2707,6 +2709,7 @@ namespace DuiLib {
 
 		m_bSelected = bSelect;
 		if( bSelect && m_pOwner != NULL ) m_pOwner->SelectMultiItem(m_iIndex);
+		if (m_pListItemCallback) m_pListItemCallback->Select(this, m_bSelected);
 		Invalidate();
 		return true;
 	}
@@ -2719,6 +2722,16 @@ namespace DuiLib {
 	bool CListContainerElementUI::Expand(bool /*bExpand = true*/)
 	{
 		return false;
+	}
+
+	void CListContainerElementUI::SetListItemCallback(IListItemCallbackUI* pCallback)
+	{
+		m_pListItemCallback = pCallback;
+	}
+
+	IListItemCallbackUI* CListContainerElementUI::GetListItemCallback() const
+	{
+		return m_pListItemCallback;
 	}
 
 	void CListContainerElementUI::DoEvent(TEventUI& event)
