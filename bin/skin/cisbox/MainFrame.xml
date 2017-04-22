@@ -66,7 +66,7 @@
 							<!-- 刷新搜索 -->
 							<HorizontalLayout height="30" width="204" padding="-1,2,0,0">
 								<Button width="24" bordercolor="#FFD9D9D9" bordersize="1" bkcolor="#FFFFFFFF" hotbkcolor="#FFE5F3FF" bkimage="res='images\common\navigator\ic_arrow_refresh.png' source='0,0,19,23' dest='2,1,21,24'"/>
-								<Edit padding="10,0,10,0" bordercolor="#FFD9D9D9" focusbordercolor="#FF2D90E5" bordersize="1" bkcolor="#FFFFFFFF" tipvalue="search" tipvaluecolor="#FF717171"/>								
+								<Edit padding="10,0,10,0" bordercolor="#FFD9D9D9" hotbordercolor="#FF2D90E5"  bordersize="1" bkcolor="#FFFFFFFF" tipvalue="search" tipvaluecolor="#FF717171"/>
 							</HorizontalLayout>
 						</HorizontalLayout>
 						<!-- toolbar区域 -->
