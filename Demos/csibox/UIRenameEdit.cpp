@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "UIRenameEdit.h"
 
 namespace DuiLib
 {
@@ -342,6 +341,10 @@ namespace DuiLib
 		if ((event.Type == UIEVENT_SETFOCUS && IsEnabled()) || event.Type == UIEVENT_DBLCLICK ||
 			event.Type == UIEVENT_MOUSEENTER || event.Type == UIEVENT_MOUSELEAVE)
 		{
+			if (event.Type == UIEVENT_DBLCLICK)
+			{
+				m_iRenameState == UIRENAME_UNINITIAL;
+			}
 			return CLabelUI::DoEvent(event);
 		}
 		if (event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_RBUTTONDOWN)
