@@ -44,6 +44,8 @@ namespace DuiLib
 		DWORD GetNativeEditBkColor() const;
 		void SetNativeEditTextColor( LPCTSTR pStrColor );
 		DWORD GetNativeEditTextColor() const;
+		void SetHotBorderColor(DWORD dwBkColor);
+		DWORD GetHotBorderColor() const;
 
 		void SetSel(long nStartChar, long nEndChar);
 		void SetSelAll();
@@ -64,6 +66,7 @@ namespace DuiLib
 
 		void PaintStatusImage(HDC hDC);
 		void PaintText(HDC hDC);
+		void PaintBorder(HDC hDC);
 
 	protected:
 		CWindowWnd* m_pWindow;
@@ -81,6 +84,7 @@ namespace DuiLib
 		DWORD m_dwTipValueColor;
 		DWORD m_dwEditbkColor;
 		DWORD m_dwEditTextColor;
+		DWORD m_dwHotBorderColor;
 		int m_iWindowStyls;
 	};
 }
