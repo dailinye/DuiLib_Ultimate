@@ -34,6 +34,7 @@ namespace DuiLib
 	{
 		return IsEnabled() ? UIFLAG_SETCURSOR : 0;
 	}
+
 	void CLabelUI::SetTextStyle(UINT uStyle)
 	{
 		m_uTextStyle = uStyle;

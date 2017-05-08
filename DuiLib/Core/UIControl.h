@@ -13,6 +13,7 @@ namespace DuiLib {
 	class UILIB_API CControlUI
 	{
 		DECLARE_DUICONTROL(CControlUI)
+
 	public:
 		CControlUI();
 		virtual ~CControlUI();

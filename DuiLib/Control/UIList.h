@@ -43,13 +43,13 @@ namespace DuiLib {
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 
-	class IListCallbackUI
+	class UILIB_API IListCallbackUI
 	{
 	public:
 		virtual LPCTSTR GetItemText(CControlUI* pList, int iItem, int iSubItem) = 0;
 	};
 
-	class IListOwnerUI
+	class UILIB_API IListOwnerUI
 	{
 	public:
 		virtual UINT GetListType() = 0;
@@ -61,7 +61,7 @@ namespace DuiLib {
 		virtual void DoEvent(TEventUI& event) = 0;
 	};
 
-	class IListUI : public IListOwnerUI
+	class UILIB_API IListUI : public IListOwnerUI
 	{
 	public:
 		virtual CListHeaderUI* GetHeader() const = 0;
@@ -79,13 +79,13 @@ namespace DuiLib {
 		virtual int GetNextSelItem(int nItem) const = 0;
 	};
 
-	class IListItemCallbackUI
+	class UILIB_API IListItemCallbackUI
 	{
 	public:
 		virtual bool Select(CControlUI* pItem, bool bSelect = true) = 0;
 	};
 
-	class IListItemUI
+	class UILIB_API IListItemUI
 	{
 	public:
 		virtual int GetIndex() const = 0;

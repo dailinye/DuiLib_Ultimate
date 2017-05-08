@@ -3,7 +3,7 @@
 namespace DuiLib {
 	IMPLEMENT_DUICONTROL(CControlUI)
 
-		CControlUI::CControlUI()
+	CControlUI::CControlUI()
 		:m_pManager(NULL), 
 		m_pParent(NULL), 
 		m_bUpdateNeeded(true),
