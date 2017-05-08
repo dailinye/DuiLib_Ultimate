@@ -7,7 +7,7 @@ namespace DuiLib {
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 
-	class IContainerUI
+	class UILIB_API IContainerUI
 	{
 	public:
 		virtual CControlUI* GetItemAt(int iIndex) const = 0;
@@ -21,6 +21,38 @@ namespace DuiLib {
 		virtual void RemoveAll() = 0;
 	};
 
+	
+	/////////////////////////////////////////////////////////////////////////////////////
+	//
+	class UILIB_API CDataTemplateUI : public CControlUI, public IContainerUI
+	{
+		DECLARE_DUICONTROL(CDataTemplateUI)
+		typedef CControlUI parent_type;
+	public:
+		CDataTemplateUI();
+		virtual ~CDataTemplateUI();
+
+	public:
+		LPCTSTR GetClass() const;
+		LPVOID GetInterface(LPCTSTR pstrName);
+
+	public:
+		CControlUI* GetItemAt(int iIndex) const;
+		int GetItemIndex(CControlUI* pControl) const;
+		bool SetItemIndex(CControlUI* pControl, int iIndex);
+		int GetCount() const;
+		bool Add(CControlUI* pControl);
+		bool AddAt(CControlUI* pControl, int iIndex);
+		bool Remove(CControlUI* pControl);
+		bool RemoveAt(int iIndex);
+		void RemoveAll();
+
+		CControlUI* CreateTemplateItem();
+
+	private:
+		CStdPtrArray m_items;
+	};
+
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
@@ -29,7 +61,7 @@ namespace DuiLib {
 	class UILIB_API CContainerUI : public CControlUI, public IContainerUI
 	{
 		DECLARE_DUICONTROL(CContainerUI)
-
+		typedef CControlUI parent_type;
 	public:
 		CContainerUI();
 		virtual ~CContainerUI();
@@ -113,6 +145,10 @@ namespace DuiLib {
 		virtual CScrollBarUI* GetVerticalScrollBar() const;
 		virtual CScrollBarUI* GetHorizontalScrollBar() const;
 
+		// data template
+		void SetDataTemplate(CDataTemplateUI* pDataTemplate);
+		CDataTemplateUI* GetDataTemplate();
+
 	protected:
 		virtual void SetFloatPos(int iIndex);
 		virtual void ProcessScrollBar(RECT rc, int cxRequired, int cyRequired);
@@ -132,6 +168,9 @@ namespace DuiLib {
 		CScrollBarUI* m_pHorizontalScrollBar;
 		CDuiString	m_sVerticalScrollBarStyle;
 		CDuiString	m_sHorizontalScrollBarStyle;
+
+		// data template
+		CDataTemplateUI* m_pDataTemplate;
 	};
 
 } // namespace DuiLib

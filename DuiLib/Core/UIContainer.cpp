@@ -1,14 +1,160 @@
 #include "StdAfx.h"
+#include "UIContainer.h"
 
 namespace DuiLib
 {
+	/////////////////////////////////////////////////////////////////////////////////////
+	//
+	//
+	IMPLEMENT_DUICONTROL(CDataTemplateUI)
+
+	CDataTemplateUI::CDataTemplateUI()
+	{
+
+	}
+
+	CDataTemplateUI::~CDataTemplateUI()
+	{
+		RemoveAll();
+	}
+
+	LPCTSTR CDataTemplateUI::GetClass() const
+	{
+		return _T("DataTemplateUI");
+	}
+
+	LPVOID CDataTemplateUI::GetInterface(LPCTSTR pstrName)
+	{
+		if (_tcsicmp(pstrName, DUI_CTR_ICONTAINER) == 0) return static_cast<IContainerUI*>(this);
+		else if (_tcsicmp(pstrName, DUI_CTR_DATATEMPLATE) == 0) return static_cast<CDataTemplateUI*>(this);
+		return CControlUI::GetInterface(pstrName);
+	}
+
+	CControlUI* CDataTemplateUI::GetItemAt(int iIndex) const
+	{
+		if (iIndex < 0 || iIndex >= m_items.GetSize()) return NULL;
+		return static_cast<CControlUI*>(m_items[iIndex]);
+	}
+
+	int CDataTemplateUI::GetItemIndex(CControlUI* pControl) const
+	{
+		for (int it = 0; it < m_items.GetSize(); it++) {
+			if (static_cast<CControlUI*>(m_items[it]) == pControl) {
+				return it;
+			}
+		}
+
+		return -1;
+	}
+
+	bool CDataTemplateUI::SetItemIndex(CControlUI* pControl, int iIndex)
+	{
+		for (int it = 0; it < m_items.GetSize(); it++) {
+			if (static_cast<CControlUI*>(m_items[it]) == pControl) {
+				m_items.Remove(it);
+				return m_items.InsertAt(iIndex, pControl);
+			}
+		}
+
+		return false;
+	}
+
+	int CDataTemplateUI::GetCount() const
+	{
+		return m_items.GetSize();
+	}
+
+	bool CDataTemplateUI::Add(CControlUI* pControl)
+	{
+		if (pControl == NULL) return false;
+		return m_items.Add(pControl);
+	}
+
+	bool CDataTemplateUI::AddAt(CControlUI* pControl, int iIndex)
+	{
+		if (pControl == NULL) return false;
+		return m_items.InsertAt(iIndex, pControl);
+	}
+
+	bool CDataTemplateUI::Remove(CControlUI* pControl)
+	{
+		if (pControl == NULL) return false;
+
+		for (int it = 0; it < m_items.GetSize(); it++) {
+			if (static_cast<CControlUI*>(m_items[it]) == pControl) {
+				delete pControl;
+				return m_items.Remove(it);
+			}
+		}
+		return false;
+	}
+
+	bool CDataTemplateUI::RemoveAt(int iIndex)
+	{
+		CControlUI* pControl = GetItemAt(iIndex);
+		if (pControl != NULL) {
+			return CDataTemplateUI::Remove(pControl);
+		}
+
+		return false;
+	}
+
+	void CDataTemplateUI::RemoveAll()
+	{
+		for (int it = 0; it < m_items.GetSize(); it++) {
+			CControlUI* pItem = static_cast<CControlUI*>(m_items[it]);
+			delete pItem;
+			pItem = NULL;
+		}
+		m_items.Empty();
+	}
+
+	CControlUI * CDataTemplateUI::CreateTemplateItem()
+	{
+		if (m_items.GetSize() == 0)
+		{
+			return NULL;
+		}
+		return static_cast<CControlUI*>(m_items[0])->CreateDataTemplateControl();
+	}
+
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CContainerUI)
+	IMPLEMENT_DUICONTROL_DATATEMPLATE_NONE(CContainerUI)
 
-		CContainerUI::CContainerUI()
+	CControlUI* CContainerUI::CreateDataTemplateControl(CControlUI* pInstance)
+	{
+		CContainerUI *pContainer = static_cast<CContainerUI*>(pInstance);
+		if (NULL == pContainer)
+		{
+			pContainer = static_cast<CContainerUI*>(CreateControl());
+			if (NULL == pContainer)
+			{
+				return NULL;
+			}
+			*pContainer = *this;
+		}
+
+		// create new instance
+		pContainer->m_pHorizontalScrollBar = NULL;
+		pContainer->m_pVerticalScrollBar = NULL;
+
+		pContainer->m_items.Empty();
+		CControlUI* pControl = NULL;
+		for (int it = 0; it < m_items.GetSize(); it++) {
+			pControl = static_cast<CControlUI*>(m_items[it]);
+			if (NULL != pControl) {
+				pContainer->m_items.Add(pControl->CreateDataTemplateControl());
+			}
+		}
+
+		// init by parent
+		return CControlUI::CreateDataTemplateControl(pContainer);
+	}
+
+	CContainerUI::CContainerUI()
 		: m_iChildPadding(0),
 		m_iChildAlign(DT_LEFT),
 		m_iChildVAlign(DT_TOP),
@@ -17,7 +163,8 @@ namespace DuiLib
 		m_bMouseChildEnabled(true),
 		m_pVerticalScrollBar(NULL),
 		m_pHorizontalScrollBar(NULL),
-		m_nScrollStepSize(0)
+		m_nScrollStepSize(0),
+		m_pDataTemplate(NULL)
 	{
 		::ZeroMemory(&m_rcInset, sizeof(m_rcInset));
 	}
@@ -34,6 +181,10 @@ namespace DuiLib
 			delete m_pHorizontalScrollBar;
 			m_pHorizontalScrollBar = NULL;
 		}
+		if( m_pDataTemplate ) {
+			delete m_pDataTemplate;
+			m_pDataTemplate = NULL;
+		}
 	}
 
 	LPCTSTR CContainerUI::GetClass() const
@@ -43,7 +194,7 @@ namespace DuiLib
 
 	LPVOID CContainerUI::GetInterface(LPCTSTR pstrName)
 	{
-		if( _tcsicmp(pstrName, _T("IContainer")) == 0 ) return static_cast<IContainerUI*>(this);
+		if( _tcsicmp(pstrName, DUI_CTR_ICONTAINER) == 0 ) return static_cast<IContainerUI*>(this);
 		else if( _tcsicmp(pstrName, DUI_CTR_CONTAINER) == 0 ) return static_cast<CContainerUI*>(this);
 		return CControlUI::GetInterface(pstrName);
 	}
@@ -591,6 +742,16 @@ namespace DuiLib
 		return m_pHorizontalScrollBar;
 	}
 
+	void CContainerUI::SetDataTemplate(CDataTemplateUI * pDataTemplate)
+	{
+		m_pDataTemplate = pDataTemplate;
+	}
+
+	CDataTemplateUI * CContainerUI::GetDataTemplate()
+	{
+		return m_pDataTemplate;
+	}
+
 	int CContainerUI::FindSelectable(int iIndex, bool bForward /*= true*/) const
 	{
 		// NOTE: This is actually a helper-function for the list/combo/ect controls
@@ -779,6 +940,15 @@ namespace DuiLib
 			if( (uFlags & UIFIND_HITTEST) == 0 || IsMouseEnabled() ) pResult = m_pHorizontalScrollBar->FindControl(Proc, pData, uFlags);
 		}
 		if( pResult != NULL ) return pResult;
+
+		if (uFlags == UIFIND_ALL) {
+			for (int it = 0; it < m_items.GetSize(); ++it) {
+				CControlUI *pControl = static_cast<CControlUI*>(m_items[it]);
+				if (Proc(pControl, pData)) {
+					return pControl;
+				}
+			}
+		}
 
 		if( (uFlags & UIFIND_HITTEST) == 0 || IsMouseChildEnabled() ) {
 			RECT rc = m_rcItem;

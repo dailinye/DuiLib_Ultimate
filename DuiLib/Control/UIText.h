@@ -8,6 +8,7 @@ namespace DuiLib
 	class UILIB_API CTextUI : public CLabelUI
 	{
 		DECLARE_DUICONTROL(CTextUI)
+		typedef CLabelUI parent_type;
 	public:
 		CTextUI();
 		~CTextUI();

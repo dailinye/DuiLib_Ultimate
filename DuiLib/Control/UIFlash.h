@@ -22,6 +22,7 @@ namespace DuiLib
 		, public ITranslateAccelerator
 	{
 		DECLARE_DUICONTROL(CFlashUI)
+		typedef CActiveXUI parent_type;
 	public:
 		CFlashUI(void);
 		~CFlashUI(void);

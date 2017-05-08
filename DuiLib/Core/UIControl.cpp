@@ -1,7 +1,23 @@
 #include "StdAfx.h"
 
 namespace DuiLib {
-	IMPLEMENT_DUICONTROL(CControlUI)
+	IMPLEMENT_DUICONTROL_DATATEMPLATE_NONE(CControlUI)
+
+	CControlUI* CControlUI::CreateDataTemplateControl(CControlUI* pInstance)
+	{
+		CControlUI *pControl = static_cast<CControlUI*>(pInstance);
+		if (NULL == pControl)
+		{
+			pControl = static_cast<CControlUI*>(CreateControl());
+			if (NULL == pControl)
+			{
+				return NULL;
+			}
+		}
+		*pControl = *this;
+
+		return pControl;
+	}
 
 	CControlUI::CControlUI()
 		:m_pManager(NULL), 

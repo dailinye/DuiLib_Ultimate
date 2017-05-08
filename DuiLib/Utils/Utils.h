@@ -79,6 +79,8 @@ namespace DuiLib
 		CStdPtrArray(const CStdPtrArray& src);
 		~CStdPtrArray();
 
+		CStdPtrArray& operator= (const CStdPtrArray& rhs);
+
 		void Empty();
 		void Resize(int iSize);
 		bool IsEmpty() const;
@@ -232,6 +234,8 @@ namespace DuiLib
 	public:
 		CStdStringPtrMap(int nSize = 83);
 		~CStdStringPtrMap();
+
+		CStdStringPtrMap& operator=(const CStdStringPtrMap& rhs);
 
 		void Resize(int nSize = 83);
 		LPVOID Find(LPCTSTR key, bool optimize = true) const;

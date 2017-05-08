@@ -8,6 +8,7 @@ namespace DuiLib {
 	class UILIB_API CColorPaletteUI : public CControlUI
 	{
 		DECLARE_DUICONTROL(CColorPaletteUI)
+		typedef CControlUI parent_type;
 	public:
 		CColorPaletteUI();
 		virtual ~CColorPaletteUI();

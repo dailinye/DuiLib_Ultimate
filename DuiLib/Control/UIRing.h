@@ -12,6 +12,7 @@ namespace DuiLib
 			RING_TIMERID = 100,
 		};
 		DECLARE_DUICONTROL(CRingUI)
+		typedef CLabelUI parent_type;
 	public:
 		CRingUI();
 		~CRingUI();

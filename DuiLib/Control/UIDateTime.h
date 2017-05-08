@@ -11,6 +11,7 @@ namespace DuiLib
 	class UILIB_API CDateTimeUI : public CLabelUI
 	{
 		DECLARE_DUICONTROL(CDateTimeUI)
+		typedef CLabelUI parent_type;
 		friend class CDateTimeWnd;
 	public:
 		CDateTimeUI();

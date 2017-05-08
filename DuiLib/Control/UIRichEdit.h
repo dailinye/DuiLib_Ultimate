@@ -11,7 +11,8 @@ namespace DuiLib {
 
 	class UILIB_API CRichEditUI : public CContainerUI, public IMessageFilterUI
 	{
-	DECLARE_DUICONTROL(CRichEditUI)
+		DECLARE_DUICONTROL(CRichEditUI)
+		typedef CContainerUI parent_type;
 	public:
 		CRichEditUI();
 		~CRichEditUI();

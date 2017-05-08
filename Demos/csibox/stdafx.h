@@ -32,3 +32,4 @@ using namespace DuiLib;
 
 #include "MainFrame.h"
 #include "UIRenameEdit.h"
+#include "UIAddressBar.h"

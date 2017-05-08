@@ -12,6 +12,7 @@ namespace DuiLib
     class UILIB_API CIPAddressExUI : public CEditUI
     {
 		DECLARE_DUICONTROL(CIPAddressExUI)
+		typedef CEditUI parent_type;
     public:
         CIPAddressExUI();
         LPCTSTR GetClass() const;

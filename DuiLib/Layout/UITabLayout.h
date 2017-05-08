@@ -8,6 +8,7 @@ namespace DuiLib
 	class UILIB_API CTabLayoutUI : public CContainerUI
 	{
 		DECLARE_DUICONTROL(CTabLayoutUI)
+		typedef CContainerUI parent_type;
 	public:
 		CTabLayoutUI();
 

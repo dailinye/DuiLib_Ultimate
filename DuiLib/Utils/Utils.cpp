@@ -166,6 +166,16 @@ namespace DuiLib
 		if( m_ppVoid != NULL ) free(m_ppVoid);
 	}
 
+	CStdPtrArray& CStdPtrArray::operator= (const CStdPtrArray& rhs)
+	{
+		if(&rhs != this) {
+			Resize(rhs.GetSize());
+			for (int i = 0; i < rhs.GetSize(); i++)
+				Add(rhs.GetAt(i));
+		}
+		return *this;
+	}
+
 	void CStdPtrArray::Empty()
 	{
 		if( m_ppVoid != NULL ) free(m_ppVoid);
@@ -814,6 +824,27 @@ namespace DuiLib
 			delete [] m_aT;
 			m_aT = NULL;
 		}
+	}
+
+	CStdStringPtrMap & CStdStringPtrMap::operator=(const CStdStringPtrMap& rhs)
+	{
+		if (&rhs != this)
+		{
+			if (m_nBuckets < rhs.GetSize())
+			{
+				Resize(rhs.GetSize());
+			}
+			if (rhs.m_aT) {
+				int len = rhs.m_nBuckets;
+				while (len--) {
+					TITEM* pItem = rhs.m_aT[len];
+					while (pItem) {
+						Insert(pItem->Key, pItem->Data);
+					}
+				}
+			}
+		}
+		return *this;
 	}
 
 	void CStdStringPtrMap::RemoveAll()

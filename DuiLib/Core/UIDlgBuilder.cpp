@@ -377,7 +377,7 @@ namespace DuiLib {
 				if ( !node.GetAttributeValue(_T("source"), szValue, cchLen) ) continue;
 				for ( int i = 0; i < count; i++ ) {
 					CDialogBuilder builder;
-					if( m_pstrtype != NULL ) { // 使用资源dll，从资源中读取
+					if( m_pstrtype != NULL ) { // load resources from dll
 						WORD id = (WORD)_tcstol(szValue, &pstr, 10); 
 						pControl = builder.Create((UINT)id, m_pstrtype, m_pCallback, pManager, pParent);
 					}
@@ -392,7 +392,7 @@ namespace DuiLib {
 				strClass.Format(_T("C%sUI"), pstrClass);
 				pControl = dynamic_cast<CControlUI*>(CControlFactory::GetInstance()->CreateControl(strClass));
 
-				// 检查插件
+				// create control by plugin
 				if( pControl == NULL ) {
 					CStdPtrArray* pPlugins = CPaintManagerUI::GetPlugins();
 					LPCREATECONTROL lpCreateControl = NULL;
@@ -404,7 +404,7 @@ namespace DuiLib {
 						}
 					}
 				}
-				// 回掉创建
+				// create control by callback
 				if( pControl == NULL && m_pCallback != NULL ) {
 					pControl = m_pCallback->CreateControl(pstrClass);
 				}
@@ -412,10 +412,9 @@ namespace DuiLib {
 
 			if( pControl == NULL ) {
 #ifdef _DEBUG
-				DUITRACE(_T("未知控件:%s"), pstrClass);
-#else
-				continue;
+				DUITRACE(_T("Unkwon Control type: %s"), pstrClass);
 #endif
+				continue;
 			}
 
 			// Add children
@@ -424,54 +423,58 @@ namespace DuiLib {
 			}
 			// Attach to parent
 			// 因为某些属性和父窗口相关，比如selected，必须先Add到父窗口
-			CTreeViewUI* pTreeView = NULL;
+			/*CTreeViewUI* pTreeView = NULL;*/
 			if( pParent != NULL && pControl != NULL ) {
-				CTreeNodeUI* pParentTreeNode = static_cast<CTreeNodeUI*>(pParent->GetInterface(_T("TreeNode")));
-				CTreeNodeUI* pTreeNode = static_cast<CTreeNodeUI*>(pControl->GetInterface(_T("TreeNode")));
-				pTreeView = static_cast<CTreeViewUI*>(pParent->GetInterface(_T("TreeView")));
-				// TreeNode子节点
-				if(pTreeNode != NULL) {
-					if(pParentTreeNode) {
-						pTreeView = pParentTreeNode->GetTreeView();
-						if(!pParentTreeNode->Add(pTreeNode)) {
-							delete pTreeNode;
-							pTreeNode = NULL;
-							continue;
-						}
-					}
-					else {
-						if(pTreeView != NULL) {
-							if(!pTreeView->Add(pTreeNode)) {
-								delete pTreeNode;
-								pTreeNode = NULL;
-								continue;
-							}
-						}
-					}
-				}
-				// TreeNode子控件
-				else if(pParentTreeNode != NULL) {
-					pParentTreeNode->GetTreeNodeHoriznotal()->Add(pControl);
-				}
-				// 普通控件
-				else {
-					if( pContainer == NULL ) pContainer = static_cast<IContainerUI*>(pParent->GetInterface(_T("IContainer")));
-					ASSERT(pContainer);
+				//CTreeNodeUI* pParentTreeNode = static_cast<CTreeNodeUI*>(pParent->GetInterface(_T("TreeNode")));
+				//CTreeNodeUI* pTreeNode = static_cast<CTreeNodeUI*>(pControl->GetInterface(_T("TreeNode")));
+				//pTreeView = static_cast<CTreeViewUI*>(pParent->GetInterface(_T("TreeView")));
+				//// TreeNode子节点
+				//if(pTreeNode != NULL) {
+				//	if(pParentTreeNode) {
+				//		pTreeView = pParentTreeNode->GetTreeView();
+				//		if(!pParentTreeNode->Add(pTreeNode)) {
+				//			delete pTreeNode;
+				//			pTreeNode = NULL;
+				//			continue;
+				//		}
+				//	}
+				//	else {
+				//		if(pTreeView != NULL) {
+				//			if(!pTreeView->Add(pTreeNode)) {
+				//				delete pTreeNode;
+				//				pTreeNode = NULL;
+				//				continue;
+				//			}
+				//		}
+				//	}
+				//}
+				//// TreeNode子控件
+				//else if(pParentTreeNode != NULL) {
+				//	pParentTreeNode->GetTreeNodeHoriznotal()->Add(pControl);
+				//}
+				//// 普通控件
+				//else 
+				{
+					if( pContainer == NULL ) pContainer = static_cast<IContainerUI*>(pParent->GetInterface(DUI_CTR_ICONTAINER));
 					if( pContainer == NULL ) return NULL;
-					if( !pContainer->Add(pControl) ) {
+					// init data template
+					if( pControl->GetInterface(DUI_CTR_DATATEMPLATE) && pParent->GetInterface(DUI_CTR_CONTAINER) ) {
+						static_cast<CContainerUI*>(pParent->GetInterface(DUI_CTR_CONTAINER))->SetDataTemplate(
+							static_cast<CDataTemplateUI*>(pControl->GetInterface(DUI_CTR_DATATEMPLATE)));
+					}
+					else if( !pContainer->Add(pControl) ) {
 						delete pControl;
 						continue;
 					}
 				}
 			}
-			if( pControl == NULL ) continue;
 
 			// Init default attributes
 			if( pManager ) {
-				if(pTreeView != NULL) {
+				/*if(pTreeView != NULL) {
 					pControl->SetManager(pManager, pTreeView, true);
 				}
-				else {
+				else*/ {
 					pControl->SetManager(pManager, NULL, false);
 				}
 				LPCTSTR pDefaultAttributes = pManager->GetDefaultAttributeList(pstrClass);
@@ -490,9 +493,9 @@ namespace DuiLib {
 				}
 			}
 			if( pManager ) {
-				if(pTreeView == NULL) {
+				/*if(pTreeView == NULL) {
 					pControl->SetManager(NULL, NULL, false);
-				}
+				}*/
 			}
 			// Return first item
 			if( pReturn == NULL ) pReturn = pControl;

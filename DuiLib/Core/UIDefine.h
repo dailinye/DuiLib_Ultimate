@@ -291,9 +291,12 @@ protected:                                                                \
 #define  DUI_CTR_LISTFOOTER                      (_T("ListFooter"))
 #define  DUI_CTR_TILELAYOUT                      (_T("TileLayout"))
 #define  DUI_CTR_WEBBROWSER                      (_T("WebBrowser"))
+#define  DUI_CTR_ICONTAINER                      (_T("IContainer"))
 
 #define  DUI_CTR_CHILDLAYOUT                     (_T("ChildLayout"))
 #define  DUI_CTR_LISTELEMENT                     (_T("ListElement"))
+
+#define  DUI_CTR_DATATEMPLATE                    (_T("DataTemplate"))
 
 #define  DUI_CTR_VERTICALLAYOUT                  (_T("VerticalLayout"))
 #define  DUI_CTR_LISTHEADERITEM                  (_T("ListHeaderItem"))

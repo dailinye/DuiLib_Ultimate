@@ -113,7 +113,7 @@ namespace DuiLib {
 	class UILIB_API CListUI : public CVerticalLayoutUI, public IListUI
 	{
 		DECLARE_DUICONTROL(CListUI)
-
+		typedef CVerticalLayoutUI parent_type;
 	public:
 		CListUI();
 
@@ -288,6 +288,7 @@ namespace DuiLib {
 	class UILIB_API CListHeaderUI : public CHorizontalLayoutUI
 	{
 		DECLARE_DUICONTROL(CListHeaderUI)
+		typedef CHorizontalLayoutUI parent_type;
 	public:
 		CListHeaderUI();
 
@@ -312,7 +313,7 @@ namespace DuiLib {
 	class UILIB_API CListHeaderItemUI : public CContainerUI
 	{
 		DECLARE_DUICONTROL(CListHeaderItemUI)
-
+		typedef CContainerUI parent_type;
 	public:
 		CListHeaderItemUI();
 
@@ -381,6 +382,8 @@ namespace DuiLib {
 
 	class UILIB_API CListElementUI : public CControlUI, public IListItemUI
 	{
+		DECLARE_DUICONTROL(CListElementUI)
+		typedef CControlUI parent_type;
 	public:
 		CListElementUI();
 
@@ -410,6 +413,7 @@ namespace DuiLib {
 		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
 
 		void DrawItemBk(HDC hDC, const RECT& rcItem);
+		void DrawItemText(HDC hDC, const RECT& rcItem);
 
 	protected:
 		int m_iIndex;
@@ -425,6 +429,7 @@ namespace DuiLib {
 	class UILIB_API CListLabelElementUI : public CListElementUI
 	{
 		DECLARE_DUICONTROL(CListLabelElementUI)
+		typedef CListElementUI parent_type;
 	public:
 		CListLabelElementUI();
 
@@ -445,6 +450,7 @@ namespace DuiLib {
 	class UILIB_API CListTextElementUI : public CListLabelElementUI
 	{
 		DECLARE_DUICONTROL(CListTextElementUI)
+		typedef CListLabelElementUI parent_type;
 	public:
 		CListTextElementUI();
 		~CListTextElementUI();
@@ -480,6 +486,7 @@ namespace DuiLib {
 	class UILIB_API CListContainerElementUI : public CHorizontalLayoutUI, public IListItemUI
 	{
 		DECLARE_DUICONTROL(CListContainerElementUI)
+		typedef CHorizontalLayoutUI parent_type;
 	public:
 		CListContainerElementUI();
 

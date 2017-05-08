@@ -9,6 +9,7 @@ namespace DuiLib
 	class UILIB_API CGroupBoxUI : public CVerticalLayoutUI
 	{
 		DECLARE_DUICONTROL(CGroupBoxUI)
+		typedef CVerticalLayoutUI parent_type;
 	public:
 		CGroupBoxUI();
 		~CGroupBoxUI();

@@ -8,6 +8,7 @@ namespace DuiLib
 	class UILIB_API CProgressUI : public CLabelUI
 	{
 		DECLARE_DUICONTROL(CProgressUI)
+		typedef CLabelUI parent_type;
 	public:
 		CProgressUI();
 

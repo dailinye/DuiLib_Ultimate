@@ -1963,7 +1963,9 @@ namespace DuiLib {
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-		CListElementUI::CListElementUI() : m_iIndex(-1),
+	IMPLEMENT_DUICONTROL(CListElementUI)
+
+	CListElementUI::CListElementUI() : m_iIndex(-1),
 		m_pOwner(NULL), 
 		m_bSelected(false),
 		m_uButtonState(0)
@@ -2219,6 +2221,10 @@ namespace DuiLib {
 				}
 			}
 		}
+	}
+
+	void CListElementUI::DrawItemText(HDC hDC, const RECT & rcItem)
+	{
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////

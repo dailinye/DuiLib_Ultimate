@@ -13,7 +13,7 @@ namespace DuiLib
 	class UILIB_API CIPAddressUI : public CLabelUI
 	{
 		DECLARE_DUICONTROL(CIPAddressUI)
-
+		typedef CLabelUI parent_type;
 		friend class CIPAddressWnd;
 	public:
 		CIPAddressUI();

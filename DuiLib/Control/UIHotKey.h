@@ -35,6 +35,7 @@ namespace DuiLib{
 	class UILIB_API CHotKeyUI : public CLabelUI
 	{
 		DECLARE_DUICONTROL(CHotKeyUI)
+		typedef CLabelUI parent_type;
 		friend CHotKeyWnd;
 	public:
 		CHotKeyUI();

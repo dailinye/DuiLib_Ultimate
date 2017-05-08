@@ -18,6 +18,7 @@ namespace DuiLib
 		, public ITranslateAccelerator
 	{
 		DECLARE_DUICONTROL(CWebBrowserUI)
+		typedef CActiveXUI parent_type;
 	public:
 		/// ¹¹Ôìº¯Êý
 		CWebBrowserUI();
