@@ -2,9 +2,11 @@
 
 namespace DuiLib
 {
+#define DUI_CTR_RENAMEEDIT (_T("RenameEdit"))
+
 	class CRenameEditWnd;
 
-	typedef enum RENAMESTATE_UI
+	enum RENAMESTATE_UI
 	{
 		UIRENAME_UNINITIAL,
 		UIRENAME_CLICK,
@@ -19,7 +21,9 @@ namespace DuiLib
 		CRenameEditUI();
 		virtual ~CRenameEditUI();
 
-		void Init();
+		LPCTSTR GetClass() const;
+		LPVOID GetInterface(LPCTSTR pstrName);
+		void DoInit();
 
 		void SetPos(RECT rc, bool bNeedInvalidate = true);
 		void Move(SIZE szOffset, bool bNeedInvalidate = true);

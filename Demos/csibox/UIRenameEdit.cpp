@@ -272,7 +272,18 @@ namespace DuiLib
 	{
 	}
 
-	void CRenameEditUI::Init()
+	LPCTSTR CRenameEditUI::GetClass() const
+	{
+		return _T("RenameEditUI");
+	}
+
+	LPVOID CRenameEditUI::GetInterface(LPCTSTR pstrName)
+	{
+		if (_tcsicmp(pstrName, DUI_CTR_RENAMEEDIT) == 0) return static_cast<CRenameEditUI*>(this);
+		return CEditUI::GetInterface(pstrName);
+	}
+
+	void CRenameEditUI::DoInit()
 	{
 		LPVOID pControl = NULL;
 		CControlUI* pParent = GetParent();
@@ -333,59 +344,53 @@ namespace DuiLib
 
 	void CRenameEditUI::DoEvent(TEventUI& event)
 	{
-		if (event.Type == UIEVENT_SETCURSOR && IsEnabled())
-		{
-			::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_ARROW)));
-			return;
-		}
-		if ((event.Type == UIEVENT_SETFOCUS && IsEnabled()) || event.Type == UIEVENT_DBLCLICK ||
-			event.Type == UIEVENT_MOUSEENTER || event.Type == UIEVENT_MOUSELEAVE)
-		{
-			if (event.Type == UIEVENT_DBLCLICK)
-			{
-				m_iRenameState == UIRENAME_UNINITIAL;
-			}
+		if (!IsEnabled()) {
 			return CLabelUI::DoEvent(event);
 		}
-		if (event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_RBUTTONDOWN)
-		{
+		if (event.Type == UIEVENT_SETCURSOR) {
+			if (m_iRenameState != UIRENAME_ACTIVATE) {
+				::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_ARROW)));
+			}
+			return;
+		}
+		if (event.Type == UIEVENT_DBLCLICK) {
+			m_iRenameState = UIRENAME_UNINITIAL;
+			return CLabelUI::DoEvent(event);
+		}
+		if (event.Type == UIEVENT_SETFOCUS || event.Type == UIEVENT_MOUSEENTER || event.Type == UIEVENT_MOUSELEAVE) {
+			return CLabelUI::DoEvent(event);
+		}
+		if (event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_RBUTTONDOWN) {
 			if (m_iRenameState == UIRENAME_UNINITIAL) {
-				if (IsEnabled()) {
-					m_iRenameState = UIRENAME_CLICK;
-				}
+				m_iRenameState = UIRENAME_CLICK;
 			}
 			else if (m_iRenameState == UIRENAME_CLICK) {
-				if (IsEnabled()) {
-					GetManager()->ReleaseCapture();
-					if (IsFocused() && m_pWindow == NULL)
-					{
-						m_pWindow = new CRenameEditWnd();
-						ASSERT(m_pWindow);
-						static_cast<CRenameEditWnd*>(m_pWindow)->Init(this);
+				GetManager()->ReleaseCapture();
+				if (IsFocused() && m_pWindow == NULL) {
+					m_pWindow = new CRenameEditWnd();
+					ASSERT(m_pWindow);
+					static_cast<CRenameEditWnd*>(m_pWindow)->Init(this);
 
-						if (PtInRect(&m_rcItem, event.ptMouse))
-						{
-							int nSize = GetWindowTextLength(*m_pWindow);
-							if (nSize == 0) nSize = 1;
-							Edit_SetSel(*m_pWindow, 0, nSize);
-						}
-					}
-					else if (m_pWindow != NULL)
-					{
-#if 1
+					if (PtInRect(&m_rcItem, event.ptMouse)) {
 						int nSize = GetWindowTextLength(*m_pWindow);
 						if (nSize == 0) nSize = 1;
 						Edit_SetSel(*m_pWindow, 0, nSize);
-#else
-						POINT pt = event.ptMouse;
-						pt.x -= m_rcItem.left + m_rcTextPadding.left;
-						pt.y -= m_rcItem.top + m_rcTextPadding.top;
-						::SendMessage(*m_pWindow, WM_LBUTTONDOWN, event.wParam, MAKELPARAM(pt.x, pt.y));
-#endif
 					}
-					m_iRenameState = UIRENAME_ACTIVATE;
-					return;
 				}
+				else if (m_pWindow != NULL) {
+#if 1
+					int nSize = GetWindowTextLength(*m_pWindow);
+					if (nSize == 0) nSize = 1;
+					Edit_SetSel(*m_pWindow, 0, nSize);
+#else
+					POINT pt = event.ptMouse;
+					pt.x -= m_rcItem.left + m_rcTextPadding.left;
+					pt.y -= m_rcItem.top + m_rcTextPadding.top;
+					::SendMessage(*m_pWindow, WM_LBUTTONDOWN, event.wParam, MAKELPARAM(pt.x, pt.y));
+#endif
+				}
+				m_iRenameState = UIRENAME_ACTIVATE;
+				return;
 			}
 			return CLabelUI::DoEvent(event);
 		}
