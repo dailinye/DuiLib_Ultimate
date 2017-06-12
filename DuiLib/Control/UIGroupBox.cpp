@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(CGroupBoxUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CGroupBoxUI)
 
 	//////////////////////////////////////////////////////////////////////////
 	//

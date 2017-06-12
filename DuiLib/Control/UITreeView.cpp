@@ -4,7 +4,7 @@
 #pragma warning( disable: 4251 )
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(CTreeNodeUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CTreeNodeUI)
 
 	//************************************
 	// 函数名称: CTreeNodeUI
@@ -726,7 +726,7 @@ namespace DuiLib
 	/*****************************************************************************/
 	/*****************************************************************************/
 	/*****************************************************************************/
-	IMPLEMENT_DUICONTROL(CTreeViewUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CTreeViewUI)
 	
 	//************************************
 	// 函数名称: CTreeViewUI

@@ -28,6 +28,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CDataTemplateUI)
 		typedef CControlUI parent_type;
+
 	public:
 		CDataTemplateUI();
 		virtual ~CDataTemplateUI();
@@ -62,6 +63,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CContainerUI)
 		typedef CControlUI parent_type;
+
 	public:
 		CContainerUI();
 		virtual ~CContainerUI();

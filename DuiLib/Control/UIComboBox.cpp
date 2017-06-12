@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(CComboBoxUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CComboBoxUI)
 
 	CComboBoxUI::CComboBoxUI()
 	{

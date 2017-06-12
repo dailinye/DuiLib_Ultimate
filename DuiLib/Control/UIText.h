@@ -9,6 +9,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CTextUI)
 		typedef CLabelUI parent_type;
+
 	public:
 		CTextUI();
 		~CTextUI();

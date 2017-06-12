@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(CButtonUI)
+	IMPLEMENT_DUICONTROL_UINIT_DATATEMPLATE(CButtonUI)
 
 	CButtonUI::CButtonUI()
 		: m_uButtonState(0)
@@ -17,6 +17,29 @@ namespace DuiLib
 		, m_nStateCount(0)
 	{
 		m_uTextStyle = DT_SINGLELINE | DT_VCENTER | DT_CENTER;
+	}
+
+	CButtonUI* CButtonUI::DoInitDataTemplate(CButtonUI* pInstance)
+	{
+		pInstance->m_uButtonState = this->m_uButtonState;
+		pInstance->m_dwHotBkColor = this->m_dwHotBkColor;
+		pInstance->m_dwPushedBkColor = this->m_dwPushedBkColor;
+		pInstance->m_dwHotBorderColor = this->m_dwHotBorderColor;
+		pInstance->m_dwHotTextColor = this->m_dwHotTextColor;
+		pInstance->m_dwPushedTextColor = this->m_dwPushedTextColor;
+		pInstance->m_dwFocusedTextColor = this->m_dwFocusedTextColor;
+		pInstance->m_sNormalImage = this->m_sNormalImage;
+		pInstance->m_sHotImage = this->m_sHotImage;
+		pInstance->m_sHotForeImage = this->m_sHotForeImage;
+		pInstance->m_sPushedImage = this->m_sPushedImage;
+		pInstance->m_sPushedForeImage = this->m_sPushedForeImage;
+		pInstance->m_sFocusedImage = this->m_sFocusedImage;
+		pInstance->m_sDisabledImage = this->m_sDisabledImage;
+		pInstance->m_nStateCount = this->m_nStateCount;
+		pInstance->m_sStateImage = this->m_sStateImage;
+		pInstance->m_iBindTabIndex = this->m_iBindTabIndex;
+		pInstance->m_sBindTabLayoutName = this->m_sBindTabLayoutName;
+		return pInstance;
 	}
 
 	LPCTSTR CButtonUI::GetClass() const

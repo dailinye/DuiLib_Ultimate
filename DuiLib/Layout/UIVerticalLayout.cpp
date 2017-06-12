@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(CVerticalLayoutUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CVerticalLayoutUI)
 	CVerticalLayoutUI::CVerticalLayoutUI() : m_iSepHeight(0), m_uButtonState(0), m_bImmMode(false)
 	{
 		ptLastMouse.x = ptLastMouse.y = 0;

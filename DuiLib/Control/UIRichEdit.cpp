@@ -1056,7 +1056,7 @@ void CTxtWinHost::SetParaFormat(PARAFORMAT2 &p)
 /////////////////////////////////////////////////////////////////////////////////////
 //
 //
-IMPLEMENT_DUICONTROL(CRichEditUI)
+IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CRichEditUI)
 
 CRichEditUI::CRichEditUI() : m_pTwh(NULL), m_bVScrollBarFixing(false), m_bWantTab(true), m_bWantReturn(true), 
     m_bWantCtrlReturn(true), m_bRich(true), m_bReadOnly(false), m_bWordWrap(false), m_dwTextColor(0), m_iFont(-1), 

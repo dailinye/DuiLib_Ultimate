@@ -154,7 +154,7 @@ namespace DuiLib
 	}
 	//////////////////////////////////////////////////////////////////////////
 	//
-	IMPLEMENT_DUICONTROL(CDateTimeUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CDateTimeUI)
 
 	CDateTimeUI::CDateTimeUI()
 	{

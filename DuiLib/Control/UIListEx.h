@@ -21,6 +21,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CListExUI)
 		typedef CListUI parent_type;
+
 	public:
 		CListExUI();
 
@@ -76,6 +77,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CListContainerHeaderItemUI)
 		typedef CHorizontalLayoutUI parent_type;
+
 	public:
 		CListContainerHeaderItemUI();
 
@@ -214,6 +216,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CListTextExtElementUI)
 		typedef CListLabelElementUI parent_type;
+
 	public:
 		CListTextExtElementUI();
 		~CListTextExtElementUI();

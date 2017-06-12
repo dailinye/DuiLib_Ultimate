@@ -10,6 +10,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CFadeButtonUI)
 		typedef CButtonUI parent_type;
+
 	public:
 		CFadeButtonUI();
 		virtual ~CFadeButtonUI();

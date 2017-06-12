@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(CChildLayoutUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CChildLayoutUI)
 
 	CChildLayoutUI::CChildLayoutUI()
 	{

@@ -2,7 +2,7 @@
 #include "UIAnimationTabLayout.h"
 
 namespace DuiLib {
-	IMPLEMENT_DUICONTROL(CAnimationTabLayoutUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CAnimationTabLayoutUI)
 
 	CAnimationTabLayoutUI::CAnimationTabLayoutUI() : 
 		CUIAnimation( this ), 

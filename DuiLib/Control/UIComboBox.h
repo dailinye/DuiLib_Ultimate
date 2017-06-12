@@ -12,6 +12,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CComboBoxUI)
 		typedef CComboUI parent_type;
+
 	public:
 		CComboBoxUI();
 		LPCTSTR GetClass() const;

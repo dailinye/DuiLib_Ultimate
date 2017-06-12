@@ -240,7 +240,7 @@ namespace DuiLib
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CEditUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CEditUI)
 
 	CEditUI::CEditUI() : m_pWindow(NULL), m_uMaxChar(255), m_bReadOnly(false), 
 		m_bPasswordMode(false), m_cPasswordChar(_T('*')), m_uButtonState(0), 

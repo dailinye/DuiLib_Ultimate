@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(CRingUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CRingUI)
 
 	CRingUI::CRingUI() : m_fCurAngle(0.0f), m_pBkimage(NULL)
 	{

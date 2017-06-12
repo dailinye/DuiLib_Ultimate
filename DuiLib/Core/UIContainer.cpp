@@ -6,7 +6,7 @@ namespace DuiLib
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CDataTemplateUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CDataTemplateUI)
 
 	CDataTemplateUI::CDataTemplateUI()
 	{
@@ -115,43 +115,71 @@ namespace DuiLib
 		{
 			return NULL;
 		}
-		return static_cast<CControlUI*>(m_items[0])->CreateDataTemplateControl();
+		CControlUI *pControl = static_cast<CControlUI*>(m_items[0]);
+		CDuiString className;
+		className.Format(_T("C%s"), pControl->GetClass());
+		// new instance
+		CControlUI *pInstance = CControlFactory::GetInstance()->CreateControl(className);
+		if (NULL == pInstance)
+		{
+			return NULL;
+		}
+		// init instance
+		if (NULL == pControl->CreateDataTemplateControl(pInstance))
+		{
+			delete pInstance;
+			return NULL;
+		}
+		return pInstance;
 	}
 
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL_DATATEMPLATE_NONE(CContainerUI)
+	IMPLEMENT_DUICONTROL_UINIT_DATATEMPLATE(CContainerUI)
 
-	CControlUI* CContainerUI::CreateDataTemplateControl(CControlUI* pInstance)
+	CContainerUI* CContainerUI::DoInitDataTemplate(CContainerUI* pInstance)
 	{
-		CContainerUI *pContainer = static_cast<CContainerUI*>(pInstance);
-		if (NULL == pContainer)
+		pInstance->m_rcInset = this->m_rcInset;
+		pInstance->m_iChildPadding = this->m_iChildPadding;
+		pInstance->m_iChildAlign = this->m_iChildAlign;
+		pInstance->m_iChildVAlign = this->m_iChildVAlign;
+		pInstance->m_bAutoDestroy = this->m_bAutoDestroy;
+		pInstance->m_bDelayedDestroy = this->m_bDelayedDestroy;
+		pInstance->m_bMouseChildEnabled = this->m_bMouseChildEnabled;
+		pInstance->m_nScrollStepSize = this->m_nScrollStepSize;
+		pInstance->m_pVerticalScrollBar = NULL;
+		pInstance->m_pHorizontalScrollBar = NULL;
+		pInstance->m_sVerticalScrollBarStyle = this->m_sVerticalScrollBarStyle;
+		pInstance->m_sHorizontalScrollBarStyle = this->m_sHorizontalScrollBarStyle;
+		pInstance->m_pDataTemplate = NULL;
+
+		for (int i = 0; i < this->m_items.GetSize(); ++i)
 		{
-			pContainer = static_cast<CContainerUI*>(CreateControl());
-			if (NULL == pContainer)
+			CControlUI *pControl = static_cast<CControlUI*>(this->m_items[i]);
+			CDuiString className;
+			className.Format(_T("C%s"), pControl->GetClass());
+			// new instance
+			CControlUI *pItemInstance = CControlFactory::GetInstance()->CreateControl(className);
+			if (NULL == pItemInstance)
 			{
+				// destroy items
+				// ...
 				return NULL;
 			}
-			*pContainer = *this;
-		}
-
-		// create new instance
-		pContainer->m_pHorizontalScrollBar = NULL;
-		pContainer->m_pVerticalScrollBar = NULL;
-
-		pContainer->m_items.Empty();
-		CControlUI* pControl = NULL;
-		for (int it = 0; it < m_items.GetSize(); it++) {
-			pControl = static_cast<CControlUI*>(m_items[it]);
-			if (NULL != pControl) {
-				pContainer->m_items.Add(pControl->CreateDataTemplateControl());
+			// init instance
+			if (NULL == pControl->CreateDataTemplateControl(pItemInstance))
+			{
+				delete pItemInstance;
+				// destroy items
+				// ...
+				return NULL;
 			}
+			pInstance->Add(pItemInstance);
 		}
 
-		// init by parent
-		return CControlUI::CreateDataTemplateControl(pContainer);
+		return pInstance;
 	}
 
 	CContainerUI::CContainerUI()
@@ -943,9 +971,9 @@ namespace DuiLib
 
 		if (uFlags == UIFIND_ALL) {
 			for (int it = 0; it < m_items.GetSize(); ++it) {
-				CControlUI *pControl = static_cast<CControlUI*>(m_items[it]);
-				if (Proc(pControl, pData)) {
-					return pControl;
+				pResult = static_cast<CControlUI*>(m_items[it])->FindControl(Proc, pData, uFlags);
+				if ( pResult != NULL ) {
+					return pResult;
 				}
 			}
 		}

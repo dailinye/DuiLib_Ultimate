@@ -9,6 +9,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CVerticalLayoutUI)
 		typedef CContainerUI parent_type;
+
 	public:
 		CVerticalLayoutUI();
 

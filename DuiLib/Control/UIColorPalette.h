@@ -9,6 +9,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CColorPaletteUI)
 		typedef CControlUI parent_type;
+
 	public:
 		CColorPaletteUI();
 		virtual ~CColorPaletteUI();

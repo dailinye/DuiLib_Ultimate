@@ -241,7 +241,7 @@ namespace DuiLib{
 
 
 	//////////////////////////////////////////////////////////////////////////
-	IMPLEMENT_DUICONTROL(CHotKeyUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CHotKeyUI)
 
 	CHotKeyUI::CHotKeyUI() : m_pWindow(NULL), m_wVirtualKeyCode(0), m_wModifiers(0), m_uButtonState(0), m_dwHotKeybkColor(0xFFFFFFFF)
 	{

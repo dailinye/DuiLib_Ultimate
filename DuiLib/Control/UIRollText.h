@@ -20,6 +20,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CRollTextUI)
 		typedef CLabelUI parent_type;
+
 	public:
 		CRollTextUI(void);
 		~CRollTextUI(void);

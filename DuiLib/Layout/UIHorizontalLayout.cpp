@@ -3,9 +3,9 @@
 
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(CHorizontalLayoutUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CHorizontalLayoutUI)
 
-	CHorizontalLayoutUI::CHorizontalLayoutUI() : m_iSepWidth(0), m_uButtonState(0), m_bImmMode(false)
+	CHorizontalLayoutUI::CHorizontalLayoutUI() : m_iSepWidth(0), m_uButtonState(0), m_bImmMode(false), m_bAutoCalcWidth(false)
 	{
 		ptLastMouse.x = ptLastMouse.y = 0;
 		::ZeroMemory(&m_rcNewPos, sizeof(m_rcNewPos));
@@ -197,6 +197,27 @@ namespace DuiLib
 		}
 	}
 
+	SIZE CHorizontalLayoutUI::EstimateSize(SIZE szAvailable)
+	{
+		if (!m_bAutoCalcWidth)
+		{
+			return CContainerUI::EstimateSize(szAvailable);
+		}
+		CControlUI *pControl = NULL;
+		SIZE cxyFixed = {0,0};
+		for (int i = 0; i < m_items.GetSize(); ++i)
+		{
+			pControl = static_cast<CControlUI*>(m_items[i]);
+			if (NULL == pControl)
+			{
+				continue;
+			}
+			cxyFixed.cx += pControl->EstimateSize(szAvailable).cx;
+		}
+		m_cxyFixed.cx = cxyFixed.cx;
+		return m_cxyFixed;
+	}
+
 	void CHorizontalLayoutUI::SetSepWidth(int iWidth)
 	{
 		m_iSepWidth = iWidth;
@@ -226,6 +247,9 @@ namespace DuiLib
 	{
 		if( _tcsicmp(pstrName, _T("sepwidth")) == 0 ) SetSepWidth(_ttoi(pstrValue));
 		else if( _tcsicmp(pstrName, _T("sepimm")) == 0 ) SetSepImmMode(_tcsicmp(pstrValue, _T("true")) == 0);
+		else if (_tcsicmp(pstrName, _T("autocalcwidth")) == 0) {
+			SetAutoCalcWidth(_tcsicmp(pstrValue, _T("true")) == 0);
+		}
 		else CContainerUI::SetAttribute(pstrName, pstrValue);
 	}
 
@@ -324,5 +348,15 @@ namespace DuiLib
 			if( m_iSepWidth >= 0 ) return CDuiRect(m_rcItem.right - m_iSepWidth, m_rcItem.top, m_rcItem.right, m_rcItem.bottom);
 			else return CDuiRect(m_rcItem.left, m_rcItem.top, m_rcItem.left - m_iSepWidth, m_rcItem.bottom);
 		}
+	}
+
+	bool CHorizontalLayoutUI::GetAutoCalcWidth() const
+	{
+		return m_bAutoCalcWidth;
+	}
+
+	void CHorizontalLayoutUI::SetAutoCalcWidth(bool bAutoCalcWidth)
+	{
+		m_bAutoCalcWidth = bAutoCalcWidth;
 	}
 }

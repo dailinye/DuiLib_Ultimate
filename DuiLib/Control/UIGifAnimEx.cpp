@@ -6,7 +6,7 @@
 namespace DuiLib
 {
 	#define GIFANIMUIEX_EVENT_TIEM_ID	100
-	IMPLEMENT_DUICONTROL(CGifAnimExUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CGifAnimExUI)
 	struct CGifAnimExUI::Imp
 	{
 		bool				m_bRealStop			;//Õ‚≤øÕ£÷π¡À

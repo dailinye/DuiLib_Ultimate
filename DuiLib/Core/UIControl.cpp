@@ -1,22 +1,82 @@
 #include "StdAfx.h"
 
 namespace DuiLib {
-	IMPLEMENT_DUICONTROL_DATATEMPLATE_NONE(CControlUI)
+	CControlUI* CControlUI::CreateControl()
+	{
+		return new CControlUI;
+	}
 
 	CControlUI* CControlUI::CreateDataTemplateControl(CControlUI* pInstance)
 	{
-		CControlUI *pControl = static_cast<CControlUI*>(pInstance);
-		if (NULL == pControl)
-		{
-			pControl = static_cast<CControlUI*>(CreateControl());
-			if (NULL == pControl)
-			{
-				return NULL;
-			}
+		this_type* pControl = static_cast<this_type*>(pInstance);
+		if (NULL == pControl) {
+			return NULL;
 		}
-		*pControl = *this;
+		/*init*/
+		if (NULL == DoInitDataTemplate(pControl)) {
+			return NULL;
+		}
+		return pInstance;
+	}
 
-		return pControl;
+	CControlUI* CControlUI::DoInitDataTemplate(CControlUI* pInstance)
+	{
+		pInstance->m_sVirtualWnd = this->m_sVirtualWnd;
+		pInstance->m_sName = this->m_sName;
+		pInstance->m_bUpdateNeeded = this->m_bUpdateNeeded;
+		pInstance->m_bMenuUsed = this->m_bMenuUsed;
+		pInstance->m_rcItem = this->m_rcItem;
+		pInstance->m_rcPadding = this->m_rcPadding;
+		pInstance->m_cXY = this->m_cXY;
+		pInstance->m_cxyFixed = this->m_cxyFixed;
+		pInstance->m_cxyMin = this->m_cxyMin;
+		pInstance->m_cxyMax = this->m_cxyMax;
+		pInstance->m_bVisible = this->m_bVisible;
+		pInstance->m_bInternVisible = this->m_bInternVisible;
+		pInstance->m_bEnabled = this->m_bEnabled;
+		pInstance->m_bMouseEnabled = this->m_bMouseEnabled;
+		pInstance->m_bKeyboardEnabled = this->m_bKeyboardEnabled;
+		pInstance->m_bFocused = this->m_bFocused;
+		pInstance->m_bFloat = this->m_bFloat;
+		pInstance->m_piFloatPercent = this->m_piFloatPercent;
+		pInstance->m_uFloatAlign = this->m_uFloatAlign;
+		pInstance->m_bSetPos = this->m_bSetPos;
+		pInstance->m_bDragEnabled = this->m_bDragEnabled;
+		pInstance->m_bDropEnabled = this->m_bDropEnabled;
+		pInstance->m_bResourceText = this->m_bResourceText;
+		pInstance->m_sText = this->m_sText;
+		pInstance->m_sToolTip = this->m_sToolTip;
+		pInstance->m_chShortcut = this->m_chShortcut;
+		pInstance->m_sUserData = this->m_sUserData;
+		pInstance->m_pTag = NULL;
+		pInstance->m_sGradient = this->m_sGradient;
+		pInstance->m_dwBackColor = this->m_dwBackColor;
+		pInstance->m_dwBackColor2 = this->m_dwBackColor2;
+		pInstance->m_dwBackColor3 = this->m_dwBackColor3;
+		pInstance->m_dwForeColor = this->m_dwForeColor;
+		pInstance->m_sBkImage = this->m_sBkImage;
+		pInstance->m_sForeImage = this->m_sForeImage;
+		pInstance->m_dwBorderColor = this->m_dwBorderColor;
+		pInstance->m_dwFocusBorderColor = this->m_dwFocusBorderColor;
+		pInstance->m_bColorHSL = this->m_bColorHSL;
+		pInstance->m_nBorderSize = this->m_nBorderSize;
+		pInstance->m_nBorderStyle = this->m_nBorderStyle;
+		pInstance->m_nTooltipWidth = this->m_nTooltipWidth;
+		pInstance->m_wCursor = this->m_wCursor;
+		pInstance->m_cxyBorderRound = this->m_cxyBorderRound;
+		pInstance->m_rcPaint = this->m_rcPaint;
+		pInstance->m_rcBorderSize = this->m_rcBorderSize;
+		pInstance->m_instance = this->m_instance;
+
+		for (int i = 0; i < this->m_mCustomAttrHash.GetSize(); ++i)
+		{
+			CDuiString pstrName = this->m_mCustomAttrHash[i];
+			CDuiString pstrAttr = *(CDuiString*)this->m_mCustomAttrHash.Find(pstrName);
+			CDuiString* pCostomAttr = new CDuiString(pstrAttr);
+			pInstance->m_mCustomAttrHash.Set(pstrName, (LPVOID)pCostomAttr);
+		}
+
+		return pInstance;
 	}
 
 	CControlUI::CControlUI()

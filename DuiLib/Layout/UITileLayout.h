@@ -9,6 +9,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CTileLayoutUI)
 		typedef CContainerUI parent_type;
+
 	public:
 		CTileLayoutUI();
 

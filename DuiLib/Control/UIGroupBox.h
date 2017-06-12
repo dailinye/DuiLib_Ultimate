@@ -10,6 +10,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CGroupBoxUI)
 		typedef CVerticalLayoutUI parent_type;
+
 	public:
 		CGroupBoxUI();
 		~CGroupBoxUI();

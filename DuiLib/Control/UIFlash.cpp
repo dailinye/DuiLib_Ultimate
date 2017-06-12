@@ -8,7 +8,7 @@
 
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(CFlashUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CFlashUI)
 
 	CFlashUI::CFlashUI(void)
 		: m_dwRef(0)

@@ -165,7 +165,7 @@ namespace DuiLib
 
 	//////////////////////////////////////////////////////////////////////////
 	//
-	IMPLEMENT_DUICONTROL(CIPAddressUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CIPAddressUI)
 
 		CIPAddressUI::CIPAddressUI()
 	{

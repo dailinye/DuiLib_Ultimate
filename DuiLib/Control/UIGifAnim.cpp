@@ -4,7 +4,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(CGifAnimUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CGifAnimUI)
 
 	CGifAnimUI::CGifAnimUI(void)
 	{

@@ -114,6 +114,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CListUI)
 		typedef CVerticalLayoutUI parent_type;
+
 	public:
 		CListUI();
 
@@ -289,6 +290,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CListHeaderUI)
 		typedef CHorizontalLayoutUI parent_type;
+
 	public:
 		CListHeaderUI();
 
@@ -314,6 +316,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CListHeaderItemUI)
 		typedef CContainerUI parent_type;
+
 	public:
 		CListHeaderItemUI();
 
@@ -384,6 +387,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CListElementUI)
 		typedef CControlUI parent_type;
+
 	public:
 		CListElementUI();
 
@@ -430,6 +434,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CListLabelElementUI)
 		typedef CListElementUI parent_type;
+
 	public:
 		CListLabelElementUI();
 
@@ -451,6 +456,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CListTextElementUI)
 		typedef CListLabelElementUI parent_type;
+
 	public:
 		CListTextElementUI();
 		~CListTextElementUI();
@@ -487,6 +493,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CListContainerElementUI)
 		typedef CHorizontalLayoutUI parent_type;
+
 	public:
 		CListContainerElementUI();
 

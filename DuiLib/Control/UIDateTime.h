@@ -12,6 +12,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CDateTimeUI)
 		typedef CLabelUI parent_type;
+
 		friend class CDateTimeWnd;
 	public:
 		CDateTimeUI();

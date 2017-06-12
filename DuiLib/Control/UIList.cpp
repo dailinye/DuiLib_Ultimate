@@ -5,7 +5,7 @@ namespace DuiLib {
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CListUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CListUI)
 
 	CListUI::CListUI() : m_pCallback(NULL), m_bScrollSelect(false), m_iCurSel(-1), m_iExpandedItem(-1), m_bMultiSel(false)
 	{
@@ -1395,7 +1395,7 @@ namespace DuiLib {
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CListHeaderUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CListHeaderUI)
 
 	CListHeaderUI::CListHeaderUI():
 	m_bIsScaleHeader(false)
@@ -1566,7 +1566,7 @@ namespace DuiLib {
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CListHeaderItemUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CListHeaderItemUI)
 
 		CListHeaderItemUI::CListHeaderItemUI() : m_bDragable(true), m_uButtonState(0), m_iSepWidth(4),
 		m_uTextStyle(DT_VCENTER | DT_CENTER | DT_SINGLELINE), m_dwTextColor(0), m_iFont(-1), m_bShowHtml(false),m_nScale(0)
@@ -1963,7 +1963,7 @@ namespace DuiLib {
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CListElementUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CListElementUI)
 
 	CListElementUI::CListElementUI() : m_iIndex(-1),
 		m_pOwner(NULL), 
@@ -2230,7 +2230,7 @@ namespace DuiLib {
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CListLabelElementUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CListLabelElementUI)
 
 		CListLabelElementUI::CListLabelElementUI()
 	{
@@ -2384,7 +2384,7 @@ namespace DuiLib {
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CListTextElementUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CListTextElementUI)
 
 	CListTextElementUI::CListTextElementUI() : m_nLinks(0), m_nHoverLink(-1), m_pOwner(NULL)
 	{
@@ -2569,7 +2569,7 @@ namespace DuiLib {
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CListContainerElementUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CListContainerElementUI)
 
 	CListContainerElementUI::CListContainerElementUI() : 
 		m_iIndex(-1),

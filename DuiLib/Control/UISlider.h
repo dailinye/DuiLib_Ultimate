@@ -9,6 +9,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CSliderUI)
 		typedef CProgressUI parent_type;
+
 	public:
 		CSliderUI();
 

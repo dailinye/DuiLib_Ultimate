@@ -13,6 +13,7 @@ namespace DuiLib
 		};
 		DECLARE_DUICONTROL(CGifAnimUI)
 		typedef CControlUI parent_type;
+
 	public:
 		CGifAnimUI(void);
 		~CGifAnimUI(void);

@@ -17,6 +17,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CTreeNodeUI)
 		typedef CListContainerElementUI parent_type;
+
 	public:
 		CTreeNodeUI(CTreeNodeUI* _ParentNode = NULL);
 		~CTreeNodeUI(void);
@@ -101,6 +102,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CTreeViewUI)
 		typedef CListUI parent_type;
+
 	public:
 		CTreeViewUI(void);
 		~CTreeViewUI(void);

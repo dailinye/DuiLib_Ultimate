@@ -914,7 +914,7 @@ namespace DuiLib {
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CActiveXUI)
+	IMPLEMENT_DUICONTROL_UINIT_DATATEMPLATE(CActiveXUI)
 
 	CActiveXUI::CActiveXUI() : m_pUnk(NULL), m_pControl(NULL), m_hwndHost(NULL), m_bCreated(false), m_bDelayCreate(true), m_bMFC(false)
 	{
@@ -924,6 +924,19 @@ namespace DuiLib {
 	CActiveXUI::~CActiveXUI()
 	{
 		ReleaseControl();
+	}
+
+	CActiveXUI* CActiveXUI::DoInitDataTemplate(CActiveXUI* pInstance)
+	{
+		pInstance->CreateControl(m_clsid);
+		pInstance->m_sModuleName = this->m_sModuleName;
+		pInstance->m_bCreated = this->m_bCreated;
+		pInstance->m_bDelayCreate = this->m_bDelayCreate;
+		pInstance->m_bMFC = this->m_bMFC;
+		pInstance->m_pUnk = NULL;
+		pInstance->m_pControl = NULL;
+		pInstance->m_hwndHost = NULL;
+		return pInstance;
 	}
 
 	LPCTSTR CActiveXUI::GetClass() const

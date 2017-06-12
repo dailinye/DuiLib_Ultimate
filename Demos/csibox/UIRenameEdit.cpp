@@ -261,7 +261,7 @@ namespace DuiLib
 		return 0;
 	}
 
-	IMPLEMENT_DUICONTROL(CRenameEditUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CRenameEditUI)
 
 	CRenameEditUI::CRenameEditUI()
 		:m_iRenameState(UIRENAME_UNINITIAL)

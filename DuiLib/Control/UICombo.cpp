@@ -263,7 +263,7 @@ namespace DuiLib {
 	}
 #endif
 	////////////////////////////////////////////////////////
-	IMPLEMENT_DUICONTROL(CComboUI)
+	IMPLEMENT_DUICONTROL_UINIT_DATATEMPLATE(CComboUI)
 
 	CComboUI::CComboUI() : m_uTextStyle(DT_VCENTER | DT_SINGLELINE)
 		, m_dwTextColor(0)
@@ -295,6 +295,30 @@ namespace DuiLib {
 		m_ListInfo.bMultiExpandable = false;
 		::ZeroMemory(&m_ListInfo.rcTextPadding, sizeof(m_ListInfo.rcTextPadding));
 		::ZeroMemory(&m_ListInfo.rcColumn, sizeof(m_ListInfo.rcColumn));
+	}
+
+	CComboUI* CComboUI::DoInitDataTemplate(CComboUI* pInstance)
+	{
+		pInstance->m_iCurSel = this->m_iCurSel;
+		pInstance->m_dwTextColor = this->m_dwTextColor;
+		pInstance->m_dwDisabledTextColor = this->m_dwDisabledTextColor;
+		pInstance->m_iFont = this->m_iFont;
+		pInstance->m_uTextStyle = this->m_uTextStyle;
+		pInstance->m_rcTextPadding = this->m_rcTextPadding;
+		pInstance->m_bShowHtml = this->m_bShowHtml;
+		pInstance->m_bShowShadow = this->m_bShowShadow;
+		pInstance->m_sDropBoxAttributes = this->m_sDropBoxAttributes;
+		pInstance->m_szDropBox = this->m_szDropBox;
+		pInstance->m_uButtonState = this->m_uButtonState;
+		pInstance->m_sNormalImage = this->m_sNormalImage;
+		pInstance->m_sHotImage = this->m_sHotImage;
+		pInstance->m_sPushedImage = this->m_sPushedImage;
+		pInstance->m_sFocusedImage = this->m_sFocusedImage;
+		pInstance->m_sDisabledImage = this->m_sDisabledImage;
+		pInstance->m_bScrollSelect = this->m_bScrollSelect;
+		memcpy(&pInstance->m_ListInfo, &this->m_ListInfo, sizeof(this->m_ListInfo));
+
+		return pInstance;
 	}
 
 	LPCTSTR CComboUI::GetClass() const

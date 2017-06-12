@@ -3,13 +3,13 @@
 
 //////////////////////////////////////////////////////////////////////////
 //
-IMPLEMENT_DUICONTROL(CCircleProgressUI)
-IMPLEMENT_DUICONTROL(CMyComboUI)
+IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CCircleProgressUI)
+IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CMyComboUI)
 
 
 //////////////////////////////////////////////////////////////////////////
 //
-IMPLEMENT_DUICONTROL(CChartViewUI)
+IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CChartViewUI)
 CChartViewUI::CChartViewUI(void) : 
 m_ViewStyle(CHARTVIEW_PIE), 
 	m_sShadowImage(_T("")), 
@@ -328,5 +328,5 @@ void CChartViewUI::DoPaintHistogram(HDC hDC, const RECT& rcPaint)
 
 //////////////////////////////////////////////////////////////////////////
 //
-IMPLEMENT_DUICONTROL(CWndUI)
+IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CWndUI)
 

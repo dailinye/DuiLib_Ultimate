@@ -16,7 +16,9 @@ namespace DuiLib
 	class CRenameEditUI : public CEditUI, public IListItemCallbackUI
 	{
 		DECLARE_DUICONTROL(CRenameEditUI)
+		typedef CEditUI parent_type;
 		friend class CRenameEditWnd;
+
 	public:
 		CRenameEditUI();
 		virtual ~CRenameEditUI();

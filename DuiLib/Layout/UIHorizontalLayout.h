@@ -9,6 +9,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CHorizontalLayoutUI)
 		typedef CContainerUI parent_type;
+
 	public:
 		CHorizontalLayoutUI();
 
@@ -25,8 +26,11 @@ namespace DuiLib
 
 		void SetPos(RECT rc, bool bNeedInvalidate = true);
 		void DoPostPaint(HDC hDC, const RECT& rcPaint);
+		SIZE EstimateSize(SIZE szAvailable);
 
 		RECT GetThumbRect(bool bUseNew = false) const;
+		virtual bool GetAutoCalcWidth() const;
+		virtual void SetAutoCalcWidth(bool bAutoCalcWidth);
 
 	protected:
 		int m_iSepWidth;
@@ -34,6 +38,7 @@ namespace DuiLib
 		POINT ptLastMouse;
 		RECT m_rcNewPos;
 		bool m_bImmMode;
+		bool m_bAutoCalcWidth;
 	};
 }
 #endif // __UIHORIZONTALLAYOUT_H__

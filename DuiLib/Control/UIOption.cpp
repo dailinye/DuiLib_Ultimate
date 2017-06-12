@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(COptionUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(COptionUI)
 	COptionUI::COptionUI() : m_bSelected(false), m_dwSelectedTextColor(0), m_dwSelectedBkColor(0), m_nSelectedStateCount(0)
 	{
 	}
@@ -342,7 +342,7 @@ namespace DuiLib
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//
-	IMPLEMENT_DUICONTROL(CCheckBoxUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CCheckBoxUI)
 
 	LPCTSTR CCheckBoxUI::GetClass() const
 	{

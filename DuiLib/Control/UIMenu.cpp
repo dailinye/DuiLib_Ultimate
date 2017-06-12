@@ -6,7 +6,7 @@ namespace DuiLib {
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
-	IMPLEMENT_DUICONTROL(CMenuUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CMenuUI)
 
 		CMenuUI::CMenuUI():
 		m_pWindow(NULL)
@@ -613,7 +613,7 @@ namespace DuiLib {
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
-	IMPLEMENT_DUICONTROL(CMenuElementUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CMenuElementUI)
 
 	CMenuElementUI::CMenuElementUI():
 	m_pWindow(NULL),

@@ -14,6 +14,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CIPAddressUI)
 		typedef CLabelUI parent_type;
+
 		friend class CIPAddressWnd;
 	public:
 		CIPAddressUI();

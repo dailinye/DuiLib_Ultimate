@@ -23,6 +23,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CFlashUI)
 		typedef CActiveXUI parent_type;
+
 	public:
 		CFlashUI(void);
 		~CFlashUI(void);

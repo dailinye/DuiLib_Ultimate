@@ -9,6 +9,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CProgressUI)
 		typedef CLabelUI parent_type;
+
 	public:
 		CProgressUI();
 

@@ -4,7 +4,7 @@
 #include <atlconv.h>
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(CLabelUI)
+	IMPLEMENT_DUICONTROL_UINIT_DATATEMPLATE(CLabelUI)
 
 	CLabelUI::CLabelUI() : m_uTextStyle(DT_VCENTER | DT_SINGLELINE), m_dwTextColor(0), 
 		m_dwDisabledTextColor(0),
@@ -17,6 +17,18 @@ namespace DuiLib
 
 	CLabelUI::~CLabelUI()
 	{
+	}
+
+	CLabelUI* CLabelUI::DoInitDataTemplate(CLabelUI* pInstance)
+	{
+		pInstance->m_dwTextColor = this->m_dwTextColor;
+		pInstance->m_dwDisabledTextColor = this->m_dwDisabledTextColor;
+		pInstance->m_iFont = this->m_iFont;
+		pInstance->m_uTextStyle = this->m_uTextStyle;
+		pInstance->m_rcTextPadding = this->m_rcTextPadding;
+		pInstance->m_bShowHtml = this->m_bShowHtml;
+		pInstance->m_bAutoCalcWidth = this->m_bAutoCalcWidth;
+		return pInstance;
 	}
 
 	LPCTSTR CLabelUI::GetClass() const

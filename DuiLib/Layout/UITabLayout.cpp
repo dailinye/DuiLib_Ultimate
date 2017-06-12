@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(CTabLayoutUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CTabLayoutUI)
 	CTabLayoutUI::CTabLayoutUI() : m_iCurSel(-1)
 	{
 	}

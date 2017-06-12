@@ -9,7 +9,7 @@ namespace DuiLib
 {
 	////////////////////////////////////////////////////////////////////////
 	//
-	IMPLEMENT_DUICONTROL(CWebBrowserUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CWebBrowserUI)
 
 		CWebBrowserUI::CWebBrowserUI()
 		: m_pWebBrowser2(NULL)

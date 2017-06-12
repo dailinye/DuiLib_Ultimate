@@ -7,6 +7,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CAnimationTabLayoutUI)
 		typedef CTabLayoutUI parent_type;
+
 	public:
 		CAnimationTabLayoutUI();
 

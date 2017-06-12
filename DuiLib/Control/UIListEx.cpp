@@ -6,7 +6,7 @@ namespace DuiLib {
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CListExUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CListExUI)
 
 	CListExUI::CListExUI() : m_pEditUI(NULL), m_pComboBoxUI(NULL), m_bAddMessageFilter(FALSE),m_nRow(-1),m_nColum(-1),m_pXCallback(NULL)
 	{
@@ -349,7 +349,7 @@ namespace DuiLib {
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CListContainerHeaderItemUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CListContainerHeaderItemUI)
 
 	CListContainerHeaderItemUI::CListContainerHeaderItemUI() : m_bDragable(TRUE), m_uButtonState(0), m_iSepWidth(4),
 		m_uTextStyle(DT_VCENTER | DT_CENTER | DT_SINGLELINE), m_dwTextColor(0), m_iFont(-1), m_bShowHtml(FALSE),
@@ -1034,7 +1034,7 @@ Label_ForeImage:
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CListTextExtElementUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CListTextExtElementUI)
 
 	CListTextExtElementUI::CListTextExtElementUI() : 
 	m_nLinks(0), m_nHoverLink(-1), m_pOwner(NULL),m_uCheckBoxState(0),m_bChecked(FALSE)

@@ -13,6 +13,7 @@ namespace DuiLib {
 	{
 		DECLARE_DUICONTROL(CRichEditUI)
 		typedef CContainerUI parent_type;
+
 	public:
 		CRichEditUI();
 		~CRichEditUI();

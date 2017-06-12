@@ -111,7 +111,7 @@ namespace DuiLib {
 	///////////////////////////////////////////////////////////////////////
 	//
 	//
-	IMPLEMENT_DUICONTROL(CColorPaletteUI)
+	IMPLEMENT_DUICONTROL_UINIT_DATATEMPLATE(CColorPaletteUI)
 
 	CColorPaletteUI::CColorPaletteUI()
 		: m_uButtonState(0)
@@ -136,7 +136,23 @@ namespace DuiLib {
 		if (m_hMemBitmap) {
 			::DeleteObject(m_hMemBitmap);
 		}
+	}
 
+	CColorPaletteUI* CColorPaletteUI::DoInitDataTemplate(CColorPaletteUI* pInstance)
+	{
+		pInstance->m_uButtonState = this->m_uButtonState;
+		pInstance->m_bIsInBar = this->m_bIsInBar;
+		pInstance->m_bIsInPallet = this->m_bIsInPallet;
+		pInstance->m_nCurH = this->m_nCurH;
+		pInstance->m_nCurS = this->m_nCurS;
+		pInstance->m_nCurB = this->m_nCurB;
+		pInstance->m_nPalletHeight = this->m_nPalletHeight;
+		pInstance->m_nBarHeight = this->m_nBarHeight;
+		pInstance->m_ptLastPalletMouse = this->m_ptLastPalletMouse;
+		pInstance->m_ptLastBarMouse = this->m_ptLastBarMouse;
+		pInstance->m_strThumbImage = this->m_strThumbImage;
+
+		return pInstance;
 	}
 
 	DWORD CColorPaletteUI::GetSelectColor()

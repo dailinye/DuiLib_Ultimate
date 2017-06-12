@@ -16,6 +16,7 @@ namespace DuiLib
 	{
 		DECLARE_DUICONTROL(CGifAnimExUI)
 		typedef CLabelUI parent_type;
+
 	public:
 		CGifAnimExUI(void);
 		~CGifAnimExUI(void);

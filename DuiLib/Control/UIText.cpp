@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(CTextUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CTextUI)
 
 	CTextUI::CTextUI() : m_nLinks(0), m_nHoverLink(-1)
 	{

@@ -248,6 +248,7 @@ class UILIB_API CMenuUI : public CListUI
 {
 	DECLARE_DUICONTROL(CMenuUI)
 	typedef CListUI parent_type;
+
 public:
 	CMenuUI();
 	virtual ~CMenuUI();
@@ -341,6 +342,7 @@ class UILIB_API CMenuElementUI : public CListContainerElementUI
 {
 	DECLARE_DUICONTROL(CMenuElementUI)
 	typedef CListContainerElementUI parent_type;
+
 	friend CMenuWnd;
 public:
     CMenuElementUI();

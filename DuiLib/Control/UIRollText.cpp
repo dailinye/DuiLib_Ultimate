@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL(CRollTextUI)
+	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CRollTextUI)
 
 	CRollTextUI::CRollTextUI(void)
 	{
