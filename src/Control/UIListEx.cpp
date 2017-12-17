@@ -356,7 +356,7 @@ namespace DuiLib {
 		m_bEditable(FALSE),m_bComboable(FALSE),m_bCheckBoxable(FALSE),m_uCheckBoxState(0),m_bChecked(FALSE),m_pOwner(NULL)
 	{
 		SetTextPadding(CDuiRect(2, 0, 2, 0));
-		ptLastMouse.x = ptLastMouse.y = 0;
+		m_ptLastMouse.x = m_ptLastMouse.y = 0;
 		SetMinWidth(16);
 	}
 
@@ -676,7 +676,7 @@ namespace DuiLib {
 			if( ::PtInRect(&rcSeparator, event.ptMouse) ) {
 				if( m_bDragable ) {
 					m_uButtonState |= UISTATE_CAPTURED;
-					ptLastMouse = event.ptMouse;
+					m_ptLastMouse = event.ptMouse;
 				}
 			}
 			else {
@@ -704,15 +704,15 @@ namespace DuiLib {
 			if( (m_uButtonState & UISTATE_CAPTURED) != 0 ) {
 				RECT rc = m_rcItem;
 				if( m_iSepWidth >= 0 ) {
-					rc.right -= ptLastMouse.x - event.ptMouse.x;
+					rc.right -= m_ptLastMouse.x - event.ptMouse.x;
 				}
 				else {
-					rc.left -= ptLastMouse.x - event.ptMouse.x;
+					rc.left -= m_ptLastMouse.x - event.ptMouse.x;
 				}
 
 				if( rc.right - rc.left > GetMinWidth() ) {
 					m_cxyFixed.cx = rc.right - rc.left;
-					ptLastMouse = event.ptMouse;
+					m_ptLastMouse = event.ptMouse;
 					if( GetParent() ) 
 						GetParent()->NeedParentUpdate();
 				}

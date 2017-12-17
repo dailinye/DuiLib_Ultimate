@@ -3,12 +3,23 @@
 
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CHorizontalLayoutUI)
+	IMPLEMENT_DUICONTROL_UINIT_DATATEMPLATE(CHorizontalLayoutUI)
 
 	CHorizontalLayoutUI::CHorizontalLayoutUI() : m_iSepWidth(0), m_uButtonState(0), m_bImmMode(false), m_bAutoCalcWidth(false)
 	{
-		ptLastMouse.x = ptLastMouse.y = 0;
+		m_ptLastMouse.x = m_ptLastMouse.y = 0;
 		::ZeroMemory(&m_rcNewPos, sizeof(m_rcNewPos));
+	}
+
+	CHorizontalLayoutUI* CHorizontalLayoutUI::DoInitDataTemplate(CHorizontalLayoutUI* pInstance)
+	{
+		pInstance->m_iSepWidth = this->m_iSepWidth;
+		pInstance->m_uButtonState = this->m_uButtonState;
+		pInstance->m_ptLastMouse = this->m_ptLastMouse;
+		pInstance->m_rcNewPos = this->m_rcNewPos;
+		pInstance->m_bImmMode = this->m_bImmMode;
+		pInstance->m_bAutoCalcWidth = this->m_bAutoCalcWidth;
+		return pInstance;
 	}
 
 	LPCTSTR CHorizontalLayoutUI::GetClass() const
@@ -126,7 +137,7 @@ namespace DuiLib
 			if (iControlMaxHeight <= 0) iControlMaxHeight = pControl->GetMaxHeight();
 			if (szControlAvailable.cx > iControlMaxWidth) szControlAvailable.cx = iControlMaxWidth;
 			if (szControlAvailable.cy > iControlMaxHeight) szControlAvailable.cy = iControlMaxHeight;
-      cxFixedRemaining = cxFixedRemaining - (rcPadding.left + rcPadding.right);
+			cxFixedRemaining = cxFixedRemaining - (rcPadding.left + rcPadding.right);
 			if (iEstimate > 1) cxFixedRemaining = cxFixedRemaining - m_iChildPadding;
 			SIZE sz = pControl->EstimateSize(szControlAvailable);
 			if( sz.cx == 0 ) {
@@ -261,7 +272,7 @@ namespace DuiLib
 				RECT rcSeparator = GetThumbRect(false);
 				if( ::PtInRect(&rcSeparator, event.ptMouse) ) {
 					m_uButtonState |= UISTATE_CAPTURED;
-					ptLastMouse = event.ptMouse;
+					m_ptLastMouse = event.ptMouse;
 					m_rcNewPos = m_rcItem;
 					if( !m_bImmMode && m_pManager ) m_pManager->AddPostPaint(this);
 					return;
@@ -280,8 +291,8 @@ namespace DuiLib
 			if( event.Type == UIEVENT_MOUSEMOVE )
 			{
 				if( (m_uButtonState & UISTATE_CAPTURED) != 0 ) {
-					LONG cx = event.ptMouse.x - ptLastMouse.x;
-					ptLastMouse = event.ptMouse;
+					LONG cx = event.ptMouse.x - m_ptLastMouse.x;
+					m_ptLastMouse = event.ptMouse;
 					RECT rc = m_rcNewPos;
 					if( m_iSepWidth >= 0 ) {
 						if( cx > 0 && event.ptMouse.x < m_rcNewPos.right - m_iSepWidth ) return;

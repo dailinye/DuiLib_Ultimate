@@ -21,6 +21,7 @@ namespace DuiLib {
 
 	CControlUI* CControlUI::DoInitDataTemplate(CControlUI* pInstance)
 	{
+		pInstance->m_pManager = this->m_pManager;
 		pInstance->m_sVirtualWnd = this->m_sVirtualWnd;
 		pInstance->m_sName = this->m_sName;
 		pInstance->m_bUpdateNeeded = this->m_bUpdateNeeded;

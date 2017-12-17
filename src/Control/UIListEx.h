@@ -120,7 +120,7 @@ namespace DuiLib {
 		void PaintStatusImage(HDC hDC);
 
 	protected:
-		POINT ptLastMouse;
+		POINT m_ptLastMouse;
 		BOOL m_bDragable;
 		UINT m_uButtonState;
 		int m_iSepWidth;
