@@ -270,38 +270,40 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)_d</TargetName>
-    <OutDir>$(SolutionDir)output\$(PlatformTarget)\dll\</OutDir>
+    <OutDir>$(SolutionDir)output\$(PlatformTarget)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Lib|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>$(ProjectName)_d</TargetName>
-    <OutDir>$(SolutionDir)output\$(PlatformTarget)\lib\</OutDir>
+    <TargetName>$(ProjectName)a_d</TargetName>
+    <OutDir>$(SolutionDir)output\$(PlatformTarget)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(PlatformTarget)\dll\</OutDir>
+    <OutDir>$(SolutionDir)output\$(PlatformTarget)\</OutDir>
     <TargetName>$(ProjectName)_d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Lib|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(PlatformTarget)\lib\</OutDir>
-    <TargetName>$(ProjectName)_d</TargetName>
+    <OutDir>$(SolutionDir)output\$(PlatformTarget)\</OutDir>
+    <TargetName>$(ProjectName)a_d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(PlatformTarget)\dll\</OutDir>
+    <OutDir>$(SolutionDir)output\$(PlatformTarget)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Lib|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(PlatformTarget)\lib\</OutDir>
+    <OutDir>$(SolutionDir)output\$(PlatformTarget)\</OutDir>
+    <TargetName>$(ProjectName)a</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(PlatformTarget)\dll\</OutDir>
+    <OutDir>$(SolutionDir)output\$(PlatformTarget)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Lib|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)output\$(PlatformTarget)\lib\</OutDir>
+    <OutDir>$(SolutionDir)output\$(PlatformTarget)\</OutDir>
+    <TargetName>$(ProjectName)a</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
