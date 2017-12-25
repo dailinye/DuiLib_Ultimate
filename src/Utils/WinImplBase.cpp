@@ -305,10 +305,10 @@ namespace DuiLib
 		}
 
 		if (pRoot == NULL) {
-			CDuiString sError = _T("加载资源文件失败：");
+			CDuiString sError = _T("Failed to load resource of ");
 			sError += GetSkinFile();
-			MessageBox(NULL, sError, _T("Duilib") ,MB_OK|MB_ICONERROR);
-			ExitProcess(1);
+			MessageBox(NULL, sError, _T("") ,MB_OK|MB_ICONERROR);
+			ExitProcess(ERROR_FILE_NOT_FOUND);
 			return 0;
 		}
 		m_pm.AttachDialog(pRoot);

@@ -654,7 +654,7 @@ namespace DuiLib
 		}
 		if( event.Type == UIEVENT_CONTEXTMENU )
 		{
-			return;
+			return CControlUI::DoEvent(event);
 		}
 		if( event.Type == UIEVENT_TIMER && event.wParam == DEFAULT_TIMERID )
 		{

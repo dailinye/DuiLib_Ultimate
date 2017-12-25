@@ -108,6 +108,7 @@
 #include "Control/UIHotKey.h"
 #include "Control/UIFadeButton.h"
 #include "Control/UIRing.h"
+#include "Control/UINotifyIcon.h"
 
 #pragma comment( lib, "comctl32.lib" )
 #pragma comment( lib, "GdiPlus.lib" )

@@ -2824,10 +2824,11 @@ namespace DuiLib {
 
 		if( event.Type == UIEVENT_CONTEXTMENU )
 		{
-			if( IsContextMenuUsed() ) {
-				m_pManager->SendNotify(this, DUI_MSGTYPE_MENU, event.wParam, event.lParam);
-				return;
-			}
+			//if( IsContextMenuUsed() ) {
+			//	m_pManager->SendNotify(this, DUI_MSGTYPE_MENU, event.wParam, event.lParam);
+			//	return;
+			//}
+			return CHorizontalLayoutUI::DoEvent(event);
 		}
 		// An important twist: The list-item will send the event not to its immediate
 		// parent but to the "attached" list. A list may actually embed several components

@@ -109,13 +109,13 @@ namespace DuiLib
 			}
 			return;
 		}
-		if( event.Type == UIEVENT_CONTEXTMENU )
-		{
-			if( IsContextMenuUsed() ) {
-				m_pManager->SendNotify(this, DUI_MSGTYPE_MENU, event.wParam, event.lParam);
-			}
-			return;
-		}
+		//if( event.Type == UIEVENT_CONTEXTMENU )
+		//{
+		//	if( IsContextMenuUsed() ) {
+		//		m_pManager->SendNotify(this, DUI_MSGTYPE_MENU, event.wParam, event.lParam);
+		//	}
+		//	return;
+		//}
 		if( event.Type == UIEVENT_MOUSEENTER )
 		{
 			if( IsEnabled() ) {

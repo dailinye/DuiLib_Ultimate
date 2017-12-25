@@ -116,6 +116,10 @@ namespace DuiLib
 #define DUI_MSGTYPE_LISTHEADITEMCHECKED		(_T("listheaditemchecked"))
 #define DUI_MSGTYPE_LISTPAGECHANGED			(_T("listpagechanged"))
 
+#define DUI_MSGTYPE_MENUADDED               (_T("menuadded"))
+#define DUI_MSGTYPE_MENUITEM_CLICK          (_T("menuitemclick"))
+#define DUI_MSGTYPE_NOTIFYICON_EVENT        (_T("notifyiconevent"))
+
 	//////////////////////////////////////////////////////////////////////////
 
 	struct DUI_MSGMAP_ENTRY;
@@ -312,7 +316,12 @@ protected:                                                                \
 
 #define  DUI_CTR_TEXTSCROLL						 (_T("TextScroll"))
 
-#define DUI_CTR_COLORPALETTE					  (_T("ColorPalette"))
+#define  DUI_CTR_COLORPALETTE					 (_T("ColorPalette"))
+
+#define  DUI_CTR_MENU					         (_T("Menu"))
+#define  DUI_CTR_MENUITEM			             (_T("MenuItem"))
+#define  DUI_CTR_CONTEXTMENU					 (_T("ContextMenu"))
+#define  DUI_CTR_NOTIFYICON			             (_T("NotifyIcon"))
 	///
 	//////////////END控件名称宏定义//////////////////////////////////////////////////
 

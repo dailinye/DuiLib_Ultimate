@@ -26,6 +26,8 @@ namespace DuiLib {
 		pInstance->m_sName = this->m_sName;
 		pInstance->m_bUpdateNeeded = this->m_bUpdateNeeded;
 		pInstance->m_bMenuUsed = this->m_bMenuUsed;
+		pInstance->m_sMenuXmlFile = this->m_sMenuXmlFile;
+		pInstance->m_pContextMenu = NULL;
 		pInstance->m_rcItem = this->m_rcItem;
 		pInstance->m_rcPadding = this->m_rcPadding;
 		pInstance->m_cXY = this->m_cXY;
@@ -85,6 +87,7 @@ namespace DuiLib {
 		m_pParent(NULL), 
 		m_bUpdateNeeded(true),
 		m_bMenuUsed(false),
+		m_pContextMenu(NULL),
 		m_bVisible(true), 
 		m_bInternVisible(true),
 		m_bFocused(false),
@@ -698,6 +701,16 @@ namespace DuiLib {
 		m_bMenuUsed = bMenuUsed;
 	}
 
+	void CControlUI::SetContextMenuXmlFile(LPCTSTR pstrXmlFile)
+	{
+		m_sMenuXmlFile = pstrXmlFile;
+	}
+
+	LPCTSTR CControlUI::GetContextMenuXmlFile() const
+	{
+		return m_sMenuXmlFile;
+	}
+
 	const CDuiString& CControlUI::GetUserData()
 	{
 		return m_sUserData;
@@ -915,7 +928,13 @@ namespace DuiLib {
 		if( event.Type == UIEVENT_CONTEXTMENU )
 		{
 			if( IsContextMenuUsed() ) {
+				if ( !m_sMenuXmlFile.IsEmpty() ) {
+					m_pContextMenu = new CContextMenuUI();
+					if ( NULL == m_pContextMenu ) return;
+					m_pContextMenu->SetXmlFile(m_sMenuXmlFile);
+				}
 				m_pManager->SendNotify(this, DUI_MSGTYPE_MENU, event.wParam, event.lParam);
+				if ( m_pContextMenu ) m_pContextMenu->SetManager(GetManager(), this, true);
 				return;
 			}
 		}
@@ -1174,6 +1193,7 @@ namespace DuiLib {
 		else if( _tcsicmp(pstrName, _T("float")) == 0 ) SetFloat(_tcsicmp(pstrValue, _T("true")) == 0);
 		else if( _tcsicmp(pstrName, _T("shortcut")) == 0 ) SetShortcut(pstrValue[0]);
 		else if( _tcsicmp(pstrName, _T("menu")) == 0 ) SetContextMenuUsed(_tcsicmp(pstrValue, _T("true")) == 0);
+		else if (_tcscmp(pstrName, _T("menuxmlfile")) == 0) SetContextMenuXmlFile(pstrValue);
 		else if( _tcsicmp(pstrName, _T("cursor")) == 0 && pstrValue) {
 			if( _tcsicmp(pstrValue, _T("arrow")) == 0 )			SetCursor(DUI_ARROW);
 			else if( _tcsicmp(pstrValue, _T("ibeam")) == 0 )	SetCursor(DUI_IBEAM);
@@ -1488,4 +1508,13 @@ namespace DuiLib {
 		Invalidate();
 	}
 
+	void CControlUI::SetNotifyIcon(CNotifyIconUI* pNotifyIcon)
+	{
+		m_pNotifyIcon = pNotifyIcon;
+	}
+
+	CNotifyIconUI* CControlUI::GetNotifyIcon() const
+	{
+		return m_pNotifyIcon;
+	}
 } // namespace DuiLib

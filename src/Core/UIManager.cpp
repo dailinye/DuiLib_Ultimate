@@ -1751,6 +1751,26 @@ namespace DuiLib {
 				if(lRes != 0) return true;
 			}
 			break;
+		case WM_NOTIFYICON:
+			{
+				if (NULL == m_pRoot || NULL == m_pRoot->GetNotifyIcon()) break;
+				/*if ( wParam == 0 ) break;
+				POINT pt = { GET_X_LPARAM(wParam), GET_Y_LPARAM(wParam) };*/
+				POINT pt = { 0 };
+				::GetCursorPos(&pt);
+				::ScreenToClient(m_hWndPaint, &pt);
+				m_ptLastMousePos = pt;
+				TEventUI event = { 0 };
+				event.Type = UIEVENT_NOTIFYICON;
+				event.pSender = m_pRoot->GetNotifyIcon();
+				event.wParam = wParam;
+				event.lParam = lParam;
+				event.ptMouse = pt;
+				event.wKeyState = (WORD)wParam;
+				event.dwTimestamp = ::GetTickCount();
+				m_pRoot->GetNotifyIcon()->Event(event);
+			}
+			break;
 		default:
 			break;
 		}

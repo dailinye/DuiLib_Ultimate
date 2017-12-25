@@ -321,10 +321,10 @@ namespace DuiLib{
 		{
 			return;
 		}
-		if( event.Type == UIEVENT_CONTEXTMENU )
-		{
-			return;
-		}
+		//if( event.Type == UIEVENT_CONTEXTMENU )
+		//{
+		//	return;
+		//}
 		if( event.Type == UIEVENT_MOUSEENTER )
 		{
 			if( IsEnabled() ) {

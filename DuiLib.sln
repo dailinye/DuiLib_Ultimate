@@ -9,10 +9,14 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Lib|x64 = Debug_Lib|x64
 		Debug_Lib|x86 = Debug_Lib|x86
+		Debug_MT_Lib|x64 = Debug_MT_Lib|x64
+		Debug_MT_Lib|x86 = Debug_MT_Lib|x86
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
 		Release_Lib|x64 = Release_Lib|x64
 		Release_Lib|x86 = Release_Lib|x86
+		Release_MT_Lib|x64 = Release_MT_Lib|x64
+		Release_MT_Lib|x86 = Release_MT_Lib|x86
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
@@ -21,6 +25,10 @@ Global
 		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Debug_Lib|x64.Build.0 = Debug_Lib|x64
 		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Debug_Lib|x86.ActiveCfg = Debug_Lib|Win32
 		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Debug_Lib|x86.Build.0 = Debug_Lib|Win32
+		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Debug_MT_Lib|x64.ActiveCfg = Debug_MT_Lib|x64
+		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Debug_MT_Lib|x64.Build.0 = Debug_MT_Lib|x64
+		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Debug_MT_Lib|x86.ActiveCfg = Debug_MT_Lib|Win32
+		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Debug_MT_Lib|x86.Build.0 = Debug_MT_Lib|Win32
 		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Debug|x64.ActiveCfg = Debug|x64
 		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Debug|x64.Build.0 = Debug|x64
 		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Debug|x86.ActiveCfg = Debug|Win32
@@ -29,6 +37,10 @@ Global
 		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Release_Lib|x64.Build.0 = Release_Lib|x64
 		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Release_Lib|x86.ActiveCfg = Release_Lib|Win32
 		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Release_Lib|x86.Build.0 = Release_Lib|Win32
+		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Release_MT_Lib|x64.ActiveCfg = Release_MT_Lib|x64
+		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Release_MT_Lib|x64.Build.0 = Release_MT_Lib|x64
+		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Release_MT_Lib|x86.ActiveCfg = Release_MT_Lib|Win32
+		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Release_MT_Lib|x86.Build.0 = Release_MT_Lib|Win32
 		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Release|x64.ActiveCfg = Release|x64
 		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Release|x64.Build.0 = Release|x64
 		{705ECB6A-FE70-471E-A446-CEBE799491D9}.Release|x86.ActiveCfg = Release|Win32
