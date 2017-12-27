@@ -931,10 +931,10 @@ namespace DuiLib {
 				if ( !m_sMenuXmlFile.IsEmpty() ) {
 					m_pContextMenu = new CContextMenuUI();
 					if ( NULL == m_pContextMenu ) return;
-					m_pContextMenu->SetXmlFile(m_sMenuXmlFile);
+					static_cast<CContextMenuUI*>(m_pContextMenu)->SetXmlFile(m_sMenuXmlFile);
 				}
 				m_pManager->SendNotify(this, DUI_MSGTYPE_MENU, event.wParam, event.lParam);
-				if ( m_pContextMenu ) m_pContextMenu->SetManager(GetManager(), this, true);
+				if ( m_pContextMenu ) static_cast<CContextMenuUI*>(m_pContextMenu)->SetManager(GetManager(), this, true);
 				return;
 			}
 		}
@@ -1506,15 +1506,5 @@ namespace DuiLib {
 	{
 		m_nBorderStyle = nStyle;
 		Invalidate();
-	}
-
-	void CControlUI::SetNotifyIcon(CNotifyIconUI* pNotifyIcon)
-	{
-		m_pNotifyIcon = pNotifyIcon;
-	}
-
-	CNotifyIconUI* CControlUI::GetNotifyIcon() const
-	{
-		return m_pNotifyIcon;
 	}
 } // namespace DuiLib

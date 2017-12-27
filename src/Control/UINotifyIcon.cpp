@@ -106,6 +106,7 @@ namespace DuiLib
 		nID.uCallbackMessage = WM_NOTIFYICON;
 		(void)::Shell_NotifyIcon(NIM_ADD, &nID);
 #endif
+		SetVisible(false);
 	}
 
 	void CNotifyIconUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)

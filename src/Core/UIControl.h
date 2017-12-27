@@ -7,8 +7,6 @@ namespace DuiLib {
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	//
-	class CContextMenuUI;
-	class CNotifyIconUI;
 	typedef CControlUI* (CALLBACK* FINDCONTROLPROC)(CControlUI*, LPVOID);
 
 	class UILIB_API CControlUI
@@ -201,9 +199,6 @@ namespace DuiLib {
 		void SetVirtualWnd(LPCTSTR pstrValue);
 		CDuiString GetVirtualWnd() const;
 
-		void SetNotifyIcon(CNotifyIconUI* pNotifyIcon);
-		CNotifyIconUI* GetNotifyIcon() const;
-
 	public:
 		CEventSource OnInit;
 		CEventSource OnDestroy;
@@ -219,7 +214,7 @@ namespace DuiLib {
 		bool m_bUpdateNeeded;
 		bool m_bMenuUsed;
 		CDuiString m_sMenuXmlFile;
-		CContextMenuUI* m_pContextMenu;
+		CControlUI* m_pContextMenu;
 		RECT m_rcItem;
 		RECT m_rcPadding;
 		SIZE m_cXY;
@@ -267,8 +262,6 @@ namespace DuiLib {
 	    HINSTANCE m_instance;
 
 		CStdStringPtrMap m_mCustomAttrHash;
-
-		CNotifyIconUI* m_pNotifyIcon;
 	};
 
 } // namespace DuiLib
