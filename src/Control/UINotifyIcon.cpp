@@ -26,6 +26,7 @@ namespace DuiLib
 	CNotifyIconUI::CNotifyIconUI(void)
 		:m_hIcon(NULL)
 		,m_id(0)
+		,m_uiBalloonTimeout(5000)
 	{
 		
 	}
@@ -47,6 +48,7 @@ namespace DuiLib
 		pInstance->m_sNotifyIcon = this->m_sNotifyIcon;
 		pInstance->m_id = this->m_id;
 		pInstance->m_hIcon = NULL;
+		pInstance->m_uiBalloonTimeout = this->m_uiBalloonTimeout;
 		return pInstance;
 	}
 
@@ -90,6 +92,16 @@ namespace DuiLib
 		return m_sNotifyIcon;
 	}
 
+	void CNotifyIconUI::SetBalloonTimeout(const UINT uiTimeout)
+	{
+		m_uiBalloonTimeout = uiTimeout;
+	}
+
+	UINT CNotifyIconUI::GetBalloonTimeout() const
+	{
+		return m_uiBalloonTimeout;
+	}
+
 	void CNotifyIconUI::Init()
 	{
 #ifdef _UNICODE
@@ -121,6 +133,10 @@ namespace DuiLib
 			m_id = _tcstol(pstrValue, &pstr, 10);
 			return;
 		}
+		if (_tcscmp(pstrName, _T("balloontimeout")) == 0) {
+			m_uiBalloonTimeout = _tcstol(pstrValue, &pstr, 10);
+			return;
+		}
 		return CControlUI::SetAttribute(pstrName, pstrValue);
 	}
 
@@ -148,9 +164,19 @@ namespace DuiLib
 		return CControlUI::DoEvent(event);
 	}
 
-	void CNotifyIconUI::ShowBalloon(LPCTSTR pstrContent)
+	void CNotifyIconUI::ShowBalloon(LPCTSTR pstrContent, const NotifyIconBalloonType type)
 	{
 #ifdef _UNICODE
+		NOTIFYICONDATA nID = { 0 };
+		nID.cbSize = (DWORD)sizeof(NOTIFYICONDATA);
+		nID.hWnd = GetManager()->GetPaintWindow();
+		nID.uID = m_id;
+		nID.uFlags = NIF_INFO;
+		nID.dwInfoFlags = type;
+		copy_notifyicon_str(nID.szInfo, sizeof(nID.szInfo) / sizeof(WCHAR), pstrContent, wcslen(pstrContent));
+		copy_notifyicon_str(nID.szInfoTitle, sizeof(nID.szInfoTitle) / sizeof(WCHAR), m_sToolTip, m_sToolTip.GetLength());
+		nID.uTimeout = m_uiBalloonTimeout;
+		(void)::Shell_NotifyIcon(NIM_MODIFY, &nID);
 #endif
 	}
 

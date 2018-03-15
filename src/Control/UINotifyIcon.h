@@ -14,6 +14,13 @@ namespace DuiLib
 		NOTIFYICON_RDBCLICK
 	};
 
+	enum NotifyIconBalloonType
+	{
+		Balloon_Info = 0x00000001,
+		Balloon_Warning = 0x00000002,
+		Balloon_Error = 0x00000003
+	};
+
 	class UILIB_API CNotifyIconUI : public CControlUI
 	{
 		DECLARE_DUICONTROL(CNotifyIconUI)
@@ -31,19 +38,20 @@ namespace DuiLib
 		LPCTSTR GetNotifyIcon() const;
 		//void SetBalloonEnabled(bool bEnabled);
 		//bool GetBalloonEnabled() const;
-		//void SetBalloonTimeout(const UINT uiTimeout);
-		//UINT GetBalloonTimeout() const;
+		void SetBalloonTimeout(const UINT uiTimeout);
+		UINT GetBalloonTimeout() const;
 
 		void Init();
 		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
 		void DoEvent(TEventUI& event);
 
-		void ShowBalloon(LPCTSTR pstrContent);
+		void ShowBalloon(LPCTSTR pstrContent, const NotifyIconBalloonType type = Balloon_Info);
 		bool ReInit();
 
 	private:
 		CDuiString m_sNotifyIcon;
 		int m_id;
 		HICON m_hIcon;
+		UINT m_uiBalloonTimeout;
 	};
 }

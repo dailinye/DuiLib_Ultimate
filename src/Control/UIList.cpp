@@ -2619,7 +2619,7 @@ namespace DuiLib {
 
 	void CListContainerElementUI::SetEnabled(bool bEnable)
 	{
-		CControlUI::SetEnabled(bEnable);
+		CContainerUI::SetEnabled(bEnable);
 		if( !IsEnabled() ) {
 			m_uButtonState = 0;
 		}
