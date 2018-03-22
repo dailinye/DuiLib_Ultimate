@@ -3,9 +3,25 @@
 
 namespace DuiLib
 {
-	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(COptionUI)
+	IMPLEMENT_DUICONTROL_UINIT_DATATEMPLATE(COptionUI)
+
 	COptionUI::COptionUI() : m_bSelected(false), m_dwSelectedTextColor(0), m_dwSelectedBkColor(0), m_nSelectedStateCount(0)
 	{
+	}
+
+	COptionUI* COptionUI::DoInitDataTemplate(COptionUI* pInstance)
+	{
+		pInstance->m_bSelected = this->m_bSelected;
+		pInstance->m_sGroupName = this->m_sGroupName;
+		pInstance->m_dwSelectedBkColor = this->m_dwSelectedBkColor;
+		pInstance->m_dwSelectedTextColor = this->m_dwSelectedTextColor;
+		pInstance->m_sSelectedImage = this->m_sSelectedImage;
+		pInstance->m_sSelectedHotImage = this->m_sSelectedHotImage;
+		pInstance->m_sSelectedPushedImage = this->m_sSelectedPushedImage;
+		pInstance->m_sSelectedForeImage = this->m_sSelectedForeImage;
+		pInstance->m_nSelectedStateCount = this->m_nSelectedStateCount;
+		pInstance->m_sSelectedStateImage = this->m_sSelectedStateImage;
+		return pInstance;
 	}
 
 	COptionUI::~COptionUI()
@@ -342,12 +358,24 @@ namespace DuiLib
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//
-	IMPLEMENT_DUICONTROL_INIT_DATATEMPLATE(CCheckBoxUI)
+	IMPLEMENT_DUICONTROL_UINIT_DATATEMPLATE(CCheckBoxUI)
+
+	CCheckBoxUI::CCheckBoxUI() : m_bAutoCheck(FALSE)
+	{
+
+	}
+
+	CCheckBoxUI* CCheckBoxUI::DoInitDataTemplate(CCheckBoxUI* pInstance)
+	{
+		pInstance->m_bAutoCheck = this->m_bAutoCheck;
+		return pInstance;
+	}
 
 	LPCTSTR CCheckBoxUI::GetClass() const
 	{
 		return _T("CheckBoxUI");
 	}
+
 	LPVOID CCheckBoxUI::GetInterface(LPCTSTR pstrName)
 	{
 		if( _tcsicmp(pstrName, DUI_CTR_CHECKBOX) == 0 ) return static_cast<CCheckBoxUI*>(this);
@@ -364,20 +392,18 @@ namespace DuiLib
 		return IsSelected();
 	}
 
-	CCheckBoxUI::CCheckBoxUI() : m_bAutoCheck(FALSE)
-	{
-
-	}
 	void CCheckBoxUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 	{
 		if( _tcsicmp(pstrName, _T("EnableAutoCheck")) == 0 ) SetAutoCheck(_tcsicmp(pstrValue, _T("true")) == 0);
 		
 		COptionUI::SetAttribute(pstrName, pstrValue);
 	}
+
 	void CCheckBoxUI::SetAutoCheck(bool bEnable)
 	{
 		m_bAutoCheck = bEnable;
 	}
+
 	void CCheckBoxUI::DoEvent(TEventUI& event)
 	{
 		if( !IsMouseEnabled() && event.Type > UIEVENT__MOUSEBEGIN && event.Type < UIEVENT__MOUSEEND ) {
@@ -397,6 +423,7 @@ namespace DuiLib
 		}
 		COptionUI::DoEvent(event);
 	}
+
 	void CCheckBoxUI::Selected(bool bSelected)
 	{
 		if( m_bSelected == bSelected ) return;

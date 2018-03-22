@@ -159,6 +159,7 @@ namespace DuiLib
 			GetManager()->SendNotify(this, DUI_MSGTYPE_NOTIFYICON_EVENT, event.wParam, NOTIFYICON_RDBCLICK);
 			break;
 		default:
+			GetManager()->SendNotify(this, DUI_MSGTYPE_NOTIFYICON_EVENT, event.wParam, event.lParam);
 			break;
 		}
 		return CControlUI::DoEvent(event);
