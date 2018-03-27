@@ -52,6 +52,7 @@ namespace DuiLib
 		void SetSel(long nStartChar, long nEndChar);
 		void SetSelAll();
 		void SetReplaceSel(LPCTSTR lpszReplace);
+		DWORD getSel();
 
 		void SetTipValue(LPCTSTR pStrTipValue);
 		LPCTSTR GetTipValue();

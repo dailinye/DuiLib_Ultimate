@@ -220,7 +220,7 @@ namespace DuiLib
 		return lRes;
 	}
 
-	LRESULT CEditWnd::OnEditChanged(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
+	LRESULT CEditWnd::OnEditChanged(UINT /*uMsg*/, WPARAM wParam, LPARAM lParam, BOOL& /*bHandled*/)
 	{
 		if( !m_bInit ) return 0;
 		if( m_pOwner == NULL ) return 0;
@@ -231,7 +231,7 @@ namespace DuiLib
 		if( pstr == NULL ) return 0;
 		::GetWindowText(m_hWnd, pstr, cchLen);
 		m_pOwner->m_sText = pstr;
-		m_pOwner->GetManager()->SendNotify(m_pOwner, DUI_MSGTYPE_TEXTCHANGED);
+		m_pOwner->GetManager()->SendNotify(m_pOwner, DUI_MSGTYPE_TEXTCHANGED, wParam, lParam);
 		if( m_pOwner->GetManager()->IsLayered() ) m_pOwner->Invalidate();
 		return 0;
 	}
@@ -539,7 +539,7 @@ namespace DuiLib
 
 	void CEditUI::SetSel(long nStartChar, long nEndChar)
 	{
-		if( m_pWindow != NULL ) Edit_SetSel(*m_pWindow, nStartChar,nEndChar);
+		if( m_pWindow != NULL ) Edit_SetSel(*m_pWindow, nStartChar, nEndChar);
 	}
 
 	void CEditUI::SetSelAll()
@@ -550,6 +550,12 @@ namespace DuiLib
 	void CEditUI::SetReplaceSel(LPCTSTR lpszReplace)
 	{
 		if( m_pWindow != NULL ) Edit_ReplaceSel(*m_pWindow, lpszReplace);
+	}
+
+	DWORD CEditUI::getSel()
+	{
+		if (m_pWindow != NULL) return Edit_GetSel(*m_pWindow);
+		return 0;
 	}
 
 	void CEditUI::SetTipValue( LPCTSTR pStrTipValue )
