@@ -2753,6 +2753,7 @@ namespace DuiLib {
 			if( IsEnabled() ) {
 				Activate();
 				Invalidate();
+				m_pManager->SendNotify(this, DUI_MSGTYPE_ITEMDBCLICK);
 			}
 			return;
 		}
