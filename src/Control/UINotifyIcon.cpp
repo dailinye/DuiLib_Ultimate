@@ -78,7 +78,8 @@ namespace DuiLib
 		NOTIFYICONDATA nID = { 0 };
 		nID.cbSize = (DWORD)sizeof(NOTIFYICONDATA);
 		nID.hIcon = m_hIcon;
-		copy_notifyicon_str(nID.szTip, sizeof(nID.szTip) / sizeof(WCHAR), m_sToolTip, m_sToolTip.GetLength());
+		CDuiString toolTip = GetToolTip();
+		copy_notifyicon_str(nID.szTip, sizeof(nID.szTip) / sizeof(WCHAR), toolTip, toolTip.GetLength());
 		nID.hWnd = GetManager()->GetPaintWindow();
 		nID.uID = m_id;
 		nID.uFlags = NIF_GUID | NIF_ICON | NIF_MESSAGE | NIF_TIP | NIF_INFO;
@@ -111,7 +112,8 @@ namespace DuiLib
 		NOTIFYICONDATA nID = {0};
 		nID.cbSize = (DWORD)sizeof(NOTIFYICONDATA);
 		nID.hIcon = m_hIcon;
-		copy_notifyicon_str(nID.szTip, sizeof(nID.szTip)/sizeof(WCHAR), m_sToolTip, m_sToolTip.GetLength());
+		CDuiString toolTip = GetToolTip();
+		copy_notifyicon_str(nID.szTip, sizeof(nID.szTip)/sizeof(WCHAR), toolTip, toolTip.GetLength());
 		nID.hWnd = GetManager()->GetPaintWindow();
 		nID.uID = m_id;
 		nID.uFlags = NIF_GUID|NIF_ICON|NIF_MESSAGE|NIF_TIP;
@@ -175,7 +177,8 @@ namespace DuiLib
 		nID.uFlags = NIF_INFO;
 		nID.dwInfoFlags = type;
 		copy_notifyicon_str(nID.szInfo, sizeof(nID.szInfo) / sizeof(WCHAR), pstrContent, wcslen(pstrContent));
-		copy_notifyicon_str(nID.szInfoTitle, sizeof(nID.szInfoTitle) / sizeof(WCHAR), m_sToolTip, m_sToolTip.GetLength());
+		CDuiString toolTip = GetToolTip();
+		copy_notifyicon_str(nID.szInfoTitle, sizeof(nID.szInfoTitle) / sizeof(WCHAR), toolTip, toolTip.GetLength());
 		nID.uTimeout = m_uiBalloonTimeout;
 		(void)::Shell_NotifyIcon(NIM_MODIFY, &nID);
 #endif
@@ -190,7 +193,8 @@ namespace DuiLib
 		NOTIFYICONDATA nID = {0};
 		nID.cbSize = (DWORD)sizeof(NOTIFYICONDATA);
 		nID.hIcon = m_hIcon;
-		copy_notifyicon_str(nID.szTip, sizeof(nID.szTip)/sizeof(WCHAR), m_sToolTip, m_sToolTip.GetLength());
+		CDuiString toolTip = GetToolTip();
+		copy_notifyicon_str(nID.szTip, sizeof(nID.szTip)/sizeof(WCHAR), toolTip, toolTip.GetLength());
 		nID.hWnd = GetManager()->GetPaintWindow();
 		nID.uID = m_id;
 		nID.uFlags = NIF_GUID|NIF_ICON|NIF_MESSAGE|NIF_TIP;
