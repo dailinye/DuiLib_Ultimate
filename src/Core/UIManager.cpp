@@ -157,7 +157,8 @@ namespace DuiLib {
 		if (paintManager->GetDPIObj()->GetScale() != 100) {
 			CDuiString sScale;
 			sScale.Format(_T("@%d."), paintManager->GetDPIObj()->GetScale());
-			sImageName.Replace(_T("."), sScale);
+			int pos = sImageName.ReverseFind(_T('.'));
+			sImageName = sImageName.Left(pos) + sScale + sImageName.Right(sImageName.GetLength() - pos - 1);
 		}
 	}
 	void tagTDrawInfo::Clear()
