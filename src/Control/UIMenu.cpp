@@ -2,7 +2,7 @@
 
 namespace DuiLib
 {
-	class CContextMenuWnd : public CWindowWnd
+	class CContextMenuWnd : public CWindowWnd, public INotifyUI
 	{
 	public:
 		CContextMenuWnd(CControlUI* pOwner, LPCTSTR pstrXmlFile, IDialogBuilderCallback* pCallback = NULL)
@@ -183,7 +183,7 @@ namespace DuiLib
 					::DeleteObject(hTriangleRgn);
 				}
 
-				//::SetTimer(*this, PAINT_BORDER_TIMER, 50, NULL);
+				m_paintManager.AddNotifier(this);
 
 				return 0;
 			}
@@ -193,21 +193,15 @@ namespace DuiLib
 			else if (uMsg == WM_CLOSE) {
 				m_iSelectMenuId = (int)lParam;
 			}
-			//else if (uMsg == WM_TIMER && wParam == PAINT_BORDER_TIMER) {
-			//	DWORD dwBorderColor = m_paintManager.GetBorderColor();
-			//	short H, S, L;
-			//	CPaintManagerUI::GetHSL(&H, &S, &L);
-			//	dwBorderColor = CRenderEngine::AdjustColor(dwBorderColor, H, S, L);
-			//	HBRUSH hBorderBrush = ::CreateSolidBrush(RGB(GetBValue(dwBorderColor), GetGValue(dwBorderColor), GetRValue(dwBorderColor)));
-			//	HRGN hRgn = ::CreateRectRgn(0, 0, 0, 0);
-			//	::GetWindowRgn(*this, hRgn);
-			//	::FrameRgn(m_paintManager.GetPaintDC(), hRgn, hBorderBrush, m_paintManager.GetBorderSize(), m_paintManager.GetBorderSize());
-			//	::DeleteObject(hBorderBrush);
-			//	::DeleteObject(hRgn);
-			//}
 			LRESULT lRes = 0;
 			if (m_paintManager.MessageHandler(uMsg, wParam, lParam, lRes)) return lRes;
 			return CWindowWnd::HandleMessage(uMsg, wParam, lParam);
+		}
+
+		virtual void Notify(TNotifyUI& msg)
+		{
+			if (!m_pRealOwner->GetManager()) return;
+			m_pRealOwner->GetManager()->SendNotify(msg);
 		}
 
 		void Init()
