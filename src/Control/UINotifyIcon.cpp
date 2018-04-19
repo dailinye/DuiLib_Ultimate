@@ -73,8 +73,7 @@ namespace DuiLib
 #ifdef _UNICODE
 		m_sNotifyIcon = pstrIcon;
 		if (NULL != m_hIcon) ::DestroyIcon(m_hIcon);
-		m_hIcon = (HICON)::LoadImage(NULL, m_sNotifyIcon, IMAGE_ICON, 0, 0, LR_LOADFROMFILE);
-		if (NULL == m_hIcon) return;
+		if (S_OK != ::LoadIconMetric(NULL, m_sNotifyIcon, LIM_SMALL, &m_hIcon)) return;
 		NOTIFYICONDATA nID = { 0 };
 		nID.cbSize = (DWORD)sizeof(NOTIFYICONDATA);
 		nID.hIcon = m_hIcon;
@@ -107,8 +106,7 @@ namespace DuiLib
 	{
 #ifdef _UNICODE
 		if (NULL != m_hIcon) ::DestroyIcon(m_hIcon);
-		m_hIcon = (HICON)::LoadImage(NULL, m_sNotifyIcon, IMAGE_ICON, 0, 0, LR_LOADFROMFILE);
-		if (NULL == m_hIcon) return;
+		if (S_OK != ::LoadIconMetric(NULL, m_sNotifyIcon, LIM_SMALL, &m_hIcon)) return;
 		NOTIFYICONDATA nID = {0};
 		nID.cbSize = (DWORD)sizeof(NOTIFYICONDATA);
 		nID.hIcon = m_hIcon;
@@ -188,8 +186,7 @@ namespace DuiLib
 	{
 #ifdef _UNICODE
 		if (NULL != m_hIcon) ::DestroyIcon(m_hIcon);
-		m_hIcon = (HICON)::LoadImage(NULL, m_sNotifyIcon, IMAGE_ICON, 0, 0, LR_LOADFROMFILE);
-		if (NULL == m_hIcon) return false;
+		if (S_OK != ::LoadIconMetric(NULL, m_sNotifyIcon, LIM_SMALL, &m_hIcon)) return false;
 		NOTIFYICONDATA nID = {0};
 		nID.cbSize = (DWORD)sizeof(NOTIFYICONDATA);
 		nID.hIcon = m_hIcon;
