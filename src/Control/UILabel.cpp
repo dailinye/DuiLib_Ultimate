@@ -179,7 +179,11 @@ namespace DuiLib
 		else if( _tcsicmp(pstrName, _T("endellipsis")) == 0 ) {
 			if( _tcsicmp(pstrValue, _T("true")) == 0 ) m_uTextStyle |= DT_END_ELLIPSIS;
 			else m_uTextStyle &= ~DT_END_ELLIPSIS;
-		}   
+		}
+		else if (_tcsicmp(pstrName, _T("pathellipsis")) == 0) {
+			if (_tcsicmp(pstrValue, _T("true")) == 0) m_uTextStyle |= DT_PATH_ELLIPSIS;
+			else m_uTextStyle &= ~DT_PATH_ELLIPSIS;
+		}
 		else if( _tcsicmp(pstrName, _T("wordbreak")) == 0 ) {
 			if( _tcsicmp(pstrValue, _T("true")) == 0 ) {
 				m_uTextStyle &= ~DT_SINGLELINE;
