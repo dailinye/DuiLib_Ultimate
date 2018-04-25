@@ -77,12 +77,9 @@ namespace DuiLib
 		NOTIFYICONDATA nID = { 0 };
 		nID.cbSize = (DWORD)sizeof(NOTIFYICONDATA);
 		nID.hIcon = m_hIcon;
-		CDuiString toolTip = GetToolTip();
-		copy_notifyicon_str(nID.szTip, sizeof(nID.szTip) / sizeof(WCHAR), toolTip, toolTip.GetLength());
 		nID.hWnd = GetManager()->GetPaintWindow();
 		nID.uID = m_id;
-		nID.uFlags = NIF_GUID | NIF_ICON | NIF_MESSAGE | NIF_TIP | NIF_INFO;
-		nID.uCallbackMessage = WM_NOTIFYICON;
+		nID.uFlags = NIF_ICON;
 		(void)::Shell_NotifyIcon(NIM_MODIFY, &nID);
 #endif
 	}
@@ -190,11 +187,11 @@ namespace DuiLib
 		NOTIFYICONDATA nID = {0};
 		nID.cbSize = (DWORD)sizeof(NOTIFYICONDATA);
 		nID.hIcon = m_hIcon;
-		CDuiString toolTip = GetToolTip();
-		copy_notifyicon_str(nID.szTip, sizeof(nID.szTip)/sizeof(WCHAR), toolTip, toolTip.GetLength());
 		nID.hWnd = GetManager()->GetPaintWindow();
 		nID.uID = m_id;
-		nID.uFlags = NIF_GUID|NIF_ICON|NIF_MESSAGE|NIF_TIP;
+		CDuiString toolTip = GetToolTip();
+		copy_notifyicon_str(nID.szTip, sizeof(nID.szTip) / sizeof(WCHAR), toolTip, toolTip.GetLength());
+		nID.uFlags = NIF_ICON | NIF_GUID | NIF_TIP | NIF_MESSAGE;
 		nID.uCallbackMessage = WM_NOTIFYICON;
 		(void)::Shell_NotifyIcon(NIM_ADD, &nID);
 		return true;
