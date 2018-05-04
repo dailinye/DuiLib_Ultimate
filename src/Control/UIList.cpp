@@ -1415,7 +1415,7 @@ namespace DuiLib {
 
 	SIZE CListHeaderUI::EstimateSize(SIZE szAvailable)
 	{
-		SIZE cXY = {0, m_cxyFixed.cy};
+		SIZE cXY = {0, GetFixedHeight()};
 		if( cXY.cy == 0 && m_pManager != NULL ) {
 			for( int it = 0; it < m_items.GetSize(); it++ ) {
 				cXY.cy = MAX(cXY.cy,static_cast<CControlUI*>(m_items[it])->EstimateSize(szAvailable).cy);
@@ -1893,8 +1893,9 @@ namespace DuiLib {
 
 	SIZE CListHeaderItemUI::EstimateSize(SIZE szAvailable)
 	{
-		if( m_cxyFixed.cy == 0 ) return CDuiSize(m_cxyFixed.cx, m_pManager->GetDefaultFontInfo()->tm.tmHeight + 14);
-		return CContainerUI::EstimateSize(szAvailable);
+		SIZE cxyFixed = CContainerUI::EstimateSize(szAvailable);
+		if (cxyFixed.cy == 0) cxyFixed.cy = m_pManager->GetDefaultFontInfo()->tm.tmHeight + 6;
+		return cxyFixed;
 	}
 
 	RECT CListHeaderItemUI::GetThumbRect() const

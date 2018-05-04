@@ -229,8 +229,7 @@ namespace DuiLib
 			}
 			cxyFixed.cx += pControl->EstimateSize(szAvailable).cx;
 		}
-		m_cxyFixed.cx = cxyFixed.cx;
-		return m_cxyFixed;
+		return cxyFixed;
 	}
 
 	void CHorizontalLayoutUI::SetSepWidth(int iWidth)
