@@ -223,6 +223,10 @@ namespace DuiLib
 			{
 				continue;
 			}
+			if (!pControl->IsVisible())
+			{
+				continue;
+			}
 			cxyFixed.cx += pControl->EstimateSize(szAvailable).cx;
 		}
 		m_cxyFixed.cx = cxyFixed.cx;
