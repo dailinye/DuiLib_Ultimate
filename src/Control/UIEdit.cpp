@@ -563,7 +563,7 @@ namespace DuiLib
 		m_sTipValue	= pStrTipValue;
 	}
 
-	LPCTSTR CEditUI::GetTipValue()
+	CDuiString CEditUI::GetTipValue()
 	{
 		if (!IsResourceText()) return m_sTipValue;
 		return CResourceManager::GetInstance()->GetText(m_sTipValue);

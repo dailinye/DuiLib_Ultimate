@@ -971,8 +971,14 @@ namespace DuiLib
 
 		if (uFlags == UIFIND_ALL) {
 			for (int it = 0; it < m_items.GetSize(); ++it) {
+				pResult = Proc(static_cast<CControlUI*>(m_items[it]), pData);
+				if (pResult != NULL) {
+					return pResult;
+				}
+			}
+			for (int it = 0; it < m_items.GetSize(); ++it) {
 				pResult = static_cast<CControlUI*>(m_items[it])->FindControl(Proc, pData, uFlags);
-				if ( pResult != NULL ) {
+				if (pResult != NULL) {
 					return pResult;
 				}
 			}

@@ -55,7 +55,7 @@ namespace DuiLib
 		DWORD getSel();
 
 		void SetTipValue(LPCTSTR pStrTipValue);
-		LPCTSTR GetTipValue();
+		CDuiString GetTipValue();
 		void SetTipValueColor(LPCTSTR pStrColor);
 		DWORD GetTipValueColor();
 
