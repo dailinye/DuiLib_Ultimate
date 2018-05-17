@@ -90,7 +90,8 @@ namespace DuiLib
 			cxNeeded = MAX(cxNeeded, sz.cx + rcPadding.left + rcPadding.right);
 			nEstimateNum++;
 		}
-		cyFixed += (nEstimateNum - 1) * m_iChildPadding;
+		cyFixed += (nEstimateNum - 1) * ((m_pManager != NULL) ?
+			m_pManager->GetDPIObj()->Scale(m_iChildPadding) : m_iChildPadding);
 
 		// Place elements
 		int cyNeeded = 0;
@@ -127,7 +128,8 @@ namespace DuiLib
 			if (szControlAvailable.cx > iControlMaxWidth) szControlAvailable.cx = iControlMaxWidth;
 			if (szControlAvailable.cy > iControlMaxHeight) szControlAvailable.cy = iControlMaxHeight;
       cyFixedRemaining = cyFixedRemaining - (rcPadding.top + rcPadding.bottom);
-			if (iEstimate > 1) cyFixedRemaining = cyFixedRemaining - m_iChildPadding;
+	  if (iEstimate > 1) cyFixedRemaining = cyFixedRemaining - ((m_pManager != NULL) ? 
+		  m_pManager->GetDPIObj()->Scale(m_iChildPadding) : m_iChildPadding);
 			SIZE sz = pControl->EstimateSize(szControlAvailable);
 			if( sz.cy == 0 ) {
 				iAdjustable++;
@@ -179,11 +181,14 @@ namespace DuiLib
 				pControl->SetPos(rcCtrl, false);
 			}
 
-			iPosY += sz.cy + m_iChildPadding + rcPadding.top + rcPadding.bottom;
+			iPosY += sz.cy + rcPadding.top + rcPadding.bottom + ((m_pManager != NULL) ?
+				m_pManager->GetDPIObj()->Scale(m_iChildPadding) : m_iChildPadding);
 			cyNeeded += sz.cy + rcPadding.top + rcPadding.bottom;
-			szRemaining.cy -= sz.cy + m_iChildPadding + rcPadding.bottom;
+			szRemaining.cy -= sz.cy + rcPadding.bottom + ((m_pManager != NULL) ?
+				m_pManager->GetDPIObj()->Scale(m_iChildPadding) : m_iChildPadding);
 		}
-		cyNeeded += (nEstimateNum - 1) * m_iChildPadding;
+		cyNeeded += (nEstimateNum - 1) * ((m_pManager != NULL) ?
+			m_pManager->GetDPIObj()->Scale(m_iChildPadding) : m_iChildPadding);
 
 		// Process the scrollbar
 		ProcessScrollBar(rc, cxNeeded, cyNeeded);

@@ -3799,6 +3799,7 @@ namespace DuiLib {
 		AddSuportedFormat(ftetc);
 		return true;
 	}
+
 	static WORD DIBNumColors(void* pv) 
 	{     
 		int bits;     
