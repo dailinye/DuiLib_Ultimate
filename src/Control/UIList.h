@@ -76,7 +76,7 @@ namespace DuiLib {
 		virtual void SelectAllItems() = 0;
 		virtual void UnSelectAllItems() = 0;
 		virtual int GetSelectItemCount() const = 0;
-		virtual int GetNextSelItem(int nItem) const = 0;
+		virtual int GetSelectItem(int iIndex) const = 0;
 	};
 
 	class UILIB_API IListItemCallbackUI
@@ -136,7 +136,7 @@ namespace DuiLib {
 		void SelectAllItems();
 		void UnSelectAllItems();
 		int GetSelectItemCount() const;
-		int GetNextSelItem(int nItem) const;
+		int GetSelectItem(int iIndex) const;
 
 		bool IsFixedScrollbar();
 		void SetFixedScrollbar(bool bFixed);

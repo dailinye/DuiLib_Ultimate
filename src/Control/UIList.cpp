@@ -539,7 +539,8 @@ namespace DuiLib {
 
 	void CListUI::UnSelectAllItems()
 	{
-		for (int i = 0; i < m_aSelItems.GetSize(); ++i) {
+		int32_t size = m_aSelItems.GetSize();
+		for (int i = m_aSelItems.GetSize() - 1; i >= 0; --i) {
 			int iSelIndex = (int)m_aSelItems.GetAt(i);
 			CControlUI* pControl = GetItemAt(iSelIndex);
 			if(pControl == NULL) continue;
@@ -557,19 +558,11 @@ namespace DuiLib {
 		return m_aSelItems.GetSize();
 	}
 
-	int CListUI::GetNextSelItem(int nItem) const
+	int CListUI::GetSelectItem(int iIndex) const
 	{
-		if (m_aSelItems.GetSize() <= 0)
+		if (m_aSelItems.GetSize() <= 0 || iIndex > m_aSelItems.GetSize() - 1)
 			return -1;
-
-		if (nItem < 0) {
-			return (int)m_aSelItems.GetAt(0);
-		}
-		int aIndex = m_aSelItems.Find((LPVOID)nItem);
-		if (aIndex < 0) return -1;
-		if (aIndex + 1 > m_aSelItems.GetSize() - 1)
-			return -1;
-		return (int)m_aSelItems.GetAt(aIndex + 1);
+		return (int)m_aSelItems.GetAt(iIndex);
 	}
 
 	UINT CListUI::GetListType()
@@ -2699,11 +2692,10 @@ namespace DuiLib {
 	bool CListContainerElementUI::Select(bool bSelect)
 	{
 		if( !IsEnabled() ) return false;
-		if( m_pOwner != NULL && m_bSelected ) m_pOwner->UnSelectItem(m_iIndex, true);
 		if( bSelect == m_bSelected ) return true;
 		m_bSelected = bSelect;
 		if( bSelect && m_pOwner != NULL ) m_pOwner->SelectItem(m_iIndex);
-		if (m_pListItemCallback) m_pListItemCallback->Select(this, m_bSelected);
+		if( m_pListItemCallback ) m_pListItemCallback->Select(this, m_bSelected);
 		Invalidate();
 
 		return true;
@@ -2713,9 +2705,9 @@ namespace DuiLib {
 	{
 		if( !IsEnabled() ) return false;
 		if( bSelect == m_bSelected ) return true;
-
 		m_bSelected = bSelect;
-		if( bSelect && m_pOwner != NULL ) m_pOwner->SelectMultiItem(m_iIndex);
+		if( !bSelect && m_pOwner != NULL ) m_pOwner->UnSelectItem(m_iIndex);
+		if (bSelect && m_pOwner != NULL) m_pOwner->SelectMultiItem(m_iIndex);
 		if (m_pListItemCallback) m_pListItemCallback->Select(this, m_bSelected);
 		Invalidate();
 		return true;
