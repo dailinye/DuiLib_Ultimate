@@ -5,7 +5,7 @@ namespace DuiLib
 {
 	IMPLEMENT_DUICONTROL_UINIT_DATATEMPLATE(COptionUI)
 
-	COptionUI::COptionUI() : m_bSelected(false), m_dwSelectedTextColor(0), m_dwSelectedBkColor(0), m_nSelectedStateCount(0)
+	COptionUI::COptionUI() : m_bSelected(false), m_dwSelectedTextColor(0), m_dwSelectedBkColor(0), m_nSelectedStateCount(0), m_iSelectedFont(0)
 	{
 	}
 
@@ -15,6 +15,7 @@ namespace DuiLib
 		pInstance->m_sGroupName = this->m_sGroupName;
 		pInstance->m_dwSelectedBkColor = this->m_dwSelectedBkColor;
 		pInstance->m_dwSelectedTextColor = this->m_dwSelectedTextColor;
+		pInstance->m_iSelectedFont = this->m_iSelectedFont;
 		pInstance->m_sSelectedImage = this->m_sSelectedImage;
 		pInstance->m_sSelectedHotImage = this->m_sSelectedHotImage;
 		pInstance->m_sSelectedPushedImage = this->m_sSelectedPushedImage;
@@ -171,6 +172,17 @@ namespace DuiLib
 		return m_dwSelectedTextColor;
 	}
 
+	void COptionUI::SetSelectedFont(int iFont)
+	{
+		m_iSelectedFont = iFont;
+	}
+
+	int COptionUI::GetSelectedFont()
+	{
+		if (m_iSelectedFont == 0) m_iSelectedFont = m_iFont;
+		return m_iSelectedFont;
+	}
+
 	void COptionUI::SetSelectedBkColor( DWORD dwBkColor )
 	{
 		m_dwSelectedBkColor = dwBkColor;
@@ -236,6 +248,7 @@ namespace DuiLib
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetSelectedTextColor(clrColor);
 		}
+		else if (_tcsicmp(pstrName, _T("selectedfont")) == 0) SetSelectedFont(_ttoi(pstrValue));
 		else CButtonUI::SetAttribute(pstrName, pstrValue);
 	}
 
@@ -348,7 +361,7 @@ namespace DuiLib
 				NULL, NULL, nLinks, m_uTextStyle);
 			else
 				CRenderEngine::DrawText(hDC, m_pManager, rc, sText, IsEnabled()?m_dwTextColor:m_dwDisabledTextColor, \
-				m_iFont, m_uTextStyle);
+				m_iSelectedFont, m_uTextStyle);
 
 			m_dwTextColor = oldTextColor;
 		}

@@ -37,18 +37,18 @@ namespace DuiLib {
 		{
 			EnsureVisible(m_iOldSel);
 		}
-		else if(msg.sType == _T("click")) {
-			// ²âÊÔ´úÂë
-			CDuiString sName = msg.pSender->GetName();
-			CControlUI* pCtrl = msg.pSender;
-			while(pCtrl != NULL) {
-				IListItemUI* pListItem = (IListItemUI*)pCtrl->GetInterface(DUI_CTR_LISTITEM);
-				if(pListItem != NULL ) {
-					break;
-				}
-				pCtrl = pCtrl->GetParent();
-			}
-		}
+		//else if(msg.sType == _T("click")) {
+		//	// ²âÊÔ´úÂë
+		//	CDuiString sName = msg.pSender->GetName();
+		//	CControlUI* pCtrl = msg.pSender;
+		//	while(pCtrl != NULL) {
+		//		IListItemUI* pListItem = (IListItemUI*)pCtrl->GetInterface(DUI_CTR_LISTITEM);
+		//		if(pListItem != NULL ) {
+		//			break;
+		//		}
+		//		pCtrl = pCtrl->GetParent();
+		//	}
+		//}
 	}
 
 	void CComboWnd::Init(CComboUI* pOwner)
@@ -271,7 +271,7 @@ namespace DuiLib {
 		, m_iFont(-1)
 		, m_bShowHtml(false)
 		, m_pWindow(NULL)
-		, m_iCurSel(-1)
+		, m_iCurSel(0)
 		, m_uButtonState(0)
 		, m_bScrollSelect(true)
 	{

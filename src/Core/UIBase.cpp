@@ -294,11 +294,20 @@ UINT CWindowWnd::ShowModal()
     ::EnableWindow(hWndParent, FALSE);
     MSG msg = { 0 };
     while( ::IsWindow(m_hWnd) && ::GetMessage(&msg, NULL, 0, 0) ) {
-        if( msg.message == WM_CLOSE && msg.hwnd == m_hWnd ) {
-            nRet = msg.wParam;
-            ::EnableWindow(hWndParent, TRUE);
-            ::SetFocus(hWndParent);
-        }
+		if (msg.message == WM_CLOSE) {
+			if (msg.hwnd == m_hWnd) {
+				nRet = msg.wParam;
+				::EnableWindow(hWndParent, TRUE);
+				::SetFocus(hWndParent);
+			}
+			else {
+				if (msg.hwnd == hWndParent) {
+					SendMessage(WM_CLOSE, msg.wParam, msg.lParam);
+				}
+				::PostMessage(msg.hwnd, WM_CLOSE, msg.wParam, msg.lParam);
+				break;
+			}
+		}
         if( !CPaintManagerUI::TranslateMessage(&msg) ) {
             ::TranslateMessage(&msg);
             ::DispatchMessage(&msg);

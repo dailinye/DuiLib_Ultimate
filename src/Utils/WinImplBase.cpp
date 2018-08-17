@@ -249,7 +249,7 @@ namespace DuiLib
 		if (wParam == SC_CLOSE)
 		{
 			bHandled = TRUE;
-			SendMessage(WM_CLOSE);
+			PostMessageW(WM_CLOSE);
 			return 0;
 		}
 #if defined(WIN32) && !defined(UNDER_CE)

@@ -34,6 +34,9 @@ namespace DuiLib
 		void SetSelectedTextColor(DWORD dwTextColor);
 		DWORD GetSelectedTextColor();
 
+		void SetSelectedFont(int iFont);
+		int GetSelectedFont();
+
 		void SetSelectedBkColor(DWORD dwBkColor);
 		DWORD GetSelectBkColor();
 
@@ -63,6 +66,7 @@ namespace DuiLib
 
 		DWORD			m_dwSelectedBkColor;
 		DWORD			m_dwSelectedTextColor;
+		int             m_iSelectedFont;
 
 		CDuiString		m_sSelectedImage;
 		CDuiString		m_sSelectedHotImage;

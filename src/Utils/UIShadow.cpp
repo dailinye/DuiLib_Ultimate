@@ -98,7 +98,7 @@ void CShadowUI::Create(CPaintManagerUI* pPaintManager)
 	// Replace the original WndProc of parent window to steal messages
 	m_OriParentProc = GetWindowLongPtr(hParentWnd, GWLP_WNDPROC);
 
-#pragma warning(disable: 4311)	// temporrarily disable the type_cast warning in Win32
+#pragma warning(disable: 4311)	// temporarily disable the type_cast warning in Win32
 	SetWindowLongPtr(hParentWnd, GWLP_WNDPROC, (LONG_PTR)ParentProc);
 #pragma warning(default: 4311)
 
@@ -117,7 +117,7 @@ LRESULT CALLBACK CShadowUI::ParentProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
 	CShadowUI *pThis = GetShadowMap()[hwnd];
 	if (pThis->m_bIsDisableShadow) {
 
-#pragma warning(disable: 4312)	// temporrarily disable the type_cast warning in Win32
+#pragma warning(disable: 4312)	// temporarily disable the type_cast warning in Win32
 		// Call the default(original) window procedure for other messages or messages processed but not returned
 		return ((WNDPROC)pThis->m_OriParentProc)(hwnd, uMsg, wParam, lParam);
 #pragma warning(default: 4312)
@@ -230,7 +230,7 @@ LRESULT CALLBACK CShadowUI::ParentProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
 	}
 
 
-#pragma warning(disable: 4312)	// temporrarily disable the type_cast warning in Win32
+#pragma warning(disable: 4312)	// temporarily disable the type_cast warning in Win32
 	// Call the default(original) window procedure for other messages or messages processed but not returned
 	return ((WNDPROC)pThis->m_OriParentProc)(hwnd, uMsg, wParam, lParam);
 #pragma warning(default: 4312)
