@@ -1,147 +1,112 @@
-#ifndef UITreeView_h__
-#define UITreeView_h__
-
-#include <vector>
-using namespace std;
+#ifndef __UITREEVIEW_H__
+#define __UITREEVIEW_H__
 
 #pragma once
 
-namespace DuiLib
-{
+namespace DuiLib {
+
 	class CTreeViewUI;
-	class CCheckBoxUI;
-	class CLabelUI;
-	class COptionUI;
 
-	class UILIB_API CTreeNodeUI : public CListContainerElementUI
+	class UILIB_API CTreeNodeElementUI : public CHorizontalLayoutUI
 	{
-		DECLARE_DUICONTROL(CTreeNodeUI)
-		typedef CListContainerElementUI parent_type;
+		DECLARE_DUICONTROL(CTreeNodeElementUI)
+		typedef CHorizontalLayoutUI parent_type;
 
 	public:
-		CTreeNodeUI(CTreeNodeUI* _ParentNode = NULL);
-		~CTreeNodeUI(void);
+		CTreeNodeElementUI();
+		~CTreeNodeElementUI();
 
-	public:
 		LPCTSTR GetClass() const;
 		LPVOID GetInterface(LPCTSTR pstrName);
-		void DoEvent(TEventUI& event);
-		void Invalidate();
-		bool Select(bool bSelect = true);
-		bool SelectMulti(bool bSelect = true);
-
-		bool Add(CControlUI* _pTreeNodeUI);
-		bool AddAt(CControlUI* pControl, int iIndex);
-		bool Remove(CControlUI* pControl);
-
-		void SetVisibleTag(bool _IsVisible);
-		bool GetVisibleTag();
-		void SetItemText(LPCTSTR pstrValue);
-		CDuiString GetItemText();
-		void CheckBoxSelected(bool _Selected);
-		bool IsCheckBoxSelected() const;
-		bool IsHasChild() const;
-		long GetTreeLevel() const;
-		bool AddChildNode(CTreeNodeUI* _pTreeNodeUI);
-		bool RemoveAt(CTreeNodeUI* _pTreeNodeUI);
-		void SetParentNode(CTreeNodeUI* _pParentTreeNode);
-		CTreeNodeUI* GetParentNode();
-		long GetCountChild();
-		void SetTreeView(CTreeViewUI* _CTreeViewUI);
-		CTreeViewUI* GetTreeView();
-		CTreeNodeUI* GetChildNode(int _nIndex);
-		void SetVisibleFolderBtn(bool _IsVisibled);
-		bool GetVisibleFolderBtn();
-		void SetVisibleCheckBtn(bool _IsVisibled);
-		bool GetVisibleCheckBtn();
-		void SetItemTextColor(DWORD _dwItemTextColor);
-		DWORD GetItemTextColor() const;
-		void SetItemHotTextColor(DWORD _dwItemHotTextColor);
-		DWORD GetItemHotTextColor() const;
-		void SetSelItemTextColor(DWORD _dwSelItemTextColor);
-		DWORD GetSelItemTextColor() const;
-		void SetSelItemHotTextColor(DWORD _dwSelHotItemTextColor);
-		DWORD GetSelItemHotTextColor() const;
-		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
-
-		CStdPtrArray GetTreeNodes();
-		int			 GetTreeIndex();
-		int			 GetNodeIndex();
-
-	public:
-		CHorizontalLayoutUI*	GetTreeNodeHoriznotal() const {return pHoriz;};
-		CCheckBoxUI*			GetFolderButton() const {return pFolderButton;};
-		CLabelUI*				GetDottedLine() const {return pDottedLine;};
-		CCheckBoxUI*			GetCheckBox() const {return pCheckBox;};
-		COptionUI*				GetItemButton() const {return pItemButton;};
-
-	private:
-		CTreeNodeUI* GetLastNode();
-		CTreeNodeUI* CalLocation(CTreeNodeUI* _pTreeNodeUI);
-
-	private:
-		long	m_iTreeLavel;
-		bool	m_bIsVisable;
-		bool	m_bIsCheckBox;
-		DWORD	m_dwItemTextColor;
-		DWORD	m_dwItemHotTextColor;
-		DWORD	m_dwSelItemTextColor;
-		DWORD	m_dwSelItemHotTextColor;
-
-		CTreeViewUI*			pTreeView;
-		CHorizontalLayoutUI*	pHoriz;
-		CCheckBoxUI*			pFolderButton;
-		CLabelUI*				pDottedLine;
-		CCheckBoxUI*			pCheckBox;
-		COptionUI*				pItemButton;
-		CTreeNodeUI*			pParentTreeNode;
-		CStdPtrArray			mTreeNodes;
 	};
 
-	class UILIB_API CTreeViewUI : public CListUI,public INotifyUI
+	class UILIB_API CTreeNodeBodyUI : public CVerticalLayoutUI
+	{
+		DECLARE_DUICONTROL(CTreeNodeBodyUI)
+		typedef CVerticalLayoutUI parent_type;
+
+	public:
+		CTreeNodeBodyUI();
+		~CTreeNodeBodyUI();
+
+		LPCTSTR GetClass() const;
+		LPVOID GetInterface(LPCTSTR pstrName);
+
+		SIZE EstimateSize(SIZE szAvailable);
+
+	private:
+		CTreeViewUI *m_pOwner;
+	};
+
+	class UILIB_API CTreeNodeUI : public CVerticalLayoutUI
+	{
+		DECLARE_DUICONTROL(CTreeNodeUI)
+		typedef CVerticalLayoutUI parent_type;
+
+	public:
+		CTreeNodeUI();
+		~CTreeNodeUI(void);
+
+		LPCTSTR GetClass() const;
+		LPVOID GetInterface(LPCTSTR pstrName);
+		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+
+		CControlUI* GetItemAt(int iIndex) const;
+		int GetItemIndex(CControlUI* pControl) const;
+		bool SetItemIndex(CControlUI* pControl, int iIndex);
+		int GetCount() const;
+		bool Add(CControlUI* pControl);
+		bool AddAt(CControlUI* pControl, int iIndex);
+		bool Remove(CControlUI* pControl);
+		bool RemoveAt(int iIndex);
+		void RemoveAll();
+
+		void SetPos(RECT rc, bool bNeedInvalidate = true);
+		SIZE EstimateSize(SIZE szAvailable);
+
+		CTreeViewUI *GetOwner();
+		void SetOwner(CTreeViewUI* pOwner);
+		CTreeNodeUI *GetParentNode();
+		void SetParentNode(CTreeNodeUI *pParentNode);
+		//bool IsSelected() const;
+		//bool Select(bool bSelect = true);
+		//bool SelectMulti(bool bSelect = true);
+		//bool IsExpanded() const;
+		//bool Expand(bool bExpand = true);
+		//
+		//SIZE EstimateSize(SIZE szAvailable);
+		//void SetPos(RECT rc, bool bNeedInvalidate = true);
+
+	private:
+		CTreeViewUI *m_pOwner;
+		CTreeNodeElementUI *m_pElement;
+		CTreeNodeBodyUI *m_pChildren;
+		CTreeNodeUI *m_pParentNode;
+	};
+
+	class UILIB_API CTreeViewUI : public CVerticalLayoutUI
 	{
 		DECLARE_DUICONTROL(CTreeViewUI)
-		typedef CListUI parent_type;
+		typedef CVerticalLayoutUI parent_type;
 
 	public:
 		CTreeViewUI(void);
 		~CTreeViewUI(void);
 
-	public:
-		virtual LPCTSTR GetClass() const;
-		virtual LPVOID	GetInterface(LPCTSTR pstrName);
+		LPCTSTR GetClass() const;
+		UINT GetControlFlags() const;
+		LPVOID	GetInterface(LPCTSTR pstrName);
+		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void Init();
 
-		virtual UINT GetListType();
-		virtual bool Add(CTreeNodeUI* pControl );
-		virtual long AddAt(CTreeNodeUI* pControl, int iIndex );
-		virtual bool AddAt(CTreeNodeUI* pControl,CTreeNodeUI* _IndexNode);
-		virtual bool Remove(CTreeNodeUI* pControl);
-		virtual bool RemoveAt(int iIndex);
-		virtual void RemoveAll();
-		virtual bool OnCheckBoxChanged(void* param);
-		virtual bool OnFolderChanged(void* param);
-		virtual bool OnDBClickItem(void* param);
-		virtual bool SetItemCheckBox(bool _Selected,CTreeNodeUI* _TreeNode = NULL);
-		virtual void SetItemExpand(bool _Expanded,CTreeNodeUI* _TreeNode = NULL);
-		virtual void Notify(TNotifyUI& msg);
-		virtual void SetVisibleFolderBtn(bool _IsVisibled);
-		virtual bool GetVisibleFolderBtn();
-		virtual void SetVisibleCheckBtn(bool _IsVisibled);
-		virtual bool GetVisibleCheckBtn();
-		virtual void SetItemMinWidth(UINT _ItemMinWidth);
-		virtual UINT GetItemMinWidth();
-		virtual void SetItemTextColor(DWORD _dwItemTextColor);
-		virtual void SetItemHotTextColor(DWORD _dwItemHotTextColor);
-		virtual void SetSelItemTextColor(DWORD _dwSelItemTextColor);
-		virtual void SetSelItemHotTextColor(DWORD _dwSelHotItemTextColor);
-		
-		virtual void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void SetLeafSep(const int iLeafSep);
+		int GetLeafSep(void) const;
+		void SetEnableMultiSelect(const bool bMultiSel);
+		bool GetEnableMultiSelect(void) const;
+
 	private:
-		UINT m_uItemMinWidth;
-		bool m_bVisibleFolderBtn;
-		bool m_bVisibleCheckBtn;
+		int m_iLeafSep;
+		bool m_bEnableMultiSelect;
 	};
-}
-
-
-#endif // UITreeView_h__
+}	// namespace DuiLib
+#endif // __UITREEVIEW_H__

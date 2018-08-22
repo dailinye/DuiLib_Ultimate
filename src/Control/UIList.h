@@ -117,6 +117,7 @@ namespace DuiLib {
 
 	public:
 		CListUI();
+		~CListUI();
 
 		LPCTSTR GetClass() const;
 		UINT GetControlFlags() const;

@@ -422,61 +422,23 @@ namespace DuiLib {
 				_Parse(&node, pControl, pManager);
 			}
 			// Attach to parent
-			// 因为某些属性和父窗口相关，比如selected，必须先Add到父窗口
-			/*CTreeViewUI* pTreeView = NULL;*/
 			if( pParent != NULL && pControl != NULL ) {
-				//CTreeNodeUI* pParentTreeNode = static_cast<CTreeNodeUI*>(pParent->GetInterface(_T("TreeNode")));
-				//CTreeNodeUI* pTreeNode = static_cast<CTreeNodeUI*>(pControl->GetInterface(_T("TreeNode")));
-				//pTreeView = static_cast<CTreeViewUI*>(pParent->GetInterface(_T("TreeView")));
-				//// TreeNode子节点
-				//if(pTreeNode != NULL) {
-				//	if(pParentTreeNode) {
-				//		pTreeView = pParentTreeNode->GetTreeView();
-				//		if(!pParentTreeNode->Add(pTreeNode)) {
-				//			delete pTreeNode;
-				//			pTreeNode = NULL;
-				//			continue;
-				//		}
-				//	}
-				//	else {
-				//		if(pTreeView != NULL) {
-				//			if(!pTreeView->Add(pTreeNode)) {
-				//				delete pTreeNode;
-				//				pTreeNode = NULL;
-				//				continue;
-				//			}
-				//		}
-				//	}
-				//}
-				//// TreeNode子控件
-				//else if(pParentTreeNode != NULL) {
-				//	pParentTreeNode->GetTreeNodeHoriznotal()->Add(pControl);
-				//}
-				//// 普通控件
-				//else 
-				{
-					if( pContainer == NULL ) pContainer = static_cast<IContainerUI*>(pParent->GetInterface(DUI_CTR_ICONTAINER));
-					if( pContainer == NULL ) return NULL;
-					// init data template
-					if( pControl->GetInterface(DUI_CTR_DATATEMPLATE) && pParent->GetInterface(DUI_CTR_CONTAINER) ) {
-						static_cast<CContainerUI*>(pParent->GetInterface(DUI_CTR_CONTAINER))->SetDataTemplate(
-							static_cast<CDataTemplateUI*>(pControl->GetInterface(DUI_CTR_DATATEMPLATE)));
-					}
-					else if( !pContainer->Add(pControl) ) {
-						delete pControl;
-						continue;
-					}
+				if( pContainer == NULL ) pContainer = static_cast<IContainerUI*>(pParent->GetInterface(DUI_CTR_ICONTAINER));
+				if( pContainer == NULL ) return NULL;
+				// init data template
+				if( pControl->GetInterface(DUI_CTR_DATATEMPLATE) && pParent->GetInterface(DUI_CTR_CONTAINER) ) {
+					static_cast<CContainerUI*>(pParent->GetInterface(DUI_CTR_CONTAINER))->SetDataTemplate(
+						static_cast<CDataTemplateUI*>(pControl->GetInterface(DUI_CTR_DATATEMPLATE)));
+				}
+				else if( !pContainer->Add(pControl) ) {
+					delete pControl;
+					continue;
 				}
 			}
 
 			// Init default attributes
 			if( pManager ) {
-				/*if(pTreeView != NULL) {
-					pControl->SetManager(pManager, pTreeView, true);
-				}
-				else*/ {
-					pControl->SetManager(pManager, NULL, false);
-				}
+				pControl->SetManager( pManager, NULL, false );
 				LPCTSTR pDefaultAttributes = pManager->GetDefaultAttributeList(pstrClass);
 				if( pDefaultAttributes ) {
 					pControl->ApplyAttributeList(pDefaultAttributes);
@@ -491,11 +453,6 @@ namespace DuiLib {
 				for( int i = 0; i < nAttributes; i++ ) {
 					pControl->SetAttribute(node.GetAttributeName(i), node.GetAttributeValue(i));
 				}
-			}
-			if( pManager ) {
-				/*if(pTreeView == NULL) {
-					pControl->SetManager(NULL, NULL, false);
-				}*/
 			}
 			// Return first item
 			if( pReturn == NULL ) pReturn = pControl;

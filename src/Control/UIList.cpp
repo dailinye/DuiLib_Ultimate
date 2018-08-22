@@ -38,6 +38,10 @@ namespace DuiLib {
 		::ZeroMemory(&m_ListInfo.rcColumn, sizeof(m_ListInfo.rcColumn));
 	}
 
+	CListUI::~CListUI()
+	{
+	}
+
 	LPCTSTR CListUI::GetClass() const
 	{
 		return _T("ListUI");
