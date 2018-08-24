@@ -213,7 +213,7 @@ void CNotifyPump::NotifyPump(TNotifyUI& msg)
 
 //////////////////////////////////////////////////////////////////////////
 ///
-CWindowWnd::CWindowWnd() : m_hWnd(NULL), m_OldWndProc(::DefWindowProc), m_bSubclassed(false)
+CWindowWnd::CWindowWnd() : m_hWnd(NULL), m_OldWndProc(::DefWindowProc), m_bSubclassed(false), m_childWnd(sizeof(HWND))
 {
 }
 
@@ -289,34 +289,36 @@ UINT CWindowWnd::ShowModal()
 {
     ASSERT(::IsWindow(m_hWnd));
     UINT nRet = 0;
-    HWND hWndParent = GetWindowOwner(m_hWnd);
+    HWND hWndParent = ::GetWindowOwner(m_hWnd);
+
+	if (hWndParent != NULL) {
+		TCHAR buf[MAX_PATH] = { 0 };
+		::GetClassName(hWndParent, buf, MAX_PATH);
+		CDuiString clsName = buf;
+		if (clsName.Find(_T("DUI_")) >= 0) {
+			CWindowWnd *pParent = reinterpret_cast<CWindowWnd*>(::GetWindowLongPtr(hWndParent, GWLP_USERDATA));
+			if (pParent) pParent->AddChildWindow(m_hWnd);
+		}
+	}
+
     ::ShowWindow(m_hWnd, SW_SHOWNORMAL);
     ::EnableWindow(hWndParent, FALSE);
     MSG msg = { 0 };
     while( ::IsWindow(m_hWnd) && ::GetMessage(&msg, NULL, 0, 0) ) {
-		if (msg.message == WM_CLOSE) {
-			if (msg.hwnd == m_hWnd) {
-				nRet = msg.wParam;
-				::EnableWindow(hWndParent, TRUE);
-				::SetFocus(hWndParent);
-			}
-			else {
-				if (msg.hwnd == hWndParent) {
-					SendMessage(WM_CLOSE, msg.wParam, msg.lParam);
-				}
-				::PostMessage(msg.hwnd, WM_CLOSE, msg.wParam, msg.lParam);
-				break;
-			}
+		if ( msg.message == WM_CLOSE && msg.hwnd == m_hWnd ) {
+			nRet = msg.wParam;
+			::EnableWindow( hWndParent, TRUE );
+			::SetFocus( hWndParent );
 		}
         if( !CPaintManagerUI::TranslateMessage(&msg) ) {
             ::TranslateMessage(&msg);
             ::DispatchMessage(&msg);
         }
-        if( msg.message == WM_QUIT ) break;
+        //if( msg.message == WM_QUIT ) break;
     }
     ::EnableWindow(hWndParent, TRUE);
     ::SetFocus(hWndParent);
-    if( msg.message == WM_QUIT ) ::PostQuitMessage(msg.wParam);
+    //if( msg.message == WM_QUIT ) ::PostQuitMessage(msg.wParam);
     return nRet;
 }
 
@@ -498,6 +500,11 @@ void CWindowWnd::ResizeClient(int cx /*= -1*/, int cy /*= -1*/)
     if( cy != -1 ) rc.bottom = cy;
     if( !::AdjustWindowRectEx(&rc, GetWindowStyle(m_hWnd), (!(GetWindowStyle(m_hWnd) & WS_CHILD) && (::GetMenu(m_hWnd) != NULL)), GetWindowExStyle(m_hWnd)) ) return;
     ::SetWindowPos(m_hWnd, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top, SWP_NOZORDER | SWP_NOMOVE | SWP_NOACTIVATE);
+}
+
+void CWindowWnd::AddChildWindow(HWND hChildWnd)
+{
+	m_childWnd.Add(&hChildWnd);
 }
 
 LRESULT CWindowWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)

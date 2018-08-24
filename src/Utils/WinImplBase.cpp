@@ -60,9 +60,26 @@ namespace DuiLib
 		return FALSE;
 	}
 
-	LRESULT WindowImplBase::OnClose(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled)
+	LRESULT WindowImplBase::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{
-		bHandled = FALSE;
+		if (m_childWnd.IsEmpty())
+		{
+			bHandled = FALSE;
+			return 0;
+		}
+
+		for (int32_t i = 0; i < m_childWnd.GetSize(); ++i)
+		{
+			HWND hChildWnd = *(HWND*)m_childWnd[i];
+			if (::IsWindow(hChildWnd))
+			{
+				::SendMessage(hChildWnd, uMsg, wParam, lParam);
+			}
+		}
+		m_childWnd.Empty();
+		::PostMessage(m_hWnd, uMsg, wParam, lParam);
+
+		bHandled = TRUE;
 		return 0;
 	}
 
