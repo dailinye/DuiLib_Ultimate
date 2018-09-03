@@ -18,6 +18,15 @@ namespace DuiLib {
 
 		LPCTSTR GetClass() const;
 		LPVOID GetInterface(LPCTSTR pstrName);
+
+		CTreeViewUI *GetOwner();
+		void SetOwner(CTreeViewUI* pOwner);
+
+		void DoEvent(TEventUI& event);
+		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+
+	private:
+		CTreeViewUI *m_pOwner;
 	};
 
 	class UILIB_API CTreeNodeBodyUI : public CVerticalLayoutUI
@@ -33,6 +42,7 @@ namespace DuiLib {
 		LPVOID GetInterface(LPCTSTR pstrName);
 
 		SIZE EstimateSize(SIZE szAvailable);
+		void SetVisible(bool bVisible = true);
 
 	private:
 		CTreeViewUI *m_pOwner;
@@ -61,18 +71,18 @@ namespace DuiLib {
 		bool RemoveAt(int iIndex);
 		void RemoveAll();
 
-		void SetPos(RECT rc, bool bNeedInvalidate = true);
 		SIZE EstimateSize(SIZE szAvailable);
 
 		CTreeViewUI *GetOwner();
 		void SetOwner(CTreeViewUI* pOwner);
 		CTreeNodeUI *GetParentNode();
 		void SetParentNode(CTreeNodeUI *pParentNode);
+		bool IsExpanded() const;
+		bool Expand(bool bExpand = true);
+
 		//bool IsSelected() const;
 		//bool Select(bool bSelect = true);
 		//bool SelectMulti(bool bSelect = true);
-		//bool IsExpanded() const;
-		//bool Expand(bool bExpand = true);
 		//
 		//SIZE EstimateSize(SIZE szAvailable);
 		//void SetPos(RECT rc, bool bNeedInvalidate = true);
@@ -82,6 +92,7 @@ namespace DuiLib {
 		CTreeNodeElementUI *m_pElement;
 		CTreeNodeBodyUI *m_pChildren;
 		CTreeNodeUI *m_pParentNode;
+		bool m_bExpanded;
 	};
 
 	class UILIB_API CTreeViewUI : public CVerticalLayoutUI
@@ -99,14 +110,22 @@ namespace DuiLib {
 		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
 		void Init();
 
-		void SetLeafSep(const int iLeafSep);
-		int GetLeafSep(void) const;
+		void SetNodeSepWidth(const int iNodeSepWidth);
+		int GetNodeSepWidth(void) const;
 		void SetEnableMultiSelect(const bool bMultiSel);
 		bool GetEnableMultiSelect(void) const;
+		void SetAutoExpand(const bool bAutoExpand);
+		bool GetAutoExpand() const;
+		void SetExpandAction(LPCTSTR ptrAction);
+		bool GetCanExpandOnClick() const;
+		bool GetCanExpandOnDbClick() const;
 
 	private:
-		int m_iLeafSep;
+		int m_iNodeSepWidth;
 		bool m_bEnableMultiSelect;
+		bool m_bAutoExpand;
+		bool m_bCanExpandOnClick;
+		bool m_bCanExpandOnDbClick;
 	};
 }	// namespace DuiLib
 #endif // __UITREEVIEW_H__

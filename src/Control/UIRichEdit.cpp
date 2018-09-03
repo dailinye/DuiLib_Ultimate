@@ -2051,9 +2051,10 @@ void CRichEditUI::SetTipValue( LPCTSTR pStrTipValue )
 	m_sTipValue	= pStrTipValue;
 }
 
-LPCTSTR CRichEditUI::GetTipValue()
+CDuiString CRichEditUI::GetTipValue()
 {
-	return m_sTipValue.GetData();
+	if (!IsResourceText()) return m_sTipValue;
+	return CResourceManager::GetInstance()->GetText(m_sTipValue);
 }
 
 void CRichEditUI::SetTipValueColor( LPCTSTR pStrColor )

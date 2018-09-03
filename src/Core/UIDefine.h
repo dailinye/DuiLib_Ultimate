@@ -301,7 +301,6 @@ protected:                                                                \
 #define  DUI_CTR_LISTELEMENT                     (_T("ListElement"))
 
 #define  DUI_CTR_DATATEMPLATE                    (_T("DataTemplate"))
-#define  DUI_CTR_TREENODEBODY                    (_T("TreeNodeBody"))
 
 #define  DUI_CTR_VERTICALLAYOUT                  (_T("VerticalLayout"))
 #define  DUI_CTR_LISTHEADERITEM                  (_T("ListHeaderItem"))

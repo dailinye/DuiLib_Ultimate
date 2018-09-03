@@ -9,6 +9,7 @@ namespace DuiLib {
 	//////////////////////////////////////////////////////////////////////////
 	// TreeNodeElement
 	CTreeNodeElementUI::CTreeNodeElementUI()
+		:m_pOwner(NULL)
 	{
 	}
 
@@ -25,6 +26,77 @@ namespace DuiLib {
 	{
 		if (_tcsicmp(pstrName, DUI_CTR_TREENODEELEMENT) == 0) return static_cast<CTreeNodeElementUI*>(this);
 		return CHorizontalLayoutUI::GetInterface(pstrName);
+	}
+
+	CTreeViewUI *CTreeNodeElementUI::GetOwner()
+	{
+		return m_pOwner;
+	}
+
+	void CTreeNodeElementUI::SetOwner(CTreeViewUI* pOwner)
+	{
+		m_pOwner = pOwner;
+	}
+
+	void CTreeNodeElementUI::DoEvent(TEventUI& event)
+	{
+		CTreeNodeUI *pParent = (CTreeNodeUI*)GetParent();
+		if (pParent) pParent = (CTreeNodeUI*)pParent->GetInterface(DUI_CTR_TREENODE);
+
+		if (!IsMouseEnabled() && event.Type > UIEVENT__MOUSEBEGIN && event.Type < UIEVENT__MOUSEEND) {			
+			if (pParent) return pParent->DoEvent(event);
+			else CHorizontalLayoutUI::DoEvent(event);
+		}
+
+		if (event.Type == UIEVENT_DBLCLICK)
+		{
+			if (IsEnabled()) {
+				if (m_pOwner && m_pOwner->GetCanExpandOnDbClick()) {
+					if (pParent) pParent->Expand(!pParent->IsExpanded());
+				} else {
+					Activate();
+					Invalidate();
+				}
+				m_pManager->SendNotify(this, DUI_MSGTYPE_ITEMDBCLICK);
+			}
+			return;
+		}
+		if (event.Type == UIEVENT_BUTTONUP)
+		{
+			if (IsEnabled()) {
+				if (m_pOwner && m_pOwner->GetCanExpandOnClick()) {
+					if (pParent) pParent->Expand(!pParent->IsExpanded());
+				}
+				m_pManager->SendNotify(this, DUI_MSGTYPE_ITEMCLICK);
+			}
+			return;
+		}
+		if (event.Type == UIEVENT_MOUSEMOVE)
+		{
+			return;
+		}
+		if (event.Type == UIEVENT_MOUSEENTER)
+		{
+			if (IsEnabled()) {
+				m_uButtonState |= UISTATE_HOT;
+				Invalidate();
+			}
+			return;
+		}
+		if (event.Type == UIEVENT_MOUSELEAVE)
+		{
+			if ((m_uButtonState & UISTATE_HOT) != 0) {
+				m_uButtonState &= ~UISTATE_HOT;
+				Invalidate();
+			}
+			return;
+		}
+		if (pParent) pParent->DoEvent(event);
+	}
+
+	void CTreeNodeElementUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	{
+		return CHorizontalLayoutUI::SetAttribute(pstrName, pstrValue);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -45,7 +117,7 @@ namespace DuiLib {
 
 	LPVOID CTreeNodeBodyUI::GetInterface(LPCTSTR pstrName)
 	{
-		if (_tcsicmp(pstrName, DUI_CTR_TREENODEBODY) == 0) return static_cast<CTreeNodeBodyUI*>(this);
+		if (_tcsicmp(pstrName, _T("TreeNodeBody")) == 0) return static_cast<CTreeNodeBodyUI*>(this);
 		return CVerticalLayoutUI::GetInterface(pstrName);
 	}
 
@@ -53,9 +125,17 @@ namespace DuiLib {
 	{
 		SIZE cXY = { GetFixedWidth(), 0 };
 		for (int it = 0; it < m_items.GetSize(); it++) {
-			cXY.cy += static_cast<CControlUI*>(m_items[it])->EstimateSize(szAvailable).cy;
+			if (IsVisible()) cXY.cy += static_cast<CControlUI*>(m_items[it])->EstimateSize(szAvailable).cy;
 		}
 		return cXY;
+	}
+
+	void CTreeNodeBodyUI::SetVisible(bool bVisible)
+	{
+		CVerticalLayoutUI::SetVisible(bVisible);
+		for (int it = 0; it < m_items.GetSize(); it++) {
+			static_cast<CControlUI*>(m_items[it])->SetVisible(bVisible);
+		}
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -65,6 +145,7 @@ namespace DuiLib {
 		,m_pParentNode(NULL)
 		,m_pElement(NULL)
 		,m_pChildren(NULL)
+		,m_bExpanded(false)
 	{
 		m_pChildren = new CTreeNodeBodyUI;
 		CVerticalLayoutUI::Add(m_pChildren);
@@ -154,33 +235,6 @@ namespace DuiLib {
 		return m_pChildren->RemoveAll();
 	}
 
-	void CTreeNodeUI::SetPos(RECT rc, bool bNeedInvalidate)
-	{
-		CVerticalLayoutUI::SetPos(rc, bNeedInvalidate);
-
-		//if (m_pElement != NULL) {
-		//	if (!m_pElement->IsVisible()) {
-		//		m_pElement->SetPos(CDuiRect(rc.left, 0, rc.right, 0), bNeedInvalidate);
-		//	} else {
-		//		m_pElement->SetPos(m_pElement->GetPos(), bNeedInvalidate);
-		//	}
-		//}
-
-		//for (int i = 0; i < m_ListInfo.nColumns; i++) {
-		//	CControlUI* pControl = static_cast<CControlUI*>(m_pHeader->GetItemAt(i));
-		//	if (!pControl->IsVisible()) continue;
-		//	if (pControl->IsFloat()) continue;
-		//	RECT rcPos = pControl->GetPos();
-		//	m_ListInfo.rcColumn[i] = pControl->GetPos();
-		//}
-		//if (!m_pHeader->IsVisible()) {
-		//	for (int it = 0; it < m_pHeader->GetCount(); it++) {
-		//		static_cast<CControlUI*>(m_pHeader->GetItemAt(it))->SetInternVisible(false);
-		//	}
-		//}
-		//m_pList->SetPos(m_pList->GetPos(), bNeedInvalidate);
-	}
-
 	SIZE CTreeNodeUI::EstimateSize(SIZE szAvailable)
 	{
 		SIZE cXY = { 0, 0 };
@@ -190,7 +244,7 @@ namespace DuiLib {
 		cXY.cx = GetFixedWidth();
 		cXY.cy += m_pElement->EstimateSize(szAvailable).cy;
 		cXY.cy += m_pChildren->EstimateSize(szAvailable).cy;
-		
+
 		return cXY;
 	}
 
@@ -202,15 +256,21 @@ namespace DuiLib {
 	void CTreeNodeUI::SetOwner(CTreeViewUI* pOwner)
 	{
 		m_pOwner = pOwner;
+
+		if (m_pParentNode == NULL) SetVisible(true);
+		if (m_pOwner && pOwner->GetAutoExpand()) m_bExpanded = true;
+
 		CTreeNodeUI *pTreeNode = NULL;
 		for (int it = 0; it < m_pChildren->GetCount(); it++) {
 			pTreeNode = static_cast<CTreeNodeUI*>(m_pChildren->GetItemAt(it)->GetInterface(DUI_CTR_TREENODE));
 			if (pTreeNode == NULL) continue;
-			pTreeNode->SetOwner(m_pOwner);
 			pTreeNode->SetParentNode(this);
+			pTreeNode->SetOwner(m_pOwner);
+			if (pOwner && pOwner->GetAutoExpand()) pTreeNode->SetVisible(true);
 		}
+		m_pElement->SetOwner(pOwner);
 		RECT rcInset = m_pChildren->GetInset();
-		rcInset.left += m_pOwner->GetLeafSep();
+		rcInset.left += m_pOwner->GetNodeSepWidth();
 		m_pChildren->SetInset(rcInset);
 	}
 
@@ -224,11 +284,29 @@ namespace DuiLib {
 		m_pParentNode = pParentNode;
 	}
 
+	bool CTreeNodeUI::IsExpanded() const
+	{
+		return m_bExpanded;
+	}
+
+	bool CTreeNodeUI::Expand(bool bExpand)
+	{
+		if (m_bExpanded == bExpand) return true;
+		m_pChildren->SetVisible(bExpand);
+		m_bExpanded = bExpand;
+
+		if (m_pOwner) m_pOwner->SetPos(m_pOwner->GetPos(), true);
+		return true;
+	}
+
 	//////////////////////////////////////////////////////////////////////////
 	// TreeView
 	CTreeViewUI::CTreeViewUI(void)
-		:m_iLeafSep(10)
+		:m_iNodeSepWidth(10)
 		,m_bEnableMultiSelect(false)
+		,m_bAutoExpand(false)
+		,m_bCanExpandOnClick(false)
+		,m_bCanExpandOnDbClick(false)
 	{
 	}
 
@@ -254,7 +332,9 @@ namespace DuiLib {
 
 	void CTreeViewUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 	{
-		if (_tcsicmp(pstrName, _T("leafsep")) == 0) SetLeafSep(_ttoi(pstrValue));
+		if (_tcsicmp(pstrName, _T("nodesepwidth")) == 0) SetNodeSepWidth(_ttoi(pstrValue));
+		if (_tcsicmp(pstrName, _T("autoexpand")) == 0) SetAutoExpand(_tcsicmp(pstrValue, _T("true")) == 0);
+		if (_tcsicmp(pstrName, _T("expandaction")) == 0) SetExpandAction(pstrValue);
 		else return CVerticalLayoutUI::SetAttribute(pstrName, pstrValue);
 	}
 
@@ -265,18 +345,17 @@ namespace DuiLib {
 			pTreeNode = static_cast<CTreeNodeUI*>(static_cast<CControlUI*>(m_items[it])->GetInterface(DUI_CTR_TREENODE));
 			if (pTreeNode == NULL) continue;
 			pTreeNode->SetOwner(this);
-			pTreeNode->SetVisible(true);
 		}
 	}
 
-	void CTreeViewUI::SetLeafSep(const int iLeafSep)
+	void CTreeViewUI::SetNodeSepWidth(const int iNodeSepWidth)
 	{
-		m_iLeafSep = iLeafSep;
+		m_iNodeSepWidth = iNodeSepWidth;
 	}
 
-	int CTreeViewUI::GetLeafSep(void) const
+	int CTreeViewUI::GetNodeSepWidth(void) const
 	{
-		return m_iLeafSep;
+		return m_iNodeSepWidth;
 	}
 
 	void CTreeViewUI::SetEnableMultiSelect(const bool bMultiSel)
@@ -287,5 +366,31 @@ namespace DuiLib {
 	bool CTreeViewUI::GetEnableMultiSelect(void) const
 	{
 		return m_bEnableMultiSelect;
+	}
+
+	void CTreeViewUI::SetAutoExpand(const bool bAutoExpand)
+	{
+		m_bAutoExpand = bAutoExpand;
+	}
+
+	bool CTreeViewUI::GetAutoExpand() const
+	{
+		return m_bAutoExpand;
+	}
+
+	void CTreeViewUI::SetExpandAction(LPCTSTR ptrAction)
+	{
+		m_bCanExpandOnClick = (_tcsicmp(ptrAction, _T("click")) == 0);
+		m_bCanExpandOnDbClick = (_tcsicmp(ptrAction, _T("dbclick")) == 0);
+	}
+
+	bool CTreeViewUI::GetCanExpandOnClick() const
+	{
+		return m_bCanExpandOnClick;
+	}
+
+	bool CTreeViewUI::GetCanExpandOnDbClick() const
+	{
+		return m_bCanExpandOnDbClick;
 	}
 }
