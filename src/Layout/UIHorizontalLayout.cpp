@@ -234,6 +234,11 @@ namespace DuiLib
 			}
 			cxyFixed.cx += pControl->EstimateSize(szAvailable).cx;
 		}
+		int iChildPadding = GetChildPadding();
+		if (m_pManager && iChildPadding > 0 && m_items.GetSize() > 0)
+		{
+			cxyFixed.cx += ((m_items.GetSize() - 1) * m_pManager->GetDPIObj()->Scale(iChildPadding));
+		}
 		return cxyFixed;
 	}
 
