@@ -304,13 +304,25 @@ namespace DuiLib
 				}
 			}
 
+			if (IsFocused()) m_uButtonState |= UISTATE_FOCUSED;
+			else m_uButtonState &= ~UISTATE_FOCUSED;
+			if (!IsEnabled()) m_uButtonState |= UISTATE_DISABLED;
+			else m_uButtonState &= ~UISTATE_DISABLED;
 
+			if ((m_uButtonState & UISTATE_DISABLED) != 0 && !m_sDisabledImage.IsEmpty()) {
+				if (!DrawImage(hDC, (LPCTSTR)m_sDisabledImage)) {}
+				else return;
+			}
 			if( (m_uButtonState & UISTATE_PUSHED) != 0 && !m_sSelectedPushedImage.IsEmpty()) {
 				if( !DrawImage(hDC, (LPCTSTR)m_sSelectedPushedImage) ) {}
 				else return;
 			}
 			else if( (m_uButtonState & UISTATE_HOT) != 0 && !m_sSelectedHotImage.IsEmpty()) {
 				if( !DrawImage(hDC, (LPCTSTR)m_sSelectedHotImage) ) {}
+				else return;
+			}
+			else if ((m_uButtonState & UISTATE_FOCUSED) != 0 && !m_sFocusedImage.IsEmpty()) {
+				if (!DrawImage(hDC, (LPCTSTR)m_sFocusedImage)) {}
 				else return;
 			}
 
